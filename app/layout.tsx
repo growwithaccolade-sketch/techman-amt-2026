@@ -15,7 +15,7 @@ export const viewport: Viewport = {
   themeColor: "#090b10",
 };
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://techmanamt.example";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://techman-amt-2026.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
