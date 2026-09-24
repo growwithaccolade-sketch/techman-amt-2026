@@ -1,0 +1,110 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Check, PackageCheck, ShieldCheck, Star, Truck } from "lucide-react";
+import { notFound } from "next/navigation";
+import CommerceHeader from "@/components/commerce-header";
+import ProductActions from "@/components/product-actions";
+import ReviewForm from "@/components/review-form";
+import ProductImage from "@/components/product-image";
+import { getStoreCatalog, getStoreProduct } from "@/lib/catalog";
+import { money, products as demoProducts } from "@/lib/products";
+import { getApprovedReviews } from "@/lib/reviews";
+
+export function generateStaticParams() {
+  return demoProducts.map((product) => ({ slug: product.slug }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const product = await getStoreProduct(slug);
+  if (!product) return { title: "Product not found" };
+  return {
+    title: product.name,
+    description: product.blurb,
+    openGraph: {
+      title: product.name,
+      description: product.blurb,
+      images: product.image ? [{ url: product.image }] : undefined,
+    },
+  };
+}
+
+export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const product = await getStoreProduct(slug);
+  if (!product) notFound();
+
+  const [catalog, reviews] = await Promise.all([getStoreCatalog(), getApprovedReviews(product.id)]);
+  const related = catalog.filter((item) => item.id !== product.id && item.category === product.category).slice(0, 3);
+  const averageRating = reviews.length ? reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length : 0;
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    image: [product.image],
+    description: product.blurb,
+    brand: { "@type": "Brand", name: product.brand },
+    ...(product.price > 0 ? {
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "NGN",
+        price: product.price,
+        availability: product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+      },
+    } : {}),
+    ...(reviews.length ? {
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: Number(averageRating.toFixed(1)),
+        reviewCount: reviews.length,
+      },
+    } : {}),
+  };
+
+  return (
+    <>
+      <CommerceHeader/>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}/>
+      <main className="productPage shell">
+        <div className="breadcrumbs"><Link href="/">Home</Link><span>/</span><Link href="/shop">{product.category}</Link><span>/</span><b>{product.name}</b></div>
+        <section className="productHero">
+          <div className="productGallery"><ProductImage src={product.image} alt={product.name} brand={product.brand} sizes="(max-width: 760px) 94vw, 52vw" priority/></div>
+          <div className="productDetail">
+            <span className="brandName">{product.brand} · {product.condition}</span>
+            <h1>{product.name}</h1>
+            {reviews.length > 0 && <div className="detailRating"><Star size={16} fill="currentColor"/> {averageRating.toFixed(1)} <span>({reviews.length} verified {reviews.length === 1 ? "review" : "reviews"})</span></div>}
+            <p className="detailBlurb">{product.blurb}</p>
+            <div className="detailPrice"><strong>{product.price > 0 ? money(product.price) : "Price on request"}</strong>{product.oldPrice && product.price > 0 && <del>{money(product.oldPrice)}</del>}</div>
+            {product.oldPrice && product.price > 0 && product.oldPrice > product.price && <p className="savings">You save {money(product.oldPrice - product.price)}</p>}
+            <div className="stockLine"><PackageCheck size={18}/><b>{product.price <= 0 ? "Availability on request" : product.stock > 0 ? "In stock" : "Out of stock"}</b><span>{product.price <= 0 ? "Contact TechMan AMT for current price and availability" : product.stock > 0 ? `${product.stock} units available` : "Check back soon"}</span></div>
+            {product.highlights.length > 0 && <div className="benefitList">{product.highlights.map((item) => <span key={item}><Check size={17}/>{item}</span>)}</div>}
+            {product.price <= 0 ? <Link className="requestLaunchButton" href={`/device-request?product=${encodeURIComponent(product.name)}`}>Request current price and availability</Link> : product.stock > 0 ? <ProductActions id={product.id} name={product.name} price={money(product.price)}/> : <div className="setupNotice">This item is currently out of stock. Contact support for restock timing.</div>}
+            <div className="purchaseTrust"><span><ShieldCheck size={18}/><b>{product.warranty}</b></span><span><Truck size={18}/><b>Nationwide delivery options</b></span></div>
+          </div>
+        </section>
+
+        <section className="specSection">
+          <div><span className="kicker">SPECIFICATIONS</span><h2>Product details.</h2><p>Confirm final package contents and regional specifications before payment.</p></div>
+          <div className="specTable">{Object.keys(product.specs).length ? Object.entries(product.specs).map(([key, value]) => <div key={key}><span>{key}</span><strong>{value}</strong></div>) : <div><span>Product details</span><strong>Ask TechMan AMT for full specifications</strong></div>}</div>
+        </section>
+
+        <section className="reviewsSection">
+          <div className="sectionHead"><div><span className="kicker">REVIEWS</span><h2>Verified purchases.</h2></div><p>Published reviews are matched to paid orders.</p></div>
+          <div className="reviewsLayout">
+            <div className="reviewList">
+              {reviews.length ? reviews.map((review) => <article className="reviewCard" key={review.id}>
+                <div className="reviewTop"><div className="reviewStars">{[1,2,3,4,5].map((value)=><Star key={value} size={15} fill={value <= review.rating ? "currentColor" : "none"}/>)}</div>{review.verifiedPurchase && <span>Verified purchase</span>}</div>
+                {review.title && <h3>{review.title}</h3>}
+                <p>{review.body}</p>
+                <small>{review.displayName} · {new Date(review.createdAt).toLocaleDateString("en-NG")}</small>
+              </article>) : <div className="reviewEmpty"><h3>No reviews yet.</h3><p>Verified buyers can submit a review after purchase.</p></div>}
+            </div>
+            <ReviewForm productId={product.id} productName={product.name}/>
+          </div>
+        </section>
+
+        {related.length > 0 && <section className="relatedSection"><div className="sectionHead"><div><span className="kicker">RELATED</span><h2>More in {product.category}.</h2></div></div><div className="relatedGrid">{related.map((item) => <Link className="relatedCard" key={item.id} href={`/product/${item.slug}`}><div className="relatedImageWrap"><ProductImage src={item.image} alt={item.name} brand={item.brand} sizes="(max-width: 760px) 94vw, 30vw"/></div><span className="brandName">{item.brand}</span><h3>{item.name}</h3><strong>{item.price > 0 ? money(item.price) : "Price on request"}</strong></Link>)}</div></section>}
+      </main>
+    </>
+  );
+}
