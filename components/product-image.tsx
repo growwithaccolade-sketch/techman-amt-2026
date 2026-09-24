@@ -71,11 +71,9 @@ export default function ProductImage({
   priority?: boolean;
 }) {
   const [failed, setFailed] = useState(false);
-  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     setFailed(false);
-    setLoaded(false);
   }, [src]);
 
   if (!src) return <ProductFallback alt={alt} brand={brand}/>;
@@ -90,9 +88,7 @@ export default function ProductImage({
           loading={priority ? "eager" : "lazy"}
           decoding="async"
           fetchPriority={priority ? "high" : "auto"}
-          referrerPolicy="no-referrer"
-          className={`productRemoteImage ${loaded ? "isLoaded" : ""} ${className || ""}`}
-          onLoad={() => setLoaded(true)}
+          className={`productRemoteImage ${className || ""}`}
           onError={() => setFailed(true)}
         />
       )}
