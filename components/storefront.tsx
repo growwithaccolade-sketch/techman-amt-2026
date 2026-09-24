@@ -49,31 +49,15 @@ const heroSlugs = [
 
 const featuredSlugs = [
   "apple-watch-ultra-4",
-  "macbook-pro-14-m5",
-  "sony-wh-1000xm6",
-  "dji-mic-3",
-  "insta360-x5",
-  "nintendo-switch-2",
-  "rog-zephyrus-g14-2026",
-  "airpods-pro-3",
-  "samsung-t9-ssd-2tb",
-];
-
-const dealSlugs = [
+  "iphone-16-pro-max-256gb",
+  "samsung-galaxy-s25-ultra-256gb",
+  "macbook-air-m4-13-inch",
+  "sony-wh-1000xm5",
   "anker-737-power-bank",
-  "ugreen-nexode-200w",
+  "hollyland-lark-m2-wireless-mic",
   "logitech-mx-master-3s",
+  "jbl-charge-5",
 ];
-
-const categoryShowcase: Record<string, string> = {
-  Phones: "google-pixel-11-pro-fold",
-  Laptops: "dell-xps-14",
-  "Creator Tools": "rode-wireless-pro",
-  Audio: "bose-quietcomfort-ultra",
-  Accessories: "ugreen-nexode-200w",
-};
-
-const creatorSlug = "dji-osmo-pocket-3";
 
 const priceLabel = (price: number) => price > 0 ? money(price) : "Price on request";
 
@@ -118,38 +102,12 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
   const tertiaryHero = heroProducts[2];
 
   const heroIds = new Set(heroProducts.map((product) => product.id));
-  const creatorProduct =
-    getBySlug(creatorSlug) ||
-    catalog.find((product) => product.category === "Creator Tools" && !heroIds.has(product.id));
-
-  const curatedDeals = dealSlugs.map(getBySlug).filter(Boolean) as typeof catalog;
-  const dealProducts = [
-    ...curatedDeals,
-    ...catalog.filter((product) =>
-      product.category === "Accessories" &&
-      !heroIds.has(product.id) &&
-      !curatedDeals.some((item) => item.id === product.id)
-    ),
-  ].slice(0, 3);
-
-  const categoryIds = new Set(
-    Object.values(categoryShowcase)
-      .map(getBySlug)
-      .filter(Boolean)
-      .map((product) => product!.id)
-  );
-  const excludedIds = new Set([
-    ...heroProducts.map((product) => product.id),
-    ...dealProducts.map((product) => product.id),
-    ...(creatorProduct ? [creatorProduct.id] : []),
-    ...Array.from(categoryIds),
-  ]);
-
   const curatedFeatured = featuredSlugs.map(getBySlug).filter(Boolean) as typeof catalog;
   const defaultFeatured = [
     ...curatedFeatured,
     ...catalog.filter((product) =>
-      !excludedIds.has(product.id) &&
+      Boolean(product.image) &&
+      !heroIds.has(product.id) &&
       !curatedFeatured.some((item) => item.id === product.id)
     ),
   ].filter((product, index, list) => list.findIndex((item) => item.id === product.id) === index).slice(0, 9);
@@ -161,11 +119,6 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
   const heroTitle = (homeContent?.title || "Technology,|properly selected.").split("|");
   const contactSection = homeContent?.sections?.[0];
   const newsletterSection = homeContent?.sections?.[1];
-
-  const productForCategory = (name: string) =>
-    getBySlug(categoryShowcase[name] || "") ||
-    catalog.find((product) => product.category === name && !heroSlugs.includes(product.slug) && !featuredSlugs.includes(product.slug)) ||
-    catalog[0];
 
   return (
     <main className="siteFrame">
@@ -284,7 +237,6 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
 
         <div className="collectionBento">
           {categoryMeta.map((item, index) => {
-            const product = productForCategory(item.name);
             const Icon = item.icon;
             return (
               <Link
@@ -297,7 +249,7 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
                   <h3>{item.name}</h3>
                   <p>{item.copy}</p>
                 </div>
-                {product && <ProductImage src={product.image} alt={product.name} brand={product.brand} sizes="(max-width: 760px) 94vw, 33vw"/>}
+                <div className="categoryVisual" aria-hidden="true"><Icon size={74}/></div>
                 <ArrowUpRight className="collectionArrow" size={20}/>
               </Link>
             );
@@ -314,14 +266,21 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
             <Link href="/shop" className="lightBtn">Browse accessories <ArrowRight size={17}/></Link>
           </div>
           <div className="dealFeatureStack">
-            {dealProducts.map((product, index) => (
-              <Link href={`/product/${product.slug}`} className="dealFeatureItem" key={product.id}>
-                <span>0{index + 1}</span>
-                <div className="dealFeatureMedia"><ProductImage src={product.image} alt={product.name} brand={product.brand} sizes="150px"/></div>
-                <div><small>{product.brand}</small><strong>{product.name}</strong><b>{priceLabel(product.price)}</b></div>
-                <ArrowUpRight size={18}/>
-              </Link>
-            ))}
+            {[
+              ["01", "Power", "Fast charging and dependable battery backup", Zap],
+              ["02", "Audio", "Clear sound for calls, travel and content", Headphones],
+              ["03", "Work", "Input and storage that match the main device", Laptop],
+            ].map(([index, label, title, FeatureIcon]) => {
+              const Icon = FeatureIcon as typeof Zap;
+              return (
+                <Link href="/shop?category=Accessories" className="dealFeatureItem dealEditorialItem" key={String(index)}>
+                  <span>{String(index)}</span>
+                  <div className="dealEditorialIcon"><Icon size={22}/></div>
+                  <div><small>{String(label)}</small><strong>{String(title)}</strong><b>Browse matched gear</b></div>
+                  <ArrowUpRight size={18}/>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -416,8 +375,11 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
       </section>
 
       <section id="creator" className="editorialSection shell">
-        <div className="editorialMedia">
-          {creatorProduct && <ProductImage src={creatorProduct.image} alt={creatorProduct.name} brand={creatorProduct.brand} sizes="(max-width: 900px) 94vw, 55vw"/>}
+        <div className="editorialMedia creatorEditorialVisual">
+          <div className="creatorVisualCore"><Mic2 size={64}/></div>
+          <div className="creatorVisualChip creatorChipOne"><Headphones size={22}/> Clean audio</div>
+          <div className="creatorVisualChip creatorChipTwo"><Zap size={22}/> Reliable power</div>
+          <div className="creatorVisualChip creatorChipThree"><Laptop size={22}/> Edit anywhere</div>
           <span className="editorialTag">CREATOR TOOLS</span>
         </div>
         <div className="editorialCopy">
