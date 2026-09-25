@@ -1,7 +1,7 @@
 import { commerceBackendConfigured, getSupabaseAdmin } from "@/lib/supabase/admin";
 import { type Product, products as demoProducts } from "@/lib/products";
 
-const fallbackImage = "";
+const fallbackImage = (slug: string) => demoProducts.find((product) => product.slug === slug)?.image || `/product-art/${slug}.svg`;
 
 function mapRow(row: Record<string, unknown>): Product {
   const condition = row.condition === "UK Used" ? "UK Used" : "New";
@@ -16,7 +16,7 @@ function mapRow(row: Record<string, unknown>): Product {
     badge: row.badge ? String(row.badge) : undefined,
     rating: 0,
     reviews: 0,
-    image: row.image_url ? String(row.image_url) : fallbackImage,
+    image: row.image_url ? String(row.image_url) : fallbackImage(String(row.slug)),
     blurb: row.blurb ? String(row.blurb) : "Selected technology from TechMan AMT.",
     stock: Number(row.stock || 0),
     warranty: row.warranty ? String(row.warranty) : "Warranty details available before payment",
