@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
+import { products } from "@/lib/products";
 
 const brandPalettes: Record<string, [string, string, string]> = {
   Apple: ["#3157ff", "#7556ff", "#edf3ff"],
@@ -70,26 +71,42 @@ export default function ProductImage({
   sizes?: string;
   priority?: boolean;
 }) {
-  const [failed, setFailed] = useState(false);
-
-  useEffect(() => {
-    setFailed(false);
-  }, [src]);
-
-  if (!src) return <ProductFallback alt={alt} brand={brand}/>;
+  const localSlug = products.find((product) => product.name === alt)?.slug;
+  const localSrc = localSlug ? `/product-art/${localSlug}.svg` : "";
+  const primarySrc = src || localSrc;
+  const remoteIsLocal = Boolean(primarySrc && primarySrc.startsWith("/product-art/"));
 
   return (
     <div className="productImageStack">
       <ProductFallback alt={alt} brand={brand}/>
-      {!failed && (
+      {localSrc && (
         <img
-          src={src}
+          src={localSrc}
+          alt=""
+          aria-hidden="true"
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+          className={`productRemoteImage productLocalImage ${className || ""}`}
+        />
+      )}
+      {primarySrc && !remoteIsLocal && (
+        <img
+          src={primarySrc}
           alt={alt}
           loading={priority ? "eager" : "lazy"}
           decoding="async"
           fetchPriority={priority ? "high" : "auto"}
-          className={`productRemoteImage ${className || ""}`}
-          onError={() => setFailed(true)}
+          className={`productRemoteImage productVendorImage ${className || ""}`}
+          onError={(event) => { event.currentTarget.style.display = "none"; }}
+        />
+      )}
+      {primarySrc && remoteIsLocal && !localSrc && (
+        <img
+          src={primarySrc}
+          alt={alt}
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+          className={`productRemoteImage productLocalImage ${className || ""}`}
         />
       )}
     </div>
