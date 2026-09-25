@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900">
+<defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#f8fbff"/><stop offset="1" stop-color="#eef2ff"/></linearGradient><radialGradient id="glow"><stop stop-color="#3157ff" stop-opacity=".22"/><stop offset="1" stop-color="#3157ff" stop-opacity="0"/></radialGradient></defs>
+<rect width="900" height="900" rx="64" fill="url(#bg)"/><circle cx="720" cy="170" r="240" fill="url(#glow)"/>
+<rect x="60" y="58" width="180" height="44" rx="22" fill="#1428a0"/><text x="150" y="87" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="white">Samsung</text>
+<rect x="385" y="65" width="130" height="150" rx="46" fill="#3157ff" opacity=".20"/><rect x="385" y="485" width="130" height="150" rx="46" fill="#3157ff" opacity=".20"/><rect x="315" y="180" width="270" height="330" rx="72" fill="white" stroke="#3157ff" stroke-width="10"/><circle cx="450" cy="345" r="82" fill="#eef2ff"/><path d="M450 345l45-35M450 345v-58" stroke="#3157ff" stroke-width="12" stroke-linecap="round"/>
+<text x="450" y="705" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="34" font-weight="800" fill="#0f172a">Galaxy Watch9</text>
+<text x="450" y="752" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" letter-spacing="3" fill="#3157ff">TECHMAN AMT</text>
+<text x="450" y="810" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="16" fill="#64748b">Product visual • exact finish may vary</text>
+</svg>

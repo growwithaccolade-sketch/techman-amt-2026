@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900">
+<defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#f8fbff"/><stop offset="1" stop-color="#eef2ff"/></linearGradient><radialGradient id="glow"><stop stop-color="#ef4444" stop-opacity=".22"/><stop offset="1" stop-color="#ef4444" stop-opacity="0"/></radialGradient></defs>
+<rect width="900" height="900" rx="64" fill="url(#bg)"/><circle cx="720" cy="170" r="240" fill="url(#glow)"/>
+<rect x="60" y="58" width="180" height="44" rx="22" fill="#991b1b"/><text x="150" y="87" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="white">Nintendo</text>
+<rect x="185" y="215" width="530" height="300" rx="90" fill="white" stroke="#ef4444" stroke-width="10"/><path d="M300 330v95M252 378h96" stroke="#ef4444" stroke-width="18" stroke-linecap="round"/><circle cx="585" cy="350" r="18" fill="#ef4444"/><circle cx="630" cy="405" r="18" fill="#ef4444"/>
+<text x="450" y="705" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="34" font-weight="800" fill="#0f172a">Nintendo Switch 2</text>
+<text x="450" y="752" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="700" letter-spacing="3" fill="#ef4444">TECHMAN AMT</text>
+<text x="450" y="810" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="16" fill="#64748b">Product visual • exact finish may vary</text>
+</svg>
