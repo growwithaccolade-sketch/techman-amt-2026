@@ -149,8 +149,12 @@ export default function MotionController() {
 
     if (!reduced && finePointer) {
       const onGlobalPointer = (event: PointerEvent) => {
+        const nx = (event.clientX / Math.max(1, window.innerWidth) - 0.5) * 2;
+        const ny = (event.clientY / Math.max(1, window.innerHeight) - 0.5) * 2;
         root.style.setProperty("--pointer-x", `${event.clientX}px`);
         root.style.setProperty("--pointer-y", `${event.clientY}px`);
+        root.style.setProperty("--cursor-nx", nx.toFixed(4));
+        root.style.setProperty("--cursor-ny", ny.toFixed(4));
       };
       window.addEventListener("pointermove", onGlobalPointer, { passive: true });
       cleanups.push(() => window.removeEventListener("pointermove", onGlobalPointer));
@@ -227,6 +231,8 @@ export default function MotionController() {
       root.style.removeProperty("--scroll-progress");
       root.style.removeProperty("--scroll-velocity");
       root.style.removeProperty("--hero-parallax");
+      root.style.removeProperty("--cursor-nx");
+      root.style.removeProperty("--cursor-ny");
     };
   }, []);
 
