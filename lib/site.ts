@@ -18,7 +18,7 @@ export const fallbackStoreSettings: StoreSettings = {
   whatsappNumber: PRIMARY_SUPPORT_PHONE,
   announcementText: "See the price. Know the condition. Buy with confidence.",
   freeDeliveryThreshold: null,
-  locationLabel: "27 Admiralty Road, Lekki Phase 1, Lagos, Nigeria",
+  locationLabel: "12 Techman Close, Lekki Phase 1, Lagos, Nigeria",
   footerCreditLabel: "Built by Mike Accolade",
   footerCreditUrl: "https://mikeaccolade.xyz",
 };
