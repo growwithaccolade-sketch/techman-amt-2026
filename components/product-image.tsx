@@ -99,7 +99,7 @@ export default function ProductImage({
           alt={alt}
           fill
           sizes={sizes}
-          quality={72}
+          quality={64}
           priority={priority}
           className={imageClass}
           onError={() => setFailed(true)}
