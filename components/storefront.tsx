@@ -398,7 +398,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
         <div className="whyGrid">
           <article><span>01</span><ShieldCheck/><h3>Prices you can see</h3><p>Every product displays a price, making it easier to compare options and decide what fits your budget.</p></article>
           <article><span>02</span><Truck/><h3>Details before payment</h3><p>Check condition, warranty, important specs and stock information before you commit your money.</p></article>
-          <article><span>03</span><BadgeCheck/><h3>Talk to a real person</h3><p>Call 08103483669 or email techmanamt@gmail.com when you need buying, delivery or order support.</p></article>
+          <article><span>03</span><BadgeCheck/><h3>Talk to a real person</h3><p>Call {settings.whatsappNumber} or email {settings.supportEmail} when you need buying, delivery or order support.</p></article>
         </div>
       </section>
 
@@ -450,7 +450,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
       <section className="homeContactBand shell">
         <div className="homeContactCopy">
           <span className="kicker">NEED A SECOND OPINION?</span>
-          <h2>{contactSection?.title || "Before you pay, make sure it is the right device."}</h2><p>{contactSection?.body || "Call 08103483669 or email techmanamt@gmail.com for a quick product recommendation, compatibility check, delivery question or order update."}</p>
+          <h2>{contactSection?.title || "Before you pay, make sure it is the right device."}</h2><p>{contactSection?.body || `Call ${settings.whatsappNumber} or email ${settings.supportEmail} for a quick product recommendation, compatibility check, delivery question or order update.`}</p>
         </div>
         <div className="homeContactActions">
           <Link className="contactPrimary" href="/contact">Talk to TechMan AMT <ArrowRight size={17}/></Link>
