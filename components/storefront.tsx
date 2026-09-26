@@ -32,11 +32,11 @@ import BrandLogo from "@/components/brand-logo";
 import type { EditablePage } from "@/lib/site-pages";
 
 const categoryMeta = [
-  { name: "Phones", copy: "Apple, Samsung and Android phones.", icon: Smartphone },
-  { name: "Laptops", copy: "MacBooks and Windows laptops.", icon: Laptop },
-  { name: "Creator Tools", copy: "Microphones, lighting, rigs and storage.", icon: Mic2 },
-  { name: "Audio", copy: "Headphones, earbuds and speakers.", icon: Headphones },
-  { name: "Accessories", copy: "Chargers, power banks, mice and hubs.", icon: Zap },
+  { name: "Phones", copy: "Flagships and everyday phones worth carrying.", icon: Smartphone },
+  { name: "Laptops", copy: "Reliable machines for work, school and serious projects.", icon: Laptop },
+  { name: "Creator Tools", copy: "Audio, lighting and gear that make your content better.", icon: Mic2 },
+  { name: "Audio", copy: "Hear more clearly at home, at work and on the move.", icon: Headphones },
+  { name: "Accessories", copy: "The chargers, storage and extras that complete the setup.", icon: Zap },
 ];
 
 const filters = ["All", "Phones", "Laptops", "Tablets", "Watches", "Audio", "Creator Tools", "Accessories", "Gaming"];
@@ -59,9 +59,7 @@ const featuredSlugs = [
   "jbl-charge-5",
 ];
 
-const isLaunchProduct = (product: Product) => product.price <= 0 && /new\s*2026/i.test(product.badge || "");
-const availabilityCta = (product: Product) => isLaunchProduct(product) ? "Join waitlist" : "Get quote";
-const priceLabel = (product: Product) => product.price > 0 ? money(product.price) : availabilityCta(product);
+const priceLabel = (product: Product) => money(product.price);
 
 export default function Storefront({ homeContent }: { homeContent?: EditablePage }) {
   const [query, setQuery] = useState("");
@@ -119,15 +117,15 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
   const displayProducts = defaultMode
     ? defaultFeatured
     : visibleProducts.filter((product) => !heroIds.has(product.id)).slice(0, 9);
-  const heroTitle = (homeContent?.title || "Technology,|properly selected.").split("|");
+  const heroTitle = (homeContent?.title || "Buy better tech.|Without the guesswork.").split("|");
   const contactSection = homeContent?.sections?.[0];
   const newsletterSection = homeContent?.sections?.[1];
 
   return (
     <main className="siteFrame">
       <div className="announcement premiumAnnouncement">
-        <span>{settings.announcementText || "Phones, laptops, audio and creator tools"}</span>
-        <span className="announcementDesktop">Delivery across Nigeria · Order support</span>
+        <span>{settings.announcementText || "See the price. Know the condition. Buy with confidence."}</span>
+        <span className="announcementDesktop">Delivery across Nigeria · Help when you need it</span>
       </div>
 
       <header className="nav shell premiumNav">
@@ -186,15 +184,15 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
 
       <section className="premiumHero shell">
         <div className="premiumHeroCopy">
-          <div className="heroOverline">{homeContent?.eyebrow || "TECHMAN AMT"}</div><h1>{heroTitle[0]}{heroTitle[1] && <><br/><span>{heroTitle[1]}</span></>}</h1><p>{homeContent?.intro || "Current phones, laptops, audio and creator tools. Clear specs, clear condition and delivery across Nigeria."}</p>
+          <div className="heroOverline">{homeContent?.eyebrow || "TECH THAT EARNS ITS PLACE"}</div><h1>{heroTitle[0]}{heroTitle[1] && <><br/><span>{heroTitle[1]}</span></>}</h1><p>{homeContent?.intro || "Shop phones, laptops, audio and creator gear selected for performance, value and everyday use. See the price, condition and key details before you commit."}</p>
           <div className="premiumHeroCtas">
-            <Link className="primaryBtn heroPrimary" href="/shop">Shop available stock <ArrowRight size={17}/></Link>
-            <Link className="textCta" href="/device-request">Request a device <ArrowUpRight size={16}/></Link>
+            <Link className="primaryBtn heroPrimary" href="/shop">Shop best picks <ArrowRight size={17}/></Link>
+            <Link className="textCta" href="/device-request">Need help choosing? <ArrowUpRight size={16}/></Link>
           </div>
           <div className="heroProof">
-            <span><BadgeCheck size={16}/> Condition and warranty shown</span>
+            <span><BadgeCheck size={16}/> Clear pricing on every product</span>
             <span><Truck size={16}/> Delivery across Nigeria</span>
-            <span><ShieldCheck size={16}/> Secure checkout</span>
+            <span><ShieldCheck size={16}/> Support before and after checkout</span>
           </div>
         </div>
 
@@ -203,19 +201,13 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
             <Link
               href={`/product/${primaryHero.slug}`}
               className="heroStageMain"
-              onClick={(event) => {
-                if (primaryHero.price <= 0) {
-                  event.preventDefault();
-                  setQuoteProduct(primaryHero);
-                }
-              }}
             >
               <div className="heroStageBadge">NEW 2026</div>
               <ProductImage src={primaryHero.image} alt={primaryHero.name} brand={primaryHero.brand} sizes="(max-width: 900px) 92vw, 46vw" priority/>
               <div className="heroStageOverlay">
                 <span>{primaryHero.brand}</span>
                 <strong>{primaryHero.name}</strong>
-                <b className={primaryHero.price <= 0 ? "heroQuoteCta" : undefined}>{priceLabel(primaryHero)}{primaryHero.price <= 0 && <ArrowRight size={14}/>}</b>
+                <b>{priceLabel(primaryHero)}</b>
               </div>
             </Link>
           )}
@@ -225,12 +217,6 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
               <Link
                 href={`/product/${secondaryHero.slug}`}
                 className="heroMiniCard"
-                onClick={(event) => {
-                  if (secondaryHero.price <= 0) {
-                    event.preventDefault();
-                    setQuoteProduct(secondaryHero);
-                  }
-                }}
               >
                 <ProductImage src={secondaryHero.image} alt={secondaryHero.name} brand={secondaryHero.brand} sizes="220px" priority/>
                 <div><span>{secondaryHero.category}</span><strong>{secondaryHero.name}</strong></div>
@@ -240,12 +226,6 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
               <Link
                 href={`/product/${tertiaryHero.slug}`}
                 className="heroMiniCard"
-                onClick={(event) => {
-                  if (tertiaryHero.price <= 0) {
-                    event.preventDefault();
-                    setQuoteProduct(tertiaryHero);
-                  }
-                }}
               >
                 <ProductImage src={tertiaryHero.image} alt={tertiaryHero.name} brand={tertiaryHero.brand} sizes="220px" priority/>
                 <div><span>{tertiaryHero.category}</span><strong>{tertiaryHero.name}</strong></div>
@@ -261,8 +241,8 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
 
       <section id="collections" className="collectionSection shell">
         <div className="premiumSectionHead">
-          <div><span className="kicker">CATEGORIES</span><h2>Find the right category quickly.</h2></div>
-          <Link href="/shop" className="sectionLink">View all products <ArrowUpRight size={16}/></Link>
+          <div><span className="kicker">CATEGORIES</span><h2>Start with what you need.</h2></div>
+          <Link href="/shop" className="sectionLink">See everything <ArrowUpRight size={16}/></Link>
         </div>
 
         <div className="collectionBento">
@@ -290,10 +270,10 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
       <section className="premiumDeal">
         <div className="shell premiumDealInner">
           <div className="premiumDealCopy">
-            <span className="dealLabel">MATCHED ACCESSORIES</span>
-            <h2>Complete the setup.</h2>
-            <p>Add the power, audio, storage and input gear that fits the main device.</p>
-            <Link href="/shop" className="lightBtn">Browse accessories <ArrowRight size={17}/></Link>
+            <span className="dealLabel">BUILD YOUR SETUP</span>
+            <h2>One device is only the start.</h2>
+            <p>Pair your main device with the power, audio, storage and everyday gear that helps it perform better.</p>
+            <Link href="/shop" className="lightBtn">Finish your setup <ArrowRight size={17}/></Link>
           </div>
           <div className="dealFeatureStack">
             {[
@@ -317,10 +297,10 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
 
       <section id="featured" className="featuredSection shell">
         <div className="premiumSectionHead featuredHead">
-          <div><span className="kicker">NEW & TRENDING 2026</span><h2>Latest launches and current bestsellers.</h2></div>
+          <div><span className="kicker">POPULAR RIGHT NOW</span><h2>Products worth your attention.</h2></div>
           <div className="featuredSearch">
             <Search size={17}/>
-            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search the collection"/>
+            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search products or brands"/>
           </div>
         </div>
 
@@ -368,43 +348,21 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
                   <Link href={`/product/${product.slug}`}><h3>{product.name}</h3></Link>
                   <p>{product.blurb}</p>
                   <div className="premiumPriceLine">
-                    {product.price > 0 ? (
-                      <>
-                        <strong>{priceLabel(product)}</strong>
-                        {product.oldPrice && <del>{money(product.oldPrice)}</del>}
-                      </>
-                    ) : (
-                      <button
-                        type="button"
-                        className="inlineQuoteButton"
-                        onClick={() => setQuoteProduct(product)}
-                      >
-                        {availabilityCta(product)}
-                      </button>
-                    )}
+                    <strong>{priceLabel(product)}</strong>
+                    {product.oldPrice && product.oldPrice > product.price && <del>{money(product.oldPrice)}</del>}
                   </div>
-                  <div className={product.price <= 0 ? "premiumStock request" : product.stock > 0 ? "premiumStock" : "premiumStock out"}>
-                    {product.price <= 0 ? "Launch / availability update" : product.stock > 0 ? `${product.stock} available` : "Out of stock"}
+                  <div className={product.stock > 0 ? "premiumStock" : "premiumStock out"}>
+                    {product.stock > 0 ? `${product.stock} available` : "Out of stock"}
                   </div>
                   <div className="premiumCardActions">
-                    {product.price <= 0 ? (
-                      <button
-                        type="button"
-                        className="premiumAddButton requestButton"
-                        onClick={() => setQuoteProduct(product)}
-                      >
-                        {availabilityCta(product)}
-                      </button>
-                    ) : (
-                      <button
-                        className={`premiumAddButton ${inCart ? "added" : ""}`}
-                        onClick={() => addItem(product.id)}
-                        disabled={product.stock <= 0}
-                      >
-                        <ShoppingBag size={16}/>
-                        {product.stock <= 0 ? "Out of stock" : inCart ? "Add another" : "Add to cart"}
-                      </button>
-                    )}
+                    <button
+                      className={`premiumAddButton ${inCart ? "added" : ""}`}
+                      onClick={() => addItem(product.id)}
+                      disabled={product.stock <= 0}
+                    >
+                      <ShoppingBag size={16}/>
+                      {product.stock <= 0 ? "Out of stock" : inCart ? "Add another" : "Add to cart"}
+                    </button>
                     <Link className="premiumDetailButton" href={`/product/${product.slug}`} aria-label={`View ${product.name}`}><ArrowUpRight size={18}/></Link>
                   </div>
                 </div>
@@ -423,14 +381,14 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
 
       <section className="whySection shell">
         <div className="whyLead">
-          <span className="kicker">WHY TECHMAN AMT</span>
-          <h2>Buy with the details upfront.</h2>
-          <p>See product condition, warranty, stock, delivery and specifications before payment.</p>
+          <span className="kicker">BUY WITH CONFIDENCE</span>
+          <h2>Fewer surprises. Better decisions.</h2>
+          <p>Know the price, condition and important details before your money leaves your account.</p>
         </div>
         <div className="whyGrid">
-          <article><span>01</span><ShieldCheck/><h3>Product details</h3><p>Condition, warranty and key specifications are shown on the product page.</p></article>
-          <article><span>02</span><Truck/><h3>Delivery pricing</h3><p>Delivery is calculated before online payment where a rate is configured.</p></article>
-          <article><span>03</span><BadgeCheck/><h3>Verified reviews</h3><p>Verified purchase reviews are tied to paid orders before publication.</p></article>
+          <article><span>01</span><ShieldCheck/><h3>Clear pricing</h3><p>Every product shows a price, so you can compare and decide without chasing a quote.</p></article>
+          <article><span>02</span><Truck/><h3>Know what you are buying</h3><p>Condition, warranty and key specifications stay visible before checkout.</p></article>
+          <article><span>03</span><BadgeCheck/><h3>Support that answers back</h3><p>Need help choosing or checking an order? Call, email or message the store directly.</p></article>
         </div>
       </section>
 
@@ -444,22 +402,22 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
         </div>
         <div className="editorialCopy">
           <span className="kicker">CREATOR TOOLS</span>
-          <h2>Build a reliable production kit.</h2>
-          <p>Wireless audio, power, storage and support gear for mobile video, interviews and streaming.</p>
+          <h2>Create without weak links.</h2>
+          <p>Choose creator gear that fixes the parts people notice first: weak audio, dead batteries, poor lighting and slow storage.</p>
           <div className="editorialChecklist">
             <span><Check/> Wireless microphones</span>
             <span><Check/> Tripods & phone rigs</span>
             <span><Check/> Lighting & streaming gear</span>
             <span><Check/> Storage & power</span>
           </div>
-          <Link href="/shop?category=Creator%20Tools" className="primaryBtn">Shop creator gear <ArrowRight size={17}/></Link>
+          <Link href="/shop?category=Creator%20Tools" className="primaryBtn">Upgrade your creator kit <ArrowRight size={17}/></Link>
         </div>
       </section>
 
       <section className="insights premiumInsights shell">
         <div className="premiumSectionHead">
-          <div><span className="kicker">BUYING GUIDES</span><h2>Useful product guides.</h2></div>
-          <Link href="/blog" className="sectionLink">See all guides <ArrowUpRight size={16}/></Link>
+          <div><span className="kicker">BUY SMARTER</span><h2>Make the next purchase smarter.</h2></div>
+          <Link href="/blog" className="sectionLink">Read the buying guides <ArrowUpRight size={16}/></Link>
         </div>
 
         <div className="insightGrid">
@@ -484,7 +442,7 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
           <h2>{contactSection?.title || "Need a product check or order help?"}</h2><p>{contactSection?.body || "Contact TechMan AMT for stock, compatibility, delivery and order questions."}</p>
         </div>
         <div className="homeContactActions">
-          <Link className="contactPrimary" href="/contact">Contact us <ArrowRight size={17}/></Link>
+          <Link className="contactPrimary" href="/contact">Get buying help <ArrowRight size={17}/></Link>
           {supportLink && <a className="contactSecondary" href={supportLink} target="_blank" rel="noreferrer"><MessageCircle size={17}/> WhatsApp</a>}
           <Link className="contactSecondary" href="/track-order">Track order</Link>
         </div>
@@ -493,8 +451,8 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
       <section className="newsletter premiumNewsletter">
         <div className="shell premiumNewsletterInner">
           <div>
-            <span className="kicker">STOCK UPDATES</span>
-            <h2>{newsletterSection?.title || "New stock and selected offers."}</h2><p>{newsletterSection?.body || "Occasional updates on arrivals, price changes and buying guides."}</p>
+            <span className="kicker">FIRST LOOK</span>
+            <h2>{newsletterSection?.title || "Get the good stuff before it disappears."}</h2><p>{newsletterSection?.body || "New arrivals, useful buying guides and selected offers, sent without the noise."}</p>
           </div>
           <NewsletterForm/>
         </div>
