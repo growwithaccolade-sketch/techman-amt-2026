@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { products } from "@/lib/products";
 
 const brandPalettes: Record<string, [string, string, string]> = {
@@ -71,44 +71,35 @@ export default function ProductImage({
   sizes?: string;
   priority?: boolean;
 }) {
+  const [failed, setFailed] = useState(false);
   const localSlug = products.find((product) => product.name === alt)?.slug;
-  const localSrc = localSlug ? `/product-art/${localSlug}.svg` : "";
-  const primarySrc = src || localSrc;
-  const remoteIsLocal = Boolean(primarySrc && primarySrc.startsWith("/product-art/"));
+  const backupSrc = localSlug ? `/product-art/${localSlug}.svg` : "";
+
+  useEffect(() => {
+    setFailed(false);
+  }, [src]);
+
+  const displaySrc = src && !failed ? src : backupSrc;
+
+  if (!displaySrc) return <ProductFallback alt={alt} brand={brand}/>;
+
+  const isRealLocalPhoto = displaySrc.startsWith("/products/");
+  const isBackupArtwork = displaySrc.startsWith("/product-art/");
 
   return (
     <div className="productImageStack">
       <ProductFallback alt={alt} brand={brand}/>
-      {localSrc && (
-        <img
-          src={localSrc}
-          alt=""
-          aria-hidden="true"
-          loading={priority ? "eager" : "lazy"}
-          decoding="async"
-          className={`productRemoteImage productLocalImage ${className || ""}`}
-        />
-      )}
-      {primarySrc && !remoteIsLocal && (
-        <img
-          src={primarySrc}
-          alt={alt}
-          loading={priority ? "eager" : "lazy"}
-          decoding="async"
-          fetchPriority={priority ? "high" : "auto"}
-          className={`productRemoteImage productVendorImage ${className || ""}`}
-          onError={(event) => { event.currentTarget.style.display = "none"; }}
-        />
-      )}
-      {primarySrc && remoteIsLocal && !localSrc && (
-        <img
-          src={primarySrc}
-          alt={alt}
-          loading={priority ? "eager" : "lazy"}
-          decoding="async"
-          className={`productRemoteImage productLocalImage ${className || ""}`}
-        />
-      )}
+      <img
+        src={displaySrc}
+        alt={alt}
+        loading={priority ? "eager" : "lazy"}
+        decoding="async"
+        fetchPriority={priority ? "high" : "auto"}
+        className={`productRemoteImage ${isRealLocalPhoto ? "productLocalImage" : isBackupArtwork ? "productBackupImage" : "productVendorImage"} ${className || ""}`}
+        onError={() => {
+          if (!isBackupArtwork) setFailed(true);
+        }}
+      />
     </div>
   );
 }
