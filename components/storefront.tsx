@@ -124,7 +124,7 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
     <main className="siteFrame">
       <div className="announcement premiumAnnouncement">
         <span>{settings.announcementText || "Real prices. Clear product details. Direct support when you need it."}</span>
-        <span className="announcementDesktop">Delivery across Nigeria · Call 08103483669 for buying help</span>
+        <span className="announcementDesktop">Delivery across Nigeria · Help when you need it</span>
       </div>
 
       <header className="nav shell premiumNav">
