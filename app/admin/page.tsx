@@ -46,8 +46,8 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
           <article>
             <span className="kicker">OPERATIONS</span>
             <h2>Manage the store from here.</h2>
-            <p>Product changes now feed the live storefront when the database is connected. Checkout validates current price and stock from the same catalog before starting payment.</p>
-            <div className="adminQuickLinks"><Link href="/admin/products">Manage products</Link><Link href="/admin/orders">Manage orders</Link><Link href="/track-order">Test customer tracking</Link></div>
+            <p>Use Products for names, prices, stock and product images; Pages for storefront copy; Media for homepage visual sections; Settings for contact details, address, announcement and footer credit. Changes feed the live storefront when the backend is connected.</p>
+            <div className="adminQuickLinks"><Link href="/admin/products">Products + prices</Link><Link href="/admin/pages">Edit pages</Link><Link href="/admin/media">Edit images</Link><Link href="/admin/settings">Store settings</Link><Link href="/admin/orders">Orders</Link></div>
           </article>
           <article>
             <span className="kicker">PRODUCTION CHECKLIST</span>
