@@ -13,12 +13,12 @@ export default function CartPageClient() {
   const freeDeliveryRemaining = settings.freeDeliveryThreshold ? Math.max(settings.freeDeliveryThreshold - subtotal, 0) : null;
 
   if (!items.length) {
-    return <section className="emptyCart shell"><ShoppingBag size={44}/><h1>Your cart is empty.</h1><p>Add products to your cart to continue.</p><Link className="primaryBtn" href="/shop">Browse products</Link></section>;
+    return <section className="emptyCart shell"><ShoppingBag size={44}/><h1>Nothing here yet.</h1><p>Start with the products worth comparing, then come back here when you are ready to buy.</p><Link className="primaryBtn" href="/shop">Shop products</Link></section>;
   }
 
   return (
     <section className="cartPage shell">
-      <div className="pageIntro"><span className="kicker">CART</span><h1>Review your cart.</h1><p>Confirm products and quantities before checkout.</p></div>
+      <div className="pageIntro"><span className="kicker">CART</span><h1>One last check before checkout.</h1><p>Check the products, quantities and prices below. You can still change anything before payment.</p></div>
       <div className="cartLayout">
         <div className="cartLines">
           {items.map(({ line, product }) => product && (
@@ -44,8 +44,8 @@ export default function CartPageClient() {
           <div><span>Subtotal</span><strong>{money(subtotal)}</strong></div>
           <div><span>Delivery</span><span>{settings.freeDeliveryThreshold && subtotal >= settings.freeDeliveryThreshold ? "Free delivery offer unlocked" : "Calculated at checkout"}</span></div>{freeDeliveryRemaining !== null && freeDeliveryRemaining > 0 && <div className="deliveryProgress"><span>Add {money(freeDeliveryRemaining)} more to reach the configured free-delivery threshold.</span><div><i style={{width: `${Math.min(100, (subtotal / settings.freeDeliveryThreshold!) * 100)}%`}}/></div></div>}
           <div className="summaryTotal"><span>Total before delivery</span><strong>{money(subtotal)}</strong></div>
-          <Link className="primaryBtn checkoutBtn" href="/checkout">Continue to checkout</Link>
-          <small>Delivery is calculated before payment where a rate is configured.</small>
+          <Link className="primaryBtn checkoutBtn" href="/checkout">Secure checkout</Link>
+          <small>Your delivery option and final total are shown before online payment starts.</small>
         </aside>
       </div>
     </section>
