@@ -1,15 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, Heart, Search, ShoppingBag } from "lucide-react";
+import { ArrowUpRight, Heart, Search, ShieldCheck, ShoppingBag, Star } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useCart } from "@/components/cart-provider";
 import { money } from "@/lib/products";
 import ProductImage from "@/components/product-image";
+import { productBadgeLabel, productSavings } from "@/lib/product-display";
 
 export default function CatalogBrowser({
-  title = "Find the tech that fits. Buy it with confidence.",
-  intro = "Compare clear prices, useful specs and current availability across phones, laptops, audio, creator gear and accessories.",
+  title = "Shop phones, laptops, audio and creator equipment.",
+  intro = "Compare prices, stock, condition and key specifications before ordering.",
   initialCategory = "All",
   initialBrand = "All",
   initialQuery = "",
@@ -90,10 +91,12 @@ export default function CatalogBrowser({
         <div className="premiumProductGrid catalogPremiumGrid">
           {products.map((product) => {
             const inCart = lines.some((line) => line.id === product.id);
+            const badge = productBadgeLabel(product);
+            const savings = productSavings(product);
             return (
               <article className="premiumProductCard" key={product.id}>
                 <div className="premiumProductMedia">
-                  {product.badge && <span className="productBadge">{product.badge}</span>}
+                  {badge && <span className={`productBadge productBadge--${badge.toLowerCase()}`}>{badge}</span>}
                   <button
                     className={`wishBtn ${wishlist.includes(product.id) ? "on" : ""}`}
                     onClick={() => toggleWishlist(product.id)}
@@ -113,9 +116,13 @@ export default function CatalogBrowser({
                   <div className="premiumPriceLine">
                     <strong>{money(product.price)}</strong>
                     {product.oldPrice && product.oldPrice > product.price && <del>{money(product.oldPrice)}</del>}
+                    {savings && <span className="priceSaving">Save {savings.percent}%</span>}
                   </div>
-                  <div className={product.stock > 0 ? "premiumStock" : "premiumStock out"}>
-                    {product.stock > 0 ? `${product.stock} available` : "Out of stock"}
+                  <div className="productTrustRow">
+                    {product.rating > 0 && product.reviews > 0
+                      ? <span><Star size={13} fill="currentColor"/> {product.rating.toFixed(1)} <small>({product.reviews})</small></span>
+                      : <span><ShieldCheck size={13}/> {product.condition}</span>}
+                    <span className={product.stock > 0 ? "" : "isOut"}>{product.stock > 0 ? "In stock" : "Stock check required"}</span>
                   </div>
                   <div className="premiumCardActions">
                     <button
