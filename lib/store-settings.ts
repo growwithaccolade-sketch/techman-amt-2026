@@ -11,8 +11,8 @@ export async function getStoreSettings(): Promise<StoreSettings> {
 
     return {
       storeName: data.store_name || fallbackStoreSettings.storeName,
-      supportEmail: PRIMARY_SUPPORT_EMAIL,
-      whatsappNumber: PRIMARY_SUPPORT_PHONE,
+      supportEmail: data.support_email || PRIMARY_SUPPORT_EMAIL,
+      whatsappNumber: data.whatsapp_number || PRIMARY_SUPPORT_PHONE,
       announcementText: data.announcement_text || fallbackStoreSettings.announcementText,
       freeDeliveryThreshold: data.free_delivery_threshold_ngn == null ? null : Number(data.free_delivery_threshold_ngn),
       locationLabel: data.location_label && data.location_label !== "Lagos, Nigeria" ? data.location_label : fallbackStoreSettings.locationLabel,
