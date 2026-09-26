@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
-import { products } from "@/lib/products";
 
 const brandPalettes: Record<string, [string, string, string]> = {
   Apple: ["#3157ff", "#7556ff", "#edf3ff"],
@@ -74,7 +73,9 @@ export default function ProductImage({
   priority?: boolean;
 }) {
   const [failed, setFailed] = useState(false);
-  const localSlug = products.find((product) => product.name === alt)?.slug;
+  const localSlug = src.startsWith("/products/")
+    ? src.split("/").pop()?.replace(/\.(?:webp|png|jpe?g|avif)$/i, "")
+    : "";
   const backupSrc = localSlug ? `/product-art/${localSlug}.svg` : "";
 
   useEffect(() => {
