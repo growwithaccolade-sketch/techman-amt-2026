@@ -16,7 +16,7 @@ export const fallbackStoreSettings: StoreSettings = {
   storeName: "TechMan AMT",
   supportEmail: PRIMARY_SUPPORT_EMAIL,
   whatsappNumber: PRIMARY_SUPPORT_PHONE,
-  announcementText: "See the price. Know the condition. Buy with confidence.",
+  announcementText: "Prices, stock and product details are shown on the site.",
   freeDeliveryThreshold: null,
   locationLabel: "12 Techman Close, Lekki Phase 1, Lagos, Nigeria",
   footerCreditLabel: "Built by Mike Accolade",
