@@ -2,34 +2,35 @@ import type { Metadata } from "next";
 import InfoPage from "@/components/info-page";
 import { getEditablePage } from "@/lib/site-pages";
 
-export const metadata: Metadata = { title: "Delivery" };
+export const metadata: Metadata = { title: "Delivery", description: "See how TechMan AMT handles delivery, dispatch and order tracking across Nigeria." };
 
 const fallback = {
-  "slug": "delivery",
-  "eyebrow": "DELIVERY",
-  "title": "Know the delivery plan before payment.",
-  "intro": "Delivery cost and timing can vary by product, location and courier availability. We confirm the available option before final fulfilment.",
-  "sections": [
+  slug: "delivery",
+  eyebrow: "DELIVERY WITHOUT THE GUESSWORK",
+  title: "Know how your order gets to you.",
+  intro: "Delivery should not become a surprise after checkout. Your destination, product and available courier determine the final delivery option and timing.",
+  sections: [
     {
-      "title": "Nationwide delivery",
-      "body": "TechMan AMT is structured to support delivery across Nigeria. The exact courier, fee and estimated delivery window should be confirmed for your order before dispatch."
+      title: "Delivery across Nigeria",
+      body: "TechMan AMT supports nationwide delivery. The available courier, fee and estimated delivery window are confirmed for the order before dispatch."
     },
     {
-      "title": "Local delivery and pickup",
-      "body": "Where same-day delivery or pickup is available, the option should only be shown after the store has configured the relevant location and operating rules."
+      title: "Local delivery or pickup",
+      body: "Where local delivery or pickup is available, the team will confirm the practical option for your location and order."
     },
     {
-      "title": "Tracking",
-      "body": "Orders created through the online checkout receive a reference that can be checked on the order tracking page using the same checkout email address."
+      title: "Track the order",
+      body: "Orders created through online checkout receive a reference you can use on the Track Order page with the same checkout email address."
     },
     {
-      "title": "Before dispatch",
-      "body": "High-value orders may require payment verification and contact confirmation before a device leaves fulfilment."
+      title: "High-value order checks",
+      body: "For some high-value purchases, payment and contact details may be verified before the device leaves fulfilment. This helps reduce failed or misdirected deliveries."
     }
   ]
 };
 
 export default async function Page() {
-  const page = await getEditablePage("delivery", fallback);
+  const stored = await getEditablePage("delivery", fallback);
+  const page = stored.title === "Know the delivery plan before payment." ? fallback : stored;
   return <InfoPage eyebrow={page.eyebrow} title={page.title} intro={page.intro} sections={page.sections}/>;
 }
