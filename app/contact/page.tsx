@@ -30,8 +30,8 @@ export default async function ContactPage() {
   return <><CommerceHeader/><main className="infoPage shell contactPage">
     <section className="infoHero contactHero"><span className="kicker">{page.eyebrow}</span><h1>{page.title}</h1><p>{page.intro}</p><small className="contactLocation">{settings.locationLabel}</small></section>
     <div className="contactCards">
-      <article><span className="kicker">PHONE + WHATSAPP</span><h2>{whatsapp.title}</h2><p>{whatsapp.body}</p><div className="contactCardActions"><a className="primaryBtn" href="tel:08103483669">Call now</a>{wa && <a className="secondaryAction" href={wa} target="_blank" rel="noreferrer">Open WhatsApp</a>}</div></article>
-      <article><span className="kicker">EMAIL</span><h2>{email.title}</h2><p>techmanamt@gmail.com</p><a className="secondaryAction" href="mailto:techmanamt@gmail.com">Send email</a></article>
+      <article><span className="kicker">PHONE + WHATSAPP</span><h2>{whatsapp.title}</h2><p>{settings.whatsappNumber}</p><div className="contactCardActions"><a className="primaryBtn" href={`tel:${settings.whatsappNumber}`}>Call now</a>{wa && <a className="secondaryAction" href={wa} target="_blank" rel="noreferrer">Open WhatsApp</a>}</div></article>
+      <article><span className="kicker">EMAIL</span><h2>{email.title}</h2><p>{settings.supportEmail}</p><a className="secondaryAction" href={`mailto:${settings.supportEmail}`}>Send email</a></article>
       <article><span className="kicker">ORDER HELP</span><h2>{tracking.title}</h2><p>{tracking.body}</p><a className="secondaryAction" href="/track-order">Track order</a></article>
     </div>
   </main></>;
