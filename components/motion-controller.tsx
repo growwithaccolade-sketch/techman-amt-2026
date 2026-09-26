@@ -3,6 +3,8 @@
 import { useEffect } from "react";
 
 const revealSelectors = [
+  "main > section",
+  "main > div",
   ".premiumHeroCopy > *",
   ".heroStage",
   ".brandRail > span",
