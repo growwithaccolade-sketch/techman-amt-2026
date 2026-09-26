@@ -136,12 +136,12 @@ export default function CheckoutClient() {
   }
 
   if (!items.length) {
-    return <section className="emptyCart shell"><h1>Nothing to check out yet.</h1><p>Add products to your cart first.</p><Link className="primaryBtn" href="/shop">Browse products</Link></section>;
+    return <section className="emptyCart shell"><h1>Your checkout is ready when your cart is.</h1><p>Add the products you want, then return here to confirm delivery and payment.</p><Link className="primaryBtn" href="/shop">Shop products</Link></section>;
   }
 
   return (
     <section className="checkoutPage shell">
-      <div className="pageIntro"><span className="kicker">CHECKOUT</span><h1>Checkout.</h1><p>Enter delivery details, confirm the delivery fee and choose your payment method.</p></div>
+      <div className="pageIntro"><span className="kicker">SECURE CHECKOUT</span><h1>Finish the order with the details clear.</h1><p>Add your delivery information, calculate the delivery fee and review the final total before payment starts.</p></div>
       <form className="checkoutLayout" onSubmit={submit}>
         <div className="checkoutForm">
           <div className="formSection"><h2>Contact</h2><label>Full name<input name="name" required autoComplete="name"/></label><div className="fieldGrid"><label>Phone number<input name="phone" required inputMode="tel"/></label><label>Email<input name="email" type="email" required autoComplete="email"/></label></div></div>
@@ -158,7 +158,7 @@ export default function CheckoutClient() {
             {couponState === "error" && <div className="couponError">{couponMessage}</div>}
           </div>
 
-          <div className="secureNote"><LockKeyhole size={18}/><span><b>Secure payment</b><small>Online card and bank payments are completed on Paystack.</small></span></div>
+          <div className="secureNote"><LockKeyhole size={18}/><span><b>Payment stays on a secure checkout</b><small>Online card and bank payments are completed on Paystack.</small></span></div>
           {error && <div className="checkoutError">{error}</div>}
         </div>
 
@@ -171,7 +171,7 @@ export default function CheckoutClient() {
           <div className="summaryTotal"><span>Estimated total</span><strong>{money(total)}</strong></div>
           <button className="primaryAction" name="intent" value="online" type="submit" disabled={loading}><CreditCard size={18}/>{loading ? "Starting secure payment..." : "Pay securely online"}</button>
           <button className="whatsappCheckout" name="intent" value="whatsapp" type="submit"><MessageCircle size={18}/> Order on WhatsApp</button>
-          <small>Product price, discount, stock and delivery are confirmed before payment starts.</small>
+          <small>Review the product total, any discount and delivery fee above before payment starts.</small>
         </aside>
       </form>
     </section>
