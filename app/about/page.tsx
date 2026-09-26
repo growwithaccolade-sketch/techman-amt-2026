@@ -26,6 +26,7 @@ const fallback = {
 };
 
 export default async function Page() {
-  const page = await getEditablePage("about", fallback);
+  const stored = await getEditablePage("about", fallback);
+  const page = stored.title === "Tech buying should feel clearer." ? fallback : stored;
   return <InfoPage eyebrow={page.eyebrow} title={page.title} intro={page.intro} sections={page.sections}/>;
 }
