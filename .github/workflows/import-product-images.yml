@@ -1,0 +1,31 @@
+name: Import real product images
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import-images:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install image tools
+        run: python -m pip install --disable-pip-version-check requests pillow
+      - name: Download and normalize real product photography
+        run: python scripts/import-product-images.py
+      - name: Commit localized product photography
+        run: |
+          git config user.name "Mike Accolade"
+          git config user.email "growwithaccolade@gmail.com"
+          git add public/products lib/products.ts
+          if git diff --cached --quiet; then
+            echo "No image changes to commit"
+          else
+            git commit -m "Localize real product photography for all catalog items"
+            git push origin HEAD:main
+          fi
