@@ -12,7 +12,7 @@ function toText(sections: PageRow["sections"]) {
   return (sections || []).map(section => [section.title, section.body, ...(section.points || [])].join("\n")).join("\n\n");
 }
 
-const core = ["home","about","contact","delivery","returns","warranty","faq","privacy","terms","refund-policy"];
+const core = ["home","shop","blog","about","contact","device-request","trade-in","corporate","delivery","returns","warranty","faq","privacy","terms","refund-policy"];
 
 export default async function PagesAdmin({ searchParams }: { searchParams: Promise<{ error?: string; success?: string }> }) {
   if (!(await hasAdminSession())) redirect("/admin");
