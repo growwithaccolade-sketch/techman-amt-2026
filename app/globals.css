@@ -4607,3 +4607,327 @@ body{
     transform:none!important;
   }
 }
+
+
+/* =========================================================
+   HOMEPAGE UX REFACTOR — QUOTE, FILTERS, CATEGORIES, FOOTER
+   ========================================================= */
+.collectionBento{
+  display:grid;
+  grid-template-columns:1.35fr .85fr .85fr;
+  grid-auto-rows:minmax(220px,auto);
+  gap:16px;
+}
+.collectionTile1{
+  grid-row:span 2;
+  min-height:456px;
+}
+.collectionTile2,
+.collectionTile3{
+  min-height:220px;
+}
+.collectionTile4{
+  grid-column:span 2;
+  min-height:230px;
+}
+.collectionTile5{
+  min-height:230px;
+}
+.categoryAlignEnd .collectionTileCopy{
+  margin-left:auto;
+  text-align:right;
+}
+.categoryAlignEnd .collectionTileTop{
+  flex-direction:row-reverse;
+}
+.categoryAlignEnd .categoryVisual{
+  left:-6%;
+  right:auto;
+  transform:rotate(7deg);
+}
+.collectionTileTop span{
+  font-size:8px;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  font-weight:900;
+  color:#687087;
+}
+.collectionTileCopy h3{
+  font-size:clamp(26px,3vw,42px);
+  line-height:.98;
+  letter-spacing:-.05em;
+}
+.collectionTileCopy p{
+  font-size:12px;
+  line-height:1.55;
+}
+.collectionTile1 .collectionTileCopy{
+  max-width:62%;
+}
+.collectionTile4 .collectionTileCopy{
+  max-width:48%;
+}
+
+.premiumFilterRow{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.premiumFilterRow button{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  min-height:40px;
+  padding:0 13px;
+  border-radius:999px;
+}
+.premiumFilterRow button span{
+  font-size:10px;
+  font-weight:900;
+}
+.premiumFilterRow button em{
+  min-width:22px;
+  height:22px;
+  display:grid;
+  place-items:center;
+  border-radius:999px;
+  background:rgba(15,23,42,.06);
+  color:#667085;
+  font-size:8px;
+  font-style:normal;
+  font-weight:900;
+  transition:background-color .2s ease,color .2s ease,transform .2s ease;
+}
+.premiumFilterRow button.active em{
+  background:rgba(255,255,255,.18);
+  color:#fff;
+  transform:scale(1.04);
+}
+
+.inlineQuoteButton{
+  appearance:none;
+  border:0;
+  padding:0;
+  background:transparent;
+  color:var(--brand-violet);
+  font:inherit;
+  font-weight:900;
+  cursor:pointer;
+  position:relative;
+}
+.inlineQuoteButton:after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-3px;
+  height:2px;
+  border-radius:999px;
+  background:currentColor;
+  transform:scaleX(.35);
+  transform-origin:left;
+  transition:transform .25s ease;
+}
+.inlineQuoteButton:hover:after{
+  transform:scaleX(1);
+}
+
+.quoteModalBackdrop{
+  position:fixed;
+  inset:0;
+  z-index:10000;
+  display:grid;
+  place-items:center;
+  padding:20px;
+  background:rgba(9,11,16,.55);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  animation:quoteBackdropIn .24s ease both;
+}
+.quoteModal{
+  width:min(520px,100%);
+  position:relative;
+  overflow:hidden;
+  border-radius:28px;
+  border:1px solid rgba(255,255,255,.65);
+  background:
+    radial-gradient(420px 240px at 100% 0%,rgba(117,86,255,.12),transparent 70%),
+    #fff;
+  padding:34px;
+  box-shadow:0 34px 100px rgba(3,8,28,.28);
+  animation:quoteModalIn .46s var(--motion-ease) both;
+}
+.quoteModalClose{
+  position:absolute;
+  right:18px;
+  top:18px;
+  width:36px;
+  height:36px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:1px solid #e8eaf0;
+  background:#fff;
+  cursor:pointer;
+}
+.quoteModal h3{
+  margin:10px 0 10px;
+  font-size:clamp(28px,4vw,42px);
+  line-height:1;
+  letter-spacing:-.05em;
+}
+.quoteModal>p{
+  margin:0;
+  max-width:410px;
+  color:#697084;
+  font-size:12px;
+  line-height:1.6;
+}
+.quoteModalProduct{
+  margin-top:24px;
+  display:grid;
+  grid-template-columns:96px 1fr;
+  gap:16px;
+  align-items:center;
+  padding:14px;
+  border-radius:18px;
+  background:#f7f8fc;
+  border:1px solid #edf0f6;
+}
+.quoteModalProduct>div{
+  position:relative;
+  width:96px;
+  height:84px;
+  overflow:hidden;
+  border-radius:14px;
+  background:#fff;
+}
+.quoteModalProduct>span{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.quoteModalProduct b{
+  font-size:13px;
+}
+.quoteModalProduct small{
+  color:#7b8190;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-weight:800;
+}
+.quoteModalActions{
+  margin-top:22px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.quoteModalActions .primaryBtn,
+.quoteModalActions .secondaryAction{
+  min-height:50px;
+  justify-content:center;
+}
+.quoteModalActions .secondaryAction{
+  border-radius:10px;
+  border:1px solid #dde2eb;
+  background:#fff;
+  color:#20263a;
+  font-size:10px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.premiumFooterTop{
+  column-gap:clamp(36px,5vw,84px)!important;
+  row-gap:38px!important;
+  padding-top:64px!important;
+  padding-bottom:54px!important;
+}
+.premiumFooterTop>div:not(.footerBrandBlock){
+  min-width:128px;
+}
+.premiumFooterTop>div{
+  gap:13px;
+}
+
+@keyframes quoteBackdropIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+@keyframes quoteModalIn{
+  from{opacity:0;transform:translateY(20px) scale(.97);filter:blur(8px)}
+  to{opacity:1;transform:none;filter:blur(0)}
+}
+
+@media(max-width:1000px){
+  .collectionBento{
+    grid-template-columns:1fr 1fr;
+  }
+  .collectionTile1{
+    grid-row:span 1;
+    min-height:280px;
+  }
+  .collectionTile4{
+    grid-column:span 1;
+  }
+}
+@media(max-width:760px){
+  .collectionBento{
+    display:flex;
+    gap:12px;
+    overflow-x:auto;
+    padding-bottom:8px;
+    scroll-snap-type:x mandatory;
+    overscroll-behavior-inline:contain;
+  }
+  .collectionTile,
+  .collectionTile1,
+  .collectionTile2,
+  .collectionTile3,
+  .collectionTile4,
+  .collectionTile5{
+    flex:0 0 min(82vw,320px);
+    min-height:250px;
+    grid-row:auto;
+    grid-column:auto;
+    scroll-snap-align:start;
+  }
+  .categoryAlignEnd .collectionTileCopy{
+    margin-left:0;
+    text-align:left;
+  }
+  .categoryAlignEnd .collectionTileTop{
+    flex-direction:row;
+  }
+  .categoryAlignEnd .categoryVisual{
+    left:auto;
+    right:-5%;
+    transform:rotate(-6deg);
+  }
+  .collectionTile1 .collectionTileCopy,
+  .collectionTile4 .collectionTileCopy{
+    max-width:72%;
+  }
+  .premiumFilterRow{
+    overflow-x:auto;
+    flex-wrap:nowrap;
+    padding-bottom:7px;
+    scrollbar-width:none;
+  }
+  .premiumFilterRow::-webkit-scrollbar{display:none}
+  .premiumFilterRow button{
+    flex:0 0 auto;
+  }
+  .quoteModal{
+    padding:28px 20px 20px;
+    border-radius:22px;
+  }
+  .quoteModalActions{
+    grid-template-columns:1fr;
+  }
+  .premiumFooterTop{
+    column-gap:28px!important;
+    row-gap:34px!important;
+  }
+}
