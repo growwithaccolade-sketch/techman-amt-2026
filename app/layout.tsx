@@ -43,4 +43,4 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   return <html lang="en"><body><MotionController/><CartProvider catalog={catalog} settings={settings}>{children}<SiteFooter/></CartProvider></body></html>;
 }
 
-// deployment-refresh: 2026-09-26-admin-performance-cms
+// deployment-refresh: 2026-09-26-final-admin-speed-pass
