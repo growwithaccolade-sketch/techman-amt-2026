@@ -44,14 +44,12 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     image: [product.image],
     description: product.blurb,
     brand: { "@type": "Brand", name: product.brand },
-    ...(product.price > 0 ? {
-      offers: {
-        "@type": "Offer",
-        priceCurrency: "NGN",
-        price: product.price,
-        availability: product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-      },
-    } : {}),
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "NGN",
+      price: product.price,
+      availability: product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+    },
     ...(reviews.length ? {
       aggregateRating: {
         "@type": "AggregateRating",
