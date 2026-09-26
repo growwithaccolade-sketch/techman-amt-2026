@@ -1,5 +1,5 @@
 import { commerceBackendConfigured, getSupabaseAdmin } from "@/lib/supabase/admin";
-import { fallbackStoreSettings, type StoreSettings } from "@/lib/site";
+import { fallbackStoreSettings, PRIMARY_SUPPORT_EMAIL, PRIMARY_SUPPORT_PHONE, type StoreSettings } from "@/lib/site";
 
 export async function getStoreSettings(): Promise<StoreSettings> {
   if (!commerceBackendConfigured()) return fallbackStoreSettings;
@@ -11,8 +11,8 @@ export async function getStoreSettings(): Promise<StoreSettings> {
 
     return {
       storeName: data.store_name || fallbackStoreSettings.storeName,
-      supportEmail: data.support_email || fallbackStoreSettings.supportEmail,
-      whatsappNumber: data.whatsapp_number || fallbackStoreSettings.whatsappNumber,
+      supportEmail: PRIMARY_SUPPORT_EMAIL,
+      whatsappNumber: PRIMARY_SUPPORT_PHONE,
       announcementText: data.announcement_text || fallbackStoreSettings.announcementText,
       freeDeliveryThreshold: data.free_delivery_threshold_ngn == null ? null : Number(data.free_delivery_threshold_ngn),
       locationLabel: data.location_label || fallbackStoreSettings.locationLabel,
