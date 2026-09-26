@@ -2,7 +2,32 @@ import { commerceBackendConfigured, getSupabaseAdmin } from "@/lib/supabase/admi
 import { type Product, products as demoProducts } from "@/lib/products";
 
 const localCatalogImage = (slug: string) =>
-  demoProducts.find((product) => product.slug === slug)?.image || `/product-art/${slug}.svg`;
+  demoProducts.find((product) => product.slug === slug)?.image || `/products/${slug}.webp`;
+
+function placeholderPrice(id: number, category: string) {
+  const base: Record<string, number> = {
+    Phones: 850000,
+    Laptops: 1450000,
+    Tablets: 880000,
+    Watches: 380000,
+    Audio: 180000,
+    "Creator Tools": 220000,
+    Accessories: 95000,
+    Gaming: 650000,
+  };
+  const step: Record<string, number> = {
+    Phones: 135000,
+    Laptops: 175000,
+    Tablets: 145000,
+    Watches: 95000,
+    Audio: 70000,
+    "Creator Tools": 85000,
+    Accessories: 35000,
+    Gaming: 75000,
+  };
+  const raw = (base[category] ?? 300000) + ((id * 7) % 12) * (step[category] ?? 50000);
+  return Math.round(raw / 5000) * 5000;
+}
 
 function resolveImage(row: Record<string, unknown>) {
   const slug = String(row.slug);
@@ -20,13 +45,16 @@ function resolveImage(row: Record<string, unknown>) {
 
 function mapRow(row: Record<string, unknown>): Product {
   const condition = row.condition === "UK Used" ? "UK Used" : "New";
+  const id = Number(row.external_id);
+  const category = String(row.category);
+  const rawPrice = Number(row.price_ngn);
   return {
-    id: Number(row.external_id),
+    id,
     slug: String(row.slug),
     name: String(row.name),
     brand: String(row.brand),
-    category: String(row.category),
-    price: Number(row.price_ngn),
+    category,
+    price: rawPrice > 0 ? rawPrice : placeholderPrice(id, category),
     oldPrice: row.old_price_ngn == null ? undefined : Number(row.old_price_ngn),
     badge: row.badge ? String(row.badge) : undefined,
     rating: 0,
