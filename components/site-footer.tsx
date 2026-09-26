@@ -17,7 +17,7 @@ export default function SiteFooter() {
     <div className="shell premiumFooterTop">
       <div className="footerBrandBlock">
         <BrandLogo light/>
-        <p>Better tech choices, clear prices and direct support when you need a second opinion.</p>
+        <p>Phones, laptops, audio, creator tools and accessories with prices listed online.</p>
         <div className="footerContactLines">
           <a href={`tel:${settings.whatsappNumber}`}>{settings.whatsappNumber}</a>
           <a href={`mailto:${settings.supportEmail}`}>{settings.supportEmail}</a>
