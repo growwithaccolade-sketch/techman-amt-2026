@@ -87,20 +87,23 @@ export default function ProductImage({
 
   const isRealLocalPhoto = displaySrc.startsWith("/products/");
   const isBackupArtwork = displaySrc.startsWith("/product-art/");
+  const isOptimizable = isRealLocalPhoto || /^https:\/\//.test(displaySrc);
 
   const imageClass = `productRemoteImage ${isRealLocalPhoto ? "productLocalImage" : isBackupArtwork ? "productBackupImage" : "productVendorImage"} ${className || ""}`;
 
   return (
     <div className="productImageStack">
       <ProductFallback alt={alt} brand={brand}/>
-      {isRealLocalPhoto ? (
+      {isOptimizable ? (
         <Image
           src={displaySrc}
           alt={alt}
           fill
           sizes={sizes}
-          quality={64}
+          quality={50}
           priority={priority}
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
           className={imageClass}
           onError={() => setFailed(true)}
         />
@@ -108,9 +111,8 @@ export default function ProductImage({
         <img
           src={displaySrc}
           alt={alt}
-          loading={priority ? "eager" : "lazy"}
+          loading="lazy"
           decoding="async"
-          fetchPriority={priority ? "high" : "auto"}
           className={imageClass}
           onError={() => {
             if (!isBackupArtwork) setFailed(true);
