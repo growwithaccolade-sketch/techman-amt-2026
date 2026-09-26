@@ -226,7 +226,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
                 href={`/product/${secondaryHero.slug}`}
                 className="heroMiniCard"
               >
-                <ProductImage src={secondaryHero.image} alt={secondaryHero.name} brand={secondaryHero.brand} sizes="220px"/>
+                <ProductImage src={secondaryHero.image} alt={secondaryHero.name} brand={secondaryHero.brand} sizes="220px" priority/>
                 <div><span>{secondaryHero.category}</span><strong>{secondaryHero.name}</strong></div>
               </Link>
             )}
@@ -235,7 +235,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
                 href={`/product/${tertiaryHero.slug}`}
                 className="heroMiniCard"
               >
-                <ProductImage src={tertiaryHero.image} alt={tertiaryHero.name} brand={tertiaryHero.brand} sizes="220px"/>
+                <ProductImage src={tertiaryHero.image} alt={tertiaryHero.name} brand={tertiaryHero.brand} sizes="220px" priority/>
                 <div><span>{tertiaryHero.category}</span><strong>{tertiaryHero.name}</strong></div>
               </Link>
             )}
