@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { products } from "@/lib/products";
 
@@ -62,6 +63,7 @@ export default function ProductImage({
   alt,
   brand,
   className,
+  sizes = "(max-width: 720px) 92vw, (max-width: 1100px) 46vw, 31vw",
   priority = false,
 }: {
   src: string;
@@ -86,20 +88,35 @@ export default function ProductImage({
   const isRealLocalPhoto = displaySrc.startsWith("/products/");
   const isBackupArtwork = displaySrc.startsWith("/product-art/");
 
+  const imageClass = `productRemoteImage ${isRealLocalPhoto ? "productLocalImage" : isBackupArtwork ? "productBackupImage" : "productVendorImage"} ${className || ""}`;
+
   return (
     <div className="productImageStack">
       <ProductFallback alt={alt} brand={brand}/>
-      <img
-        src={displaySrc}
-        alt={alt}
-        loading={priority ? "eager" : "lazy"}
-        decoding="async"
-        fetchPriority={priority ? "high" : "auto"}
-        className={`productRemoteImage ${isRealLocalPhoto ? "productLocalImage" : isBackupArtwork ? "productBackupImage" : "productVendorImage"} ${className || ""}`}
-        onError={() => {
-          if (!isBackupArtwork) setFailed(true);
-        }}
-      />
+      {isRealLocalPhoto ? (
+        <Image
+          src={displaySrc}
+          alt={alt}
+          fill
+          sizes={sizes}
+          quality={72}
+          priority={priority}
+          className={imageClass}
+          onError={() => setFailed(true)}
+        />
+      ) : (
+        <img
+          src={displaySrc}
+          alt={alt}
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+          fetchPriority={priority ? "high" : "auto"}
+          className={imageClass}
+          onError={() => {
+            if (!isBackupArtwork) setFailed(true);
+          }}
+        />
+      )}
     </div>
   );
 }
