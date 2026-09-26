@@ -23,12 +23,12 @@ export const metadata: Metadata = {
     default: "TechMan AMT | Phones, Gadgets & Creator Tech",
     template: "%s | TechMan AMT",
   },
-  description: "Shop phones, laptops, gadgets, creator tools and everyday tech in Nigeria.",
+  description: "Shop phones, laptops, audio and creator tech in Nigeria with visible prices, clear product details and direct buying support.",
   openGraph: {
     type: "website",
     siteName: "TechMan AMT",
     title: "TechMan AMT | Phones, Gadgets & Creator Tech",
-    description: "Shop phones, laptops, audio, accessories and creator tools in Nigeria.",
+    description: "Compare phones, laptops, audio, accessories and creator tools in Nigeria with visible prices and clear buying details.",
     url: siteUrl,
   },
   twitter: {
