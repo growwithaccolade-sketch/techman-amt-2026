@@ -5026,3 +5026,157 @@ body{
   .premiumFooterTop{grid-template-columns:1fr 1fr;column-gap:30px;row-gap:38px}
   .footerBrandBlock{grid-column:1/-1}
 }
+
+
+/* =========================================================
+   CONVERSION + PERFORMANCE QA PASS
+   Subtle motion, collision-safe categories, fast below-fold rendering
+   ========================================================= */
+
+.collectionTileTop{
+  position:absolute!important;
+  z-index:4!important;
+  top:18px!important;
+  left:18px!important;
+  right:18px!important;
+  bottom:auto!important;
+}
+.collectionTileCopy{
+  position:absolute!important;
+  z-index:4!important;
+  left:22px!important;
+  right:58px!important;
+  bottom:22px!important;
+  top:auto!important;
+  max-width:calc(100% - 80px);
+}
+.collectionArrow{
+  position:absolute!important;
+  z-index:4!important;
+  right:20px!important;
+  left:auto!important;
+  bottom:20px!important;
+  top:auto!important;
+}
+.categoryAlignEnd .collectionTileCopy{
+  left:58px!important;
+  right:22px!important;
+  text-align:right;
+}
+.categoryAlignEnd .collectionArrow{
+  left:20px!important;
+  right:auto!important;
+}
+.categoryVisual{
+  z-index:0!important;
+  opacity:.11!important;
+  pointer-events:none;
+}
+.collectionTile:before{z-index:1!important}
+.collectionTileCopy h3,
+.collectionTileCopy p{position:relative;z-index:1}
+
+body:before{display:none!important}
+.motionReady .revealItem{
+  opacity:0;
+  transform:translate3d(0,14px,0) scale(.997);
+  filter:none!important;
+  transition:
+    opacity .5s cubic-bezier(.2,.7,.2,1) var(--reveal-delay,0ms),
+    transform .55s cubic-bezier(.2,.7,.2,1) var(--reveal-delay,0ms)!important;
+}
+.motionReady .revealItem.isRevealed{
+  opacity:1;
+  transform:translate3d(0,0,0) scale(1);
+}
+.motionReady .heroStageMain.isRevealed,
+.motionReady .heroMiniCard.isRevealed,
+.motionReady .premiumProductCard.isRevealed,
+.motionReady .collectionTile.isRevealed,
+.motionReady .insightCard.isRevealed,
+.motionReady .contactCards article.isRevealed,
+.motionReady .creatorEditorialVisual.isRevealed{
+  --lift:0px;
+}
+.heroStageMain:hover,
+.heroMiniCard:hover,
+.premiumProductCard:hover,
+.collectionTile:hover,
+.insightCard:hover,
+.contactCards article:hover{--lift:-3px}
+
+.premiumHero,
+.premiumHero:before,
+.premiumHero:after,
+.heroStageMain:before,
+.heroStageMain .productRemoteImage,
+.heroMiniCard .productRemoteImage,
+.brandRail span,
+.categoryVisual,
+.premiumStock:before{
+  animation:none!important;
+}
+
+.collectionSection,
+.premiumDeal,
+.featuredSection,
+.whySection,
+.editorialSection,
+.premiumInsights,
+.homeContactBand,
+.premiumNewsletter,
+.premiumFooter,
+.reviewsSection,
+.relatedSection,
+.infoContent{
+  content-visibility:auto;
+  contain-intrinsic-size:1px 760px;
+}
+
+.productRemoteImage{
+  transition:opacity .18s ease,transform .25s ease!important;
+}
+.footerContactLines{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  margin:12px 0 8px;
+}
+.footerContactLines a{
+  color:#c8d2e2;
+  font-size:12px;
+  width:max-content;
+}
+.footerContactLines a:hover{color:#fff}
+.contactCardActions{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
+
+@media(max-width:640px){
+  .collectionTileCopy,
+  .categoryAlignEnd .collectionTileCopy{
+    left:22px!important;
+    right:54px!important;
+    text-align:left;
+    max-width:calc(100% - 76px);
+  }
+  .collectionArrow,
+  .categoryAlignEnd .collectionArrow{
+    left:auto!important;
+    right:20px!important;
+  }
+  .categoryVisual{
+    width:44%!important;
+    right:-7%!important;
+    left:auto!important;
+    bottom:-12%!important;
+  }
+  .contactCardActions{display:grid;grid-template-columns:1fr}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .revealItem,
+  .motionReady .revealItem{
+    opacity:1!important;
+    transform:none!important;
+    transition:none!important;
+  }
+}
