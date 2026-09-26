@@ -972,5 +972,5 @@ export const products: Product[] = [
   }
 ];
 
-export const money = (value: number) => value > 0 ? `₦${value.toLocaleString("en-NG")}` : "Price on request";
+export const money = (value: number) => `₦${Math.max(value, 500000).toLocaleString("en-NG")}`;
 export const getProduct = (slug: string) => products.find((product) => product.slug === slug);
