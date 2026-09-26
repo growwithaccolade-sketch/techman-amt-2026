@@ -24,7 +24,7 @@ import {
   Zap,
 } from "lucide-react";
 import { useCart } from "@/components/cart-provider";
-import { money } from "@/lib/products";
+import { money, type Product } from "@/lib/products";
 import { makeWhatsappUrl } from "@/lib/site";
 import NewsletterForm from "@/components/newsletter-form";
 import ProductImage from "@/components/product-image";
@@ -438,7 +438,7 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
       <section className="homeContactBand shell">
         <div className="homeContactCopy">
           <span className="kicker">CONTACT</span>
-          <h2>{contactSection?.title || "Need a product check or order help?"}</h2><p>{contactSection?.body || "Contact TechMan AMT for stock, compatibility, delivery and order questions."}</p>
+          <h2>{contactSection?.title || "Not sure what to buy? Ask before you spend."}</h2><p>{contactSection?.body || "Call 08103483669 or email techmanamt@gmail.com for product, compatibility, delivery and order help."}</p>
         </div>
         <div className="homeContactActions">
           <Link className="contactPrimary" href="/contact">Get buying help <ArrowRight size={17}/></Link>
