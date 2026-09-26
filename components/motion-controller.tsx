@@ -38,6 +38,13 @@ const revealSelectors = [
   ".infoHero > *",
   ".infoContent > section",
   ".infoAside",
+  ".leadHero > *",
+  ".leadLayout > *",
+  ".catalogMeta",
+  ".reviewsLayout > *",
+  ".relatedSection .sectionHead",
+  ".premiumFooterTop > div",
+  ".premiumCopyright > *",
 ];
 
 const tiltSelector = [
@@ -111,7 +118,7 @@ export default function MotionController() {
       if (registered.has(element)) return;
       registered.add(element);
       element.classList.add("revealItem");
-      element.style.setProperty("--reveal-delay", `${Math.min(index % 6, 5) * 65}ms`);
+      element.style.setProperty("--reveal-delay", `${Math.min(index % 5, 4) * 45}ms`);
       element.style.setProperty("--reveal-order", String(index % 6));
 
       if (reduced || element.getBoundingClientRect().top < window.innerHeight * 0.92) {
@@ -131,18 +138,27 @@ export default function MotionController() {
             observer?.unobserve(element);
           });
         },
-        { threshold: 0.1, rootMargin: "0px 0px -7% 0px" }
+        { threshold: 0.08, rootMargin: "0px 0px -4% 0px" }
       );
     }
 
-    const scanReveals = () => {
-      document
-        .querySelectorAll<HTMLElement>(revealSelectors.join(","))
-        .forEach((element, index) => registerReveal(element, index));
+    const revealQuery = revealSelectors.join(",");
+    const scanReveals = (rootNode: ParentNode, startIndex = 0) => {
+      rootNode
+        .querySelectorAll<HTMLElement>(revealQuery)
+        .forEach((element, index) => registerReveal(element, startIndex + index));
     };
-    scanReveals();
+    scanReveals(document);
 
-    const mutationObserver = new MutationObserver(() => scanReveals());
+    const mutationObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (!(node instanceof HTMLElement)) return;
+          if (node.matches(revealQuery)) registerReveal(node, registered.size);
+          scanReveals(node, registered.size);
+        });
+      });
+    });
     mutationObserver.observe(body, { childList: true, subtree: true });
 
     const cleanups: Array<() => void> = [];
@@ -166,8 +182,8 @@ export default function MotionController() {
           const py = Math.min(1, Math.max(0, (event.clientY - rect.top) / rect.height));
           target.style.setProperty("--mx", `${event.clientX - rect.left}px`);
           target.style.setProperty("--my", `${event.clientY - rect.top}px`);
-          target.style.setProperty("--tilt-x", `${((0.5 - py) * 5).toFixed(2)}deg`);
-          target.style.setProperty("--tilt-y", `${((px - 0.5) * 6).toFixed(2)}deg`);
+          target.style.setProperty("--tilt-x", `${((0.5 - py) * 1.6).toFixed(2)}deg`);
+          target.style.setProperty("--tilt-y", `${((px - 0.5) * 2).toFixed(2)}deg`);
           target.style.setProperty("--pointer-px", px.toFixed(3));
           target.style.setProperty("--pointer-py", py.toFixed(3));
         };
@@ -188,8 +204,8 @@ export default function MotionController() {
       document.querySelectorAll<HTMLElement>(magneticSelector).forEach((target) => {
         const move = (event: PointerEvent) => {
           const rect = target.getBoundingClientRect();
-          const x = (event.clientX - rect.left - rect.width / 2) * 0.1;
-          const y = (event.clientY - rect.top - rect.height / 2) * 0.12;
+          const x = (event.clientX - rect.left - rect.width / 2) * 0.035;
+          const y = (event.clientY - rect.top - rect.height / 2) * 0.04;
           target.style.setProperty("--mag-x", `${x.toFixed(2)}px`);
           target.style.setProperty("--mag-y", `${y.toFixed(2)}px`);
         };
