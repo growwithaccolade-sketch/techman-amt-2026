@@ -198,7 +198,16 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
 
         <div className="heroStage">
           {primaryHero && (
-            <Link href={`/product/${primaryHero.slug}`} className="heroStageMain">
+            <Link
+              href={`/product/${primaryHero.slug}`}
+              className="heroStageMain"
+              onClick={(event) => {
+                if (primaryHero.price <= 0) {
+                  event.preventDefault();
+                  setQuoteProduct(primaryHero);
+                }
+              }}
+            >
               <div className="heroStageBadge">NEW 2026</div>
               <ProductImage src={primaryHero.image} alt={primaryHero.name} brand={primaryHero.brand} sizes="(max-width: 900px) 92vw, 46vw" priority/>
               <div className="heroStageOverlay">
@@ -211,13 +220,31 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
 
           <div className="heroStageRail">
             {secondaryHero && (
-              <Link href={`/product/${secondaryHero.slug}`} className="heroMiniCard">
+              <Link
+                href={`/product/${secondaryHero.slug}`}
+                className="heroMiniCard"
+                onClick={(event) => {
+                  if (secondaryHero.price <= 0) {
+                    event.preventDefault();
+                    setQuoteProduct(secondaryHero);
+                  }
+                }}
+              >
                 <ProductImage src={secondaryHero.image} alt={secondaryHero.name} brand={secondaryHero.brand} sizes="220px" priority/>
                 <div><span>{secondaryHero.category}</span><strong>{secondaryHero.name}</strong></div>
               </Link>
             )}
             {tertiaryHero && (
-              <Link href={`/product/${tertiaryHero.slug}`} className="heroMiniCard">
+              <Link
+                href={`/product/${tertiaryHero.slug}`}
+                className="heroMiniCard"
+                onClick={(event) => {
+                  if (tertiaryHero.price <= 0) {
+                    event.preventDefault();
+                    setQuoteProduct(tertiaryHero);
+                  }
+                }}
+              >
                 <ProductImage src={tertiaryHero.image} alt={tertiaryHero.name} brand={tertiaryHero.brand} sizes="220px" priority/>
                 <div><span>{tertiaryHero.category}</span><strong>{tertiaryHero.name}</strong></div>
               </Link>
