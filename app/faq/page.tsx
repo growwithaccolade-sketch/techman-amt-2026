@@ -2,38 +2,39 @@ import type { Metadata } from "next";
 import InfoPage from "@/components/info-page";
 import { getEditablePage } from "@/lib/site-pages";
 
-export const metadata: Metadata = { title: "Faq" };
+export const metadata: Metadata = { title: "FAQ", description: "Quick answers about TechMan AMT products, delivery, condition, support and bulk orders." };
 
 const fallback = {
-  "slug": "faq",
-  "eyebrow": "FAQ",
-  "title": "Answers before you spend.",
-  "intro": "The store is designed to make important buying information easy to find. For anything product-specific, confirm with support before payment.",
-  "sections": [
+  slug: "faq",
+  eyebrow: "QUICK ANSWERS",
+  title: "Get the important answers before checkout.",
+  intro: "Prices are shown on products. Condition and key details are stated where available. If your decision still needs a human answer, call 08103483669 or email techmanamt@gmail.com.",
+  sections: [
     {
-      "title": "Do you deliver across Nigeria?",
-      "body": "The platform supports nationwide delivery. Exact pricing, timing and courier availability depend on the destination and product."
+      title: "Do you deliver across Nigeria?",
+      body: "Yes. The exact courier, fee and delivery window depend on the destination and product, and are confirmed for the order."
     },
     {
-      "title": "Can I order through WhatsApp?",
-      "body": "Yes when the store WhatsApp number is configured. Product and checkout flows can generate an order message with the relevant item details."
+      title: "Can I ask before I buy?",
+      body: "Yes. Call or WhatsApp 08103483669 for product, compatibility and order questions, or email techmanamt@gmail.com."
     },
     {
-      "title": "How do I track an order?",
-      "body": "Open the Track Order page and enter the order reference together with the same email address used at checkout."
+      title: "How do I track an order?",
+      body: "Open the Track Order page and enter the order reference together with the same email address used at checkout."
     },
     {
-      "title": "Are products new or UK used?",
-      "body": "Condition is displayed per product. Never assume the condition from price alone."
+      title: "Are products new or UK used?",
+      body: "Condition is shown per product. Check the product detail before checkout instead of judging condition from price."
     },
     {
-      "title": "Can businesses buy in bulk?",
-      "body": "Bulk and corporate ordering is supported. Use the corporate request form with the product, quantity and delivery location."
+      title: "Can a business order in bulk?",
+      body: "Yes. Use the Bulk & Corporate form with the products, quantity, budget, delivery location and required timeline so the team can prepare a useful quote."
     }
   ]
 };
 
 export default async function Page() {
-  const page = await getEditablePage("faq", fallback);
+  const stored = await getEditablePage("faq", fallback);
+  const page = stored.title === "Answers before you spend." ? fallback : stored;
   return <InfoPage eyebrow={page.eyebrow} title={page.title} intro={page.intro} sections={page.sections}/>;
 }
