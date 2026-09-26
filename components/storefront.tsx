@@ -69,7 +69,7 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
 
   const supportLink = makeWhatsappUrl(
     settings.whatsappNumber,
-    "Hello TechMan AMT, I need help choosing the right tech product."
+    "Hello TechMan AMT, I’m ready to buy but want help choosing the right option."
   );
 
   const visibleProducts = useMemo(() => {
@@ -116,15 +116,15 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
   const displayProducts = defaultMode
     ? defaultFeatured
     : visibleProducts.filter((product) => !heroIds.has(product.id)).slice(0, 9);
-  const heroTitle = (homeContent?.title || "Buy better tech.|Without the guesswork.").split("|");
+  const heroTitle = (homeContent?.title || "The right tech.|The right price. No chasing.").split("|");
   const contactSection = homeContent?.sections?.[0];
   const newsletterSection = homeContent?.sections?.[1];
 
   return (
     <main className="siteFrame">
       <div className="announcement premiumAnnouncement">
-        <span>{settings.announcementText || "See the price. Know the condition. Buy with confidence."}</span>
-        <span className="announcementDesktop">Delivery across Nigeria · Help when you need it</span>
+        <span>{settings.announcementText || "Real prices. Clear product details. Direct support when you need it."}</span>
+        <span className="announcementDesktop">Delivery across Nigeria · Call 08103483669 for buying help</span>
       </div>
 
       <header className="nav shell premiumNav">
@@ -183,15 +183,15 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
 
       <section className="premiumHero shell">
         <div className="premiumHeroCopy">
-          <div className="heroOverline">{homeContent?.eyebrow || "TECH THAT EARNS ITS PLACE"}</div><h1>{heroTitle[0]}{heroTitle[1] && <><br/><span>{heroTitle[1]}</span></>}</h1><p>{homeContent?.intro || "Shop phones, laptops, audio and creator gear selected for performance, value and everyday use. See the price, condition and key details before you commit."}</p>
+          <div className="heroOverline">{homeContent?.eyebrow || "BUY WITH CLARITY"}</div><h1>{heroTitle[0]}{heroTitle[1] && <><br/><span>{heroTitle[1]}</span></>}</h1><p>{homeContent?.intro || "Stop wasting time asking for prices or guessing which model fits. Compare trusted phones, laptops, audio and creator gear with visible pricing, key details and direct buying support."}</p>
           <div className="premiumHeroCtas">
-            <Link className="primaryBtn heroPrimary" href="/shop">Shop best picks <ArrowRight size={17}/></Link>
-            <Link className="textCta" href="/device-request">Need help choosing? <ArrowUpRight size={16}/></Link>
+            <Link className="primaryBtn heroPrimary" href="/shop">Shop products with prices <ArrowRight size={17}/></Link>
+            <Link className="textCta" href="/device-request">Get a buying recommendation <ArrowUpRight size={16}/></Link>
           </div>
           <div className="heroProof">
-            <span><BadgeCheck size={16}/> Clear pricing on every product</span>
+            <span><BadgeCheck size={16}/> A visible price on every product</span>
             <span><Truck size={16}/> Delivery across Nigeria</span>
-            <span><ShieldCheck size={16}/> Support before and after checkout</span>
+            <span><ShieldCheck size={16}/> Call or email before you pay</span>
           </div>
         </div>
 
@@ -217,7 +217,7 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
                 href={`/product/${secondaryHero.slug}`}
                 className="heroMiniCard"
               >
-                <ProductImage src={secondaryHero.image} alt={secondaryHero.name} brand={secondaryHero.brand} sizes="220px" priority/>
+                <ProductImage src={secondaryHero.image} alt={secondaryHero.name} brand={secondaryHero.brand} sizes="220px"/>
                 <div><span>{secondaryHero.category}</span><strong>{secondaryHero.name}</strong></div>
               </Link>
             )}
@@ -226,7 +226,7 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
                 href={`/product/${tertiaryHero.slug}`}
                 className="heroMiniCard"
               >
-                <ProductImage src={tertiaryHero.image} alt={tertiaryHero.name} brand={tertiaryHero.brand} sizes="220px" priority/>
+                <ProductImage src={tertiaryHero.image} alt={tertiaryHero.name} brand={tertiaryHero.brand} sizes="220px"/>
                 <div><span>{tertiaryHero.category}</span><strong>{tertiaryHero.name}</strong></div>
               </Link>
             )}
@@ -240,8 +240,8 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
 
       <section id="collections" className="collectionSection shell">
         <div className="premiumSectionHead">
-          <div><span className="kicker">CATEGORIES</span><h2>Start with what you need.</h2></div>
-          <Link href="/shop" className="sectionLink">See everything <ArrowUpRight size={16}/></Link>
+          <div><span className="kicker">SHOP BY NEED</span><h2>Find the right product faster.</h2></div>
+          <Link href="/shop" className="sectionLink">Browse the full store <ArrowUpRight size={16}/></Link>
         </div>
 
         <div className="collectionBento">
@@ -269,10 +269,10 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
       <section className="premiumDeal">
         <div className="shell premiumDealInner">
           <div className="premiumDealCopy">
-            <span className="dealLabel">BUILD YOUR SETUP</span>
-            <h2>One device is only the start.</h2>
-            <p>Pair your main device with the power, audio, storage and everyday gear that helps it perform better.</p>
-            <Link href="/shop" className="lightBtn">Finish your setup <ArrowRight size={17}/></Link>
+            <span className="dealLabel">MAKE THE PURCHASE COUNT</span>
+            <h2>Do not stop at the main device.</h2>
+            <p>Add the charger, audio, storage and creator gear that makes your new device more useful from day one.</p>
+            <Link href="/shop" className="lightBtn">Build the complete setup <ArrowRight size={17}/></Link>
           </div>
           <div className="dealFeatureStack">
             {[
@@ -296,10 +296,10 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
 
       <section id="featured" className="featuredSection shell">
         <div className="premiumSectionHead featuredHead">
-          <div><span className="kicker">POPULAR RIGHT NOW</span><h2>Products worth your attention.</h2></div>
+          <div><span className="kicker">READY TO BUY</span><h2>Compare what is worth your money.</h2></div>
           <div className="featuredSearch">
             <Search size={17}/>
-            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search products or brands"/>
+            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search iPhone, Samsung, MacBook, audio..."/>
           </div>
         </div>
 
@@ -380,14 +380,14 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
 
       <section className="whySection shell">
         <div className="whyLead">
-          <span className="kicker">BUY WITH CONFIDENCE</span>
-          <h2>Fewer surprises. Better decisions.</h2>
-          <p>Know the price, condition and important details before your money leaves your account.</p>
+          <span className="kicker">WHY BUY HERE</span>
+          <h2>Less back-and-forth. More certainty.</h2>
+          <p>You should not have to message three times just to know the price, condition or next step. The important buying details stay visible.</p>
         </div>
         <div className="whyGrid">
-          <article><span>01</span><ShieldCheck/><h3>Clear pricing</h3><p>Every product shows a price, so you can compare and decide without chasing a quote.</p></article>
-          <article><span>02</span><Truck/><h3>Know what you are buying</h3><p>Condition, warranty and key specifications stay visible before checkout.</p></article>
-          <article><span>03</span><BadgeCheck/><h3>Support that answers back</h3><p>Need help choosing or checking an order? Call, email or message the store directly.</p></article>
+          <article><span>01</span><ShieldCheck/><h3>Prices you can see</h3><p>Every product displays a price, making it easier to compare options and decide what fits your budget.</p></article>
+          <article><span>02</span><Truck/><h3>Details before payment</h3><p>Check condition, warranty, important specs and stock information before you commit your money.</p></article>
+          <article><span>03</span><BadgeCheck/><h3>Talk to a real person</h3><p>Call 08103483669 or email techmanamt@gmail.com when you need buying, delivery or order support.</p></article>
         </div>
       </section>
 
@@ -401,22 +401,22 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
         </div>
         <div className="editorialCopy">
           <span className="kicker">CREATOR TOOLS</span>
-          <h2>Create without weak links.</h2>
-          <p>Choose creator gear that fixes the parts people notice first: weak audio, dead batteries, poor lighting and slow storage.</p>
+          <h2>Make your content sound and look more expensive.</h2>
+          <p>Upgrade the problems viewers notice immediately: weak audio, poor lighting, shaky shots, low storage and unreliable power.</p>
           <div className="editorialChecklist">
             <span><Check/> Wireless microphones</span>
             <span><Check/> Tripods & phone rigs</span>
             <span><Check/> Lighting & streaming gear</span>
             <span><Check/> Storage & power</span>
           </div>
-          <Link href="/shop?category=Creator%20Tools" className="primaryBtn">Upgrade your creator kit <ArrowRight size={17}/></Link>
+          <Link href="/shop?category=Creator%20Tools" className="primaryBtn">Shop creator upgrades <ArrowRight size={17}/></Link>
         </div>
       </section>
 
       <section className="insights premiumInsights shell">
         <div className="premiumSectionHead">
-          <div><span className="kicker">BUY SMARTER</span><h2>Make the next purchase smarter.</h2></div>
-          <Link href="/blog" className="sectionLink">Read the buying guides <ArrowUpRight size={16}/></Link>
+          <div><span className="kicker">BEFORE YOU BUY</span><h2>Spend with a reason, not just hype.</h2></div>
+          <Link href="/blog" className="sectionLink">Use the buying guides <ArrowUpRight size={16}/></Link>
         </div>
 
         <div className="insightGrid">
@@ -437,11 +437,11 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
 
       <section className="homeContactBand shell">
         <div className="homeContactCopy">
-          <span className="kicker">CONTACT</span>
-          <h2>{contactSection?.title || "Not sure what to buy? Ask before you spend."}</h2><p>{contactSection?.body || "Call 08103483669 or email techmanamt@gmail.com for product, compatibility, delivery and order help."}</p>
+          <span className="kicker">NEED A SECOND OPINION?</span>
+          <h2>{contactSection?.title || "Before you pay, make sure it is the right device."}</h2><p>{contactSection?.body || "Call 08103483669 or email techmanamt@gmail.com for a quick product recommendation, compatibility check, delivery question or order update."}</p>
         </div>
         <div className="homeContactActions">
-          <Link className="contactPrimary" href="/contact">Get buying help <ArrowRight size={17}/></Link>
+          <Link className="contactPrimary" href="/contact">Talk to TechMan AMT <ArrowRight size={17}/></Link>
           {supportLink && <a className="contactSecondary" href={supportLink} target="_blank" rel="noreferrer"><MessageCircle size={17}/> WhatsApp</a>}
           <Link className="contactSecondary" href="/track-order">Track order</Link>
         </div>
@@ -450,8 +450,8 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
       <section className="newsletter premiumNewsletter">
         <div className="shell premiumNewsletterInner">
           <div>
-            <span className="kicker">FIRST LOOK</span>
-            <h2>{newsletterSection?.title || "Get the good stuff before it disappears."}</h2><p>{newsletterSection?.body || "New arrivals, useful buying guides and selected offers, sent without the noise."}</p>
+            <span className="kicker">STOCK + PRICE UPDATES</span>
+            <h2>{newsletterSection?.title || "Know what just landed before everyone else does."}</h2><p>{newsletterSection?.body || "Get new arrivals, useful price updates, selected offers and buying guides without daily spam."}</p>
           </div>
           <NewsletterForm/>
         </div>
