@@ -2,30 +2,31 @@ import type { Metadata } from "next";
 import InfoPage from "@/components/info-page";
 import { getEditablePage } from "@/lib/site-pages";
 
-export const metadata: Metadata = { title: "Warranty" };
+export const metadata: Metadata = { title: "Warranty", description: "Understand the warranty attached to your TechMan AMT product before you buy." };
 
 const fallback = {
-  "slug": "warranty",
-  "eyebrow": "WARRANTY",
-  "title": "Know what is covered before you buy.",
-  "intro": "Warranty terms are product-specific. The product page or sales confirmation should state the applicable warranty before payment.",
-  "sections": [
+  slug: "warranty",
+  eyebrow: "WARRANTY YOU CAN CHECK",
+  title: "Know the cover before checkout.",
+  intro: "Warranty terms differ by product. Check the warranty shown on the product page or sales confirmation so you know who provides the cover and for how long.",
+  sections: [
     {
-      "title": "Seller or manufacturer warranty",
-      "body": "Coverage may come from TechMan AMT, a distributor or the manufacturer depending on the item. The responsible warranty provider and duration should be confirmed on the order."
+      title: "Who provides the warranty?",
+      body: "Coverage may come from TechMan AMT, a distributor or the manufacturer depending on the item. The responsible provider and duration should be clear on the order."
     },
     {
-      "title": "What warranty usually addresses",
-      "body": "Warranty generally focuses on qualifying manufacturing or functional faults. Accidental damage, liquid damage, misuse and unauthorized repairs are commonly excluded unless a specific protection plan says otherwise."
+      title: "What is usually covered?",
+      body: "Warranty generally applies to qualifying manufacturing or functional faults. Accidental damage, liquid damage, misuse and unauthorised repairs are commonly excluded unless a separate protection plan states otherwise."
     },
     {
-      "title": "Making a claim",
-      "body": "Keep your order reference, proof of purchase and device identifiers. Support may request diagnostics, photos or an inspection before a resolution is approved."
+      title: "Need to make a claim?",
+      body: "Keep your order reference, proof of purchase and device identifiers. Support may request diagnostics, photos or an inspection so the issue can be assessed properly."
     }
   ]
 };
 
 export default async function Page() {
-  const page = await getEditablePage("warranty", fallback);
+  const stored = await getEditablePage("warranty", fallback);
+  const page = stored.title === "Know what is covered before you buy." ? fallback : stored;
   return <InfoPage eyebrow={page.eyebrow} title={page.title} intro={page.intro} sections={page.sections}/>;
 }
