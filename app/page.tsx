@@ -1,5 +1,6 @@
 import Storefront from "@/components/storefront";
 import { getEditablePage } from "@/lib/site-pages";
+import { getSiteMedia } from "@/lib/site-media";
 
 const fallback = {
   slug: "home",
@@ -13,12 +14,12 @@ const fallback = {
 };
 
 export default async function Home() {
-  const stored = await getEditablePage("home", fallback);
+  const [stored, siteMedia] = await Promise.all([getEditablePage("home", fallback), getSiteMedia()]);
   const isLegacyCopy =
     stored.title === "Technology,|properly selected." ||
     stored.title === "Buy better tech.|Without the guesswork." ||
     stored.intro.startsWith("Current phones, laptops, audio and creator tools") ||
     stored.intro.startsWith("Shop phones, laptops, audio and creator gear selected");
   const content = isLegacyCopy ? fallback : stored;
-  return <Storefront homeContent={content}/>;
+  return <Storefront homeContent={content} siteMedia={siteMedia}/>;
 }
