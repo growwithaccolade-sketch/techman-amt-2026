@@ -2,30 +2,31 @@ import type { Metadata } from "next";
 import InfoPage from "@/components/info-page";
 import { getEditablePage } from "@/lib/site-pages";
 
-export const metadata: Metadata = { title: "Returns" };
+export const metadata: Metadata = { title: "Returns", description: "Understand TechMan AMT return steps before and after your purchase." };
 
 const fallback = {
-  "slug": "returns",
-  "eyebrow": "RETURNS",
-  "title": "Clear return rules protect both sides.",
-  "intro": "Return eligibility depends on the product category, condition, packaging state and the reason for the request. Confirm the applicable terms before purchase.",
-  "sections": [
+  slug: "returns",
+  eyebrow: "RETURNS, EXPLAINED CLEARLY",
+  title: "If something is wrong, know what to do next.",
+  intro: "Return eligibility depends on the item, its condition, packaging and the reason for the request. Keep the order details and contact support quickly when there is a problem.",
+  sections: [
     {
-      "title": "Report problems quickly",
-      "body": "If an item arrives damaged, materially different from the confirmed order or appears faulty, contact support promptly with the order reference and clear photos or video where useful."
+      title: "Report an issue quickly",
+      body: "If an item arrives damaged, materially different from the confirmed order or appears faulty, contact support with your order reference and clear photos or video where useful."
     },
     {
-      "title": "Keep packaging and accessories",
-      "body": "Do not discard packaging, included accessories, labels or proof of purchase while a return or warranty issue is being reviewed."
+      title: "Keep the box and accessories",
+      body: "Hold on to packaging, accessories, labels and proof of purchase while a return or warranty case is being reviewed. Missing items can affect the assessment."
     },
     {
-      "title": "Change-of-mind returns",
-      "body": "Eligibility for a non-fault return should be stated for the specific product before payment. Opened devices, activated software and some hygiene-sensitive accessories may have additional restrictions."
+      title: "Changed your mind?",
+      body: "Non-fault returns depend on the specific product and its condition. Opened devices, activated software and hygiene-sensitive accessories can have extra restrictions, so check before opening or activating anything you may want to return."
     }
   ]
 };
 
 export default async function Page() {
-  const page = await getEditablePage("returns", fallback);
+  const stored = await getEditablePage("returns", fallback);
+  const page = stored.title === "Clear return rules protect both sides." ? fallback : stored;
   return <InfoPage eyebrow={page.eyebrow} title={page.title} intro={page.intro} sections={page.sections}/>;
 }
