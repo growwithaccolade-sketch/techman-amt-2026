@@ -8,8 +8,8 @@ export const metadata: Metadata = { title: "Shop Tech With Visible Prices", desc
 const fallback = {
   slug: "shop",
   eyebrow: "SHOP",
-  title: "Find the tech that fits. Buy it with confidence.",
-  intro: "Compare clear prices, useful specs and current availability across phones, laptops, audio, creator gear and accessories.",
+  title: "Shop phones, laptops, audio and creator equipment.",
+  intro: "Compare prices, stock, condition and key specifications before ordering.",
   sections: [],
 };
 
