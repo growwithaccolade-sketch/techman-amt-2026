@@ -16,7 +16,7 @@ export default function CommerceHeader() {
     <>
       <div className="announcement premiumAnnouncement">
         <span>{settings.announcementText || "Phones, laptops, audio and creator tools."}</span>
-        <span className="announcementDesktop">Delivery across Nigeria · Order support</span>
+        <span className="announcementDesktop">Delivery across Nigeria · Help when you need it</span>
       </div>
 
       <header className="nav shell premiumNav commercePremiumNav">
