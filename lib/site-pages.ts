@@ -36,7 +36,7 @@ export async function getEditablePage(slug: string, fallback: EditablePage): Pro
 export async function getAdminPages() {
   if (!commerceBackendConfigured()) return { backend: false, pages: [] as Record<string, unknown>[] };
   const supabase = getSupabaseAdmin();
-  const { data, error } = await supabase.from("site_pages").select("*").order("slug");
+  const { data, error } = await supabase.from("site_pages").select("*").neq("slug", "media-config").order("slug");
   if (error) throw new Error(error.message);
   return { backend: true, pages: data ?? [] };
 }
