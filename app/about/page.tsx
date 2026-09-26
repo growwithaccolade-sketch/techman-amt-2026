@@ -7,20 +7,20 @@ export const metadata: Metadata = { title: "About" };
 const fallback = {
   "slug": "about",
   "eyebrow": "ABOUT TECHMAN AMT",
-  "title": "Tech buying should feel clearer.",
-  "intro": "TechMan AMT is being built as a practical place to discover, compare and buy phones, gadgets, creator tools and everyday technology without unnecessary confusion.",
+  "title": "Buy the tech you need, not the confusion around it.",
+  "intro": "TechMan AMT helps people compare, choose and buy useful technology with clear prices, useful details and direct support when the decision needs a human answer.",
   "sections": [
     {
-      "title": "What we care about",
-      "body": "Good ecommerce is more than putting products in a grid. Customers need clear product condition, useful explanations, realistic delivery information and access to support when the purchase deserves a conversation."
+      "title": "Clarity before checkout",
+      "body": "A product page should answer the questions that matter: what it costs, what condition it is in, what it can do, what warranty applies and how to get help before paying."
     },
     {
-      "title": "Who we serve",
-      "body": "The store is designed for individuals, creators, students, professionals and growing businesses looking for technology that fits a real use case and budget."
+      "title": "Built for real use cases",
+      "body": "Students, creators, professionals, teams and everyday buyers use tech differently. The goal is to make it easier to match a device or setup to the work you actually need it to do."
     },
     {
-      "title": "How we want to sell",
-      "body": "We aim to use transparent product information, genuine offers and clear support rather than fake urgency, fake reviews or invented achievements."
+      "title": "Sell with useful information",
+      "body": "Clear product information, visible pricing and direct support should do more selling than noise. That is the standard TechMan AMT is built around."
     }
   ]
 };
