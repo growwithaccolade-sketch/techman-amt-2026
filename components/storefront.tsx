@@ -24,7 +24,7 @@ import {
   Zap,
 } from "lucide-react";
 import { useCart } from "@/components/cart-provider";
-import { money, type Product } from "@/lib/products";
+import { money } from "@/lib/products";
 import { makeWhatsappUrl } from "@/lib/site";
 import NewsletterForm from "@/components/newsletter-form";
 import ProductImage from "@/components/product-image";
@@ -65,7 +65,6 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All");
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [quoteProduct, setQuoteProduct] = useState<Product | null>(null);
   const { catalog, settings, lines, wishlist, totalItems, addItem, toggleWishlist } = useCart();
 
   const supportLink = makeWhatsappUrl(
@@ -457,32 +456,6 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
           <NewsletterForm/>
         </div>
       </section>
-
-
-      {quoteProduct && (
-        <div className="quoteModalBackdrop" role="presentation" onMouseDown={() => setQuoteProduct(null)}>
-          <div
-            className="quoteModal"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="quote-modal-title"
-            onMouseDown={(event) => event.stopPropagation()}
-          >
-            <button className="quoteModalClose" type="button" onClick={() => setQuoteProduct(null)} aria-label="Close quote dialog"><X size={18}/></button>
-            <span className="kicker">{isLaunchProduct(quoteProduct) ? "EARLY ACCESS" : "QUICK QUOTE"}</span>
-            <h3 id="quote-modal-title">{quoteProduct.name}</h3>
-            <p>{isLaunchProduct(quoteProduct) ? "Join the waitlist for the current price, stock confirmation and availability update." : "Get current price, stock status and delivery details without leaving the page."}</p>
-            <div className="quoteModalProduct">
-              <div><ProductImage src={quoteProduct.image} alt={quoteProduct.name} brand={quoteProduct.brand} sizes="110px"/></div>
-              <span><b>{quoteProduct.brand}</b><small>{quoteProduct.category}</small></span>
-            </div>
-            <div className="quoteModalActions">
-              <Link className="primaryBtn" href={`/device-request?product=${encodeURIComponent(quoteProduct.name)}&intent=${isLaunchProduct(quoteProduct) ? "waitlist" : "quote"}`}>{availabilityCta(quoteProduct)} <ArrowRight size={16}/></Link>
-              <button type="button" className="secondaryAction" onClick={() => { setQuoteProduct(null); setCategory(quoteProduct.category); document.getElementById("featured")?.scrollIntoView({ behavior: "smooth" }); }}>See similar products</button>
-            </div>
-          </div>
-        </div>
-      )}
 
       <nav className="mobileDock" aria-label="Mobile navigation">
         <Link href="/"><span className="dockIcon"><Home size={18}/></span><small>Home</small></Link>
