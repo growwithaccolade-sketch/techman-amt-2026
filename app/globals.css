@@ -5180,3 +5180,96 @@ body:before{display:none!important}
     transition:none!important;
   }
 }
+
+
+/* Conversion + layout stabilization */
+.collectionTileTop{
+  position:absolute!important;
+  top:18px!important;
+  left:18px!important;
+  right:18px!important;
+  bottom:auto!important;
+  z-index:4!important;
+}
+.collectionTileCopy{
+  position:absolute!important;
+  left:22px!important;
+  right:50px!important;
+  bottom:22px!important;
+  top:auto!important;
+  z-index:4!important;
+  max-width:calc(100% - 72px);
+}
+.categoryAlignEnd .collectionTileCopy{
+  left:50px!important;
+  right:22px!important;
+}
+.collectionArrow{
+  position:absolute!important;
+  right:20px!important;
+  bottom:20px!important;
+  left:auto!important;
+  top:auto!important;
+  z-index:5!important;
+}
+.categoryAlignEnd .collectionArrow{
+  left:20px!important;
+  right:auto!important;
+}
+.categoryVisual{
+  pointer-events:none;
+  z-index:2!important;
+}
+.collectionTileTop + .collectionTileCopy{margin-top:0!important}
+.collectionTileCopy p{max-width:min(390px,82%)}
+.footerContactLines{display:flex;flex-direction:column;gap:7px;margin:14px 0 10px}
+.footerContactLines a{font-size:12px!important;color:#c7ced8!important}
+.footerContactLines a:hover{color:#fff!important}
+
+/* Defer off-screen rendering work on long commerce pages. */
+.featuredSection,
+.whySection,
+.editorialSection,
+.premiumInsights,
+.homeContactBand,
+.premiumNewsletter,
+.premiumFooter{
+  content-visibility:auto;
+  contain-intrinsic-size:800px;
+}
+
+@media(max-width:760px){
+  .collectionTileTop{
+    top:16px!important;
+    left:16px!important;
+    right:16px!important;
+  }
+  .collectionTileCopy,
+  .categoryAlignEnd .collectionTileCopy{
+    left:20px!important;
+    right:54px!important;
+    bottom:20px!important;
+    text-align:left!important;
+    max-width:calc(100% - 74px);
+  }
+  .collectionArrow,
+  .categoryAlignEnd .collectionArrow{
+    right:18px!important;
+    left:auto!important;
+    bottom:18px!important;
+  }
+  .categoryVisual{
+    width:44%!important;
+    right:-7%!important;
+    bottom:-10%!important;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .revealItem,.motionReady .revealItem{
+    opacity:1!important;
+    transform:none!important;
+    filter:none!important;
+    transition:none!important;
+  }
+}
