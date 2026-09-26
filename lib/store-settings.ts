@@ -15,7 +15,7 @@ export async function getStoreSettings(): Promise<StoreSettings> {
       whatsappNumber: PRIMARY_SUPPORT_PHONE,
       announcementText: data.announcement_text || fallbackStoreSettings.announcementText,
       freeDeliveryThreshold: data.free_delivery_threshold_ngn == null ? null : Number(data.free_delivery_threshold_ngn),
-      locationLabel: data.location_label || fallbackStoreSettings.locationLabel,
+      locationLabel: data.location_label && data.location_label !== "Lagos, Nigeria" ? data.location_label : fallbackStoreSettings.locationLabel,
       footerCreditLabel: data.footer_credit_label || fallbackStoreSettings.footerCreditLabel,
       footerCreditUrl: data.footer_credit_url || fallbackStoreSettings.footerCreditUrl,
     };
