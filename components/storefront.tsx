@@ -30,13 +30,14 @@ import NewsletterForm from "@/components/newsletter-form";
 import ProductImage from "@/components/product-image";
 import BrandLogo from "@/components/brand-logo";
 import type { EditablePage } from "@/lib/site-pages";
+import type { SiteMedia } from "@/lib/site-media";
 
 const categoryMeta = [
-  { name: "Phones", copy: "Flagships and everyday phones worth carrying.", icon: Smartphone },
-  { name: "Laptops", copy: "Reliable machines for work, school and serious projects.", icon: Laptop },
-  { name: "Creator Tools", copy: "Audio, lighting and gear that make your content better.", icon: Mic2 },
-  { name: "Audio", copy: "Hear more clearly at home, at work and on the move.", icon: Headphones },
-  { name: "Accessories", copy: "The chargers, storage and extras that complete the setup.", icon: Zap },
+  { name: "Phones", copy: "Flagships and everyday phones worth carrying.", icon: Smartphone, mediaKey: "categoryPhones" as const },
+  { name: "Laptops", copy: "Reliable machines for work, school and serious projects.", icon: Laptop, mediaKey: "categoryLaptops" as const },
+  { name: "Creator Tools", copy: "Audio, lighting and gear that make your content better.", icon: Mic2, mediaKey: "categoryCreatorTools" as const },
+  { name: "Audio", copy: "Hear more clearly at home, at work and on the move.", icon: Headphones, mediaKey: "categoryAudio" as const },
+  { name: "Accessories", copy: "The chargers, storage and extras that complete the setup.", icon: Zap, mediaKey: "categoryAccessories" as const },
 ];
 
 const filters = ["All", "Phones", "Laptops", "Tablets", "Watches", "Audio", "Creator Tools", "Accessories", "Gaming"];
@@ -61,7 +62,7 @@ const featuredSlugs = [
 
 const priceLabel = (product: Product) => money(product.price);
 
-export default function Storefront({ homeContent }: { homeContent?: EditablePage }) {
+export default function Storefront({ homeContent, siteMedia }: { homeContent?: EditablePage; siteMedia?: SiteMedia }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All");
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -253,6 +254,7 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
                 href={`/shop?category=${encodeURIComponent(item.name)}`}
                 className={`collectionTile collectionTile${index + 1} ${index % 2 === 0 ? "categoryAlignStart" : "categoryAlignEnd"}`}
               >
+                {siteMedia?.[item.mediaKey] && <img className="collectionTileCmsImage" src={siteMedia[item.mediaKey]} alt="" loading="lazy" decoding="async"/>}
                 <div className="collectionTileTop"><Icon size={18}/><span>{index === 0 ? "Featured" : index === 1 ? "Portable" : item.name === "Creator Tools" ? "Studio" : "Explore"}</span></div>
                 <div className="collectionTileCopy">
                   <h3>{item.name}</h3>
@@ -393,6 +395,7 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
 
       <section id="creator" className="editorialSection shell">
         <div className="editorialMedia creatorEditorialVisual">
+          {siteMedia?.creatorImage && <img className="creatorCmsImage" src={siteMedia.creatorImage} alt="Creator setup" loading="lazy" decoding="async"/>}
           <div className="creatorVisualCore"><Mic2 size={64}/></div>
           <div className="creatorVisualChip creatorChipOne"><Headphones size={22}/> Clean audio</div>
           <div className="creatorVisualChip creatorChipTwo"><Zap size={22}/> Reliable power</div>
