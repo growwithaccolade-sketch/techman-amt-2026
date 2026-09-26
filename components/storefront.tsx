@@ -118,8 +118,16 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
     ? defaultFeatured
     : visibleProducts.filter((product) => !heroIds.has(product.id)).slice(0, 9);
   const heroTitle = (homeContent?.title || "The right tech.|The right price. No chasing.").split("|");
-  const contactSection = homeContent?.sections?.[0];
-  const newsletterSection = homeContent?.sections?.[1];
+  const homeSections = homeContent?.sections || [];
+  const editableSections = homeSections.length >= 8 ? homeSections : [];
+  const categorySection = editableSections[0];
+  const setupSection = editableSections[1];
+  const trendingSection = editableSections[2];
+  const trustSection = editableSections[3];
+  const creatorSection = editableSections[4];
+  const guidesSection = editableSections[5];
+  const contactSection = editableSections[6] || homeSections[0];
+  const newsletterSection = editableSections[7] || homeSections[1];
 
   return (
     <main className="siteFrame">
@@ -241,7 +249,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
 
       <section id="collections" className="collectionSection shell">
         <div className="premiumSectionHead">
-          <div><span className="kicker">SHOP BY NEED</span><h2>Find the right product faster.</h2></div>
+          <div><span className="kicker">SHOP BY NEED</span><h2>{categorySection?.title || "Find the right product faster."}</h2>{categorySection?.body && <p className="sectionLead">{categorySection.body}</p>}</div>
           <Link href="/shop" className="sectionLink">Browse the full store <ArrowUpRight size={16}/></Link>
         </div>
 
@@ -273,8 +281,8 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
         <div className="shell premiumDealInner">
           <div className="premiumDealCopy">
             <span className="dealLabel">MAKE THE PURCHASE COUNT</span>
-            <h2>Do not stop at the main device.</h2>
-            <p>Add the charger, audio, storage and creator gear that makes your new device more useful from day one.</p>
+            <h2>{setupSection?.title || "Do not stop at the main device."}</h2>
+            <p>{setupSection?.body || "Add the charger, audio, storage and creator gear that makes your new device more useful from day one."}</p>
             <Link href="/shop" className="lightBtn">Build the complete setup <ArrowRight size={17}/></Link>
           </div>
           <div className="dealFeatureStack">
@@ -299,7 +307,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
 
       <section id="featured" className="featuredSection shell">
         <div className="premiumSectionHead featuredHead">
-          <div><span className="kicker">READY TO BUY</span><h2>Compare what is worth your money.</h2></div>
+          <div><span className="kicker">READY TO BUY</span><h2>{trendingSection?.title || "Compare what is worth your money."}</h2>{trendingSection?.body && <p className="sectionLead">{trendingSection.body}</p>}</div>
           <div className="featuredSearch">
             <Search size={17}/>
             <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search iPhone, Samsung, MacBook, audio..."/>
@@ -384,8 +392,8 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
       <section className="whySection shell">
         <div className="whyLead">
           <span className="kicker">WHY BUY HERE</span>
-          <h2>Less back-and-forth. More certainty.</h2>
-          <p>You should not have to message three times just to know the price, condition or next step. The important buying details stay visible.</p>
+          <h2>{trustSection?.title || "Less back-and-forth. More certainty."}</h2>
+          <p>{trustSection?.body || "You should not have to message three times just to know the price, condition or next step. The important buying details stay visible."}</p>
         </div>
         <div className="whyGrid">
           <article><span>01</span><ShieldCheck/><h3>Prices you can see</h3><p>Every product displays a price, making it easier to compare options and decide what fits your budget.</p></article>
@@ -405,8 +413,8 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
         </div>
         <div className="editorialCopy">
           <span className="kicker">CREATOR TOOLS</span>
-          <h2>Make your content sound and look more expensive.</h2>
-          <p>Upgrade the problems viewers notice immediately: weak audio, poor lighting, shaky shots, low storage and unreliable power.</p>
+          <h2>{creatorSection?.title || "Make your content sound and look more expensive."}</h2>
+          <p>{creatorSection?.body || "Upgrade the problems viewers notice immediately: weak audio, poor lighting, shaky shots, low storage and unreliable power."}</p>
           <div className="editorialChecklist">
             <span><Check/> Wireless microphones</span>
             <span><Check/> Tripods & phone rigs</span>
@@ -419,7 +427,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
 
       <section className="insights premiumInsights shell">
         <div className="premiumSectionHead">
-          <div><span className="kicker">BEFORE YOU BUY</span><h2>Spend with a reason, not just hype.</h2></div>
+          <div><span className="kicker">BEFORE YOU BUY</span><h2>{guidesSection?.title || "Spend with a reason, not just hype."}</h2>{guidesSection?.body && <p className="sectionLead">{guidesSection.body}</p>}</div>
           <Link href="/blog" className="sectionLink">Use the buying guides <ArrowUpRight size={16}/></Link>
         </div>
 
