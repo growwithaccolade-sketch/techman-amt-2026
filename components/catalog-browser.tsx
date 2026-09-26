@@ -8,8 +8,8 @@ import { money } from "@/lib/products";
 import ProductImage from "@/components/product-image";
 
 export default function CatalogBrowser({
-  title = "Shop TechMan AMT",
-  intro = "Phones, laptops, audio, accessories and creator tools.",
+  title = "Find the tech that fits. Buy it with confidence.",
+  intro = "Compare clear prices, useful specs and current availability across phones, laptops, audio, creator gear and accessories.",
   initialCategory = "All",
   initialBrand = "All",
   initialQuery = "",
@@ -52,11 +52,7 @@ export default function CatalogBrowser({
     };
 
     return [...filtered].sort((a, b) => {
-      if (sort === "price-low") {
-        if (a.price <= 0 && b.price > 0) return 1;
-        if (b.price <= 0 && a.price > 0) return -1;
-        return a.price - b.price;
-      }
+      if (sort === "price-low") return a.price - b.price;
       if (sort === "price-high") return b.price - a.price;
       if (sort === "stock") return b.stock - a.stock;
       const badgeDiff = badgeWeight(b.badge) - badgeWeight(a.badge);
@@ -115,27 +111,21 @@ export default function CatalogBrowser({
                   <Link href={`/product/${product.slug}`}><h3>{product.name}</h3></Link>
                   <p>{product.blurb}</p>
                   <div className="premiumPriceLine">
-                    <strong>{product.price > 0 ? money(product.price) : "Price on request"}</strong>
-                    {product.oldPrice && <del>{money(product.oldPrice)}</del>}
+                    <strong>{money(product.price)}</strong>
+                    {product.oldPrice && product.oldPrice > product.price && <del>{money(product.oldPrice)}</del>}
                   </div>
-                  <div className={product.price <= 0 ? "premiumStock request" : product.stock > 0 ? "premiumStock" : "premiumStock out"}>
-                    {product.price <= 0 ? "Availability on request" : product.stock > 0 ? `${product.stock} available` : "Out of stock"}
+                  <div className={product.stock > 0 ? "premiumStock" : "premiumStock out"}>
+                    {product.stock > 0 ? `${product.stock} available` : "Out of stock"}
                   </div>
                   <div className="premiumCardActions">
-                    {product.price <= 0 ? (
-                      <Link className="premiumAddButton requestButton" href={`/device-request?product=${encodeURIComponent(product.name)}`}>
-                        Request price
-                      </Link>
-                    ) : (
-                      <button
-                        className={`premiumAddButton ${inCart ? "added" : ""}`}
-                        onClick={() => addItem(product.id)}
-                        disabled={product.stock <= 0}
-                      >
-                        <ShoppingBag size={16}/>
-                        {product.stock <= 0 ? "Out of stock" : inCart ? "Add another" : "Add to cart"}
-                      </button>
-                    )}
+                    <button
+                      className={`premiumAddButton ${inCart ? "added" : ""}`}
+                      onClick={() => addItem(product.id)}
+                      disabled={product.stock <= 0}
+                    >
+                      <ShoppingBag size={16}/>
+                      {product.stock <= 0 ? "Out of stock" : inCart ? "Add another" : "Add to cart"}
+                    </button>
                     <Link className="premiumDetailButton" href={`/product/${product.slug}`} aria-label={`View ${product.name}`}>
                       <ArrowUpRight size={18}/>
                     </Link>
