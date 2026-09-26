@@ -3,10 +3,11 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
-    minimumCacheTTL: 86400,
+    minimumCacheTTL: 2592000,
     deviceSizes: [360, 390, 430, 640, 768, 1024, 1280, 1440, 1920],
     imageSizes: [64, 96, 128, 160, 220, 320, 480],
     remotePatterns: [
+      { protocol: "https", hostname: "**.supabase.co" },
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "images.pexels.com" },
       { protocol: "https", hostname: "storage.googleapis.com" },
