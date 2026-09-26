@@ -3516,3 +3516,617 @@ body{background:#fff}
   .creatorChipTwo{right:5%;top:40%}
   .creatorChipThree{left:10%;bottom:12%}
 }
+
+
+/* =========================================================
+   CINEMATIC COMMERCE MOTION SYSTEM · 2026
+   Performance-first depth, lighting and section choreography
+   ========================================================= */
+:root{
+  --pointer-x:50vw;
+  --pointer-y:30vh;
+  --scroll-velocity:0;
+  --hero-parallax:0px;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  z-index:-1;
+  width:560px;
+  height:560px;
+  left:calc(var(--pointer-x) - 280px);
+  top:calc(var(--pointer-y) - 280px);
+  border-radius:50%;
+  pointer-events:none;
+  background:radial-gradient(circle,rgba(49,87,255,.055),rgba(117,86,255,.025) 38%,transparent 70%);
+  transition:opacity .35s ease;
+  opacity:.8;
+  will-change:left,top;
+}
+
+.scrollProgress{
+  position:fixed;
+  z-index:9999;
+  left:0;
+  top:0;
+  width:100%;
+  height:2px;
+  transform:scaleX(0);
+  transform-origin:left center;
+  background:linear-gradient(90deg,#3157ff,#7556ff,#1fa67a);
+  box-shadow:0 0 18px rgba(49,87,255,.35);
+  pointer-events:none;
+  will-change:transform;
+}
+
+.motionReady .revealItem{
+  opacity:0;
+  transform:translate3d(0,30px,0) scale(.985);
+  filter:blur(8px);
+  transition:
+    opacity .78s cubic-bezier(.16,1,.3,1) var(--reveal-delay,0ms),
+    transform .9s cubic-bezier(.16,1,.3,1) var(--reveal-delay,0ms),
+    filter .7s ease var(--reveal-delay,0ms);
+  will-change:opacity,transform,filter;
+}
+.motionReady .revealItem.isRevealed{
+  opacity:1;
+  transform:translate3d(0,0,0) scale(1);
+  filter:blur(0);
+}
+
+.motionReady .premiumHeroCopy>.revealItem:nth-child(1){--reveal-delay:40ms}
+.motionReady .premiumHeroCopy>.revealItem:nth-child(2){--reveal-delay:110ms}
+.motionReady .premiumHeroCopy>.revealItem:nth-child(3){--reveal-delay:190ms}
+.motionReady .premiumHeroCopy>.revealItem:nth-child(4){--reveal-delay:270ms}
+.motionReady .premiumHeroCopy>.revealItem:nth-child(5){--reveal-delay:350ms}
+
+/* Hero: depth without noisy motion */
+.premiumHero{
+  position:relative;
+  isolation:isolate;
+}
+.premiumHero:before,
+.premiumHero:after{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:-1;
+  filter:blur(1px);
+}
+.premiumHero:before{
+  width:430px;
+  height:430px;
+  right:22%;
+  top:9%;
+  background:radial-gradient(circle,rgba(49,87,255,.12),transparent 69%);
+  animation:heroAtmosphereA 10s ease-in-out infinite;
+}
+.premiumHero:after{
+  width:310px;
+  height:310px;
+  right:2%;
+  bottom:8%;
+  background:radial-gradient(circle,rgba(31,166,122,.09),transparent 70%);
+  animation:heroAtmosphereB 12s ease-in-out infinite;
+}
+
+.motionReady .heroStage.isRevealed{
+  transform:translate3d(0,var(--hero-parallax,0px),0);
+  transition:
+    opacity .8s cubic-bezier(.16,1,.3,1),
+    filter .7s ease,
+    transform .18s linear;
+  will-change:transform;
+}
+
+.heroStage{
+  perspective:1400px;
+}
+.heroStageMain,
+.heroMiniCard,
+.premiumProductCard,
+.collectionTile,
+.insightCard,
+.contactCards article,
+.creatorEditorialVisual{
+  --tilt-x:0deg;
+  --tilt-y:0deg;
+  --lift:0px;
+  transform-style:preserve-3d;
+}
+.heroStageMain.isRevealed,
+.heroMiniCard.isRevealed,
+.premiumProductCard.isRevealed,
+.collectionTile.isRevealed,
+.insightCard.isRevealed,
+.contactCards article.isRevealed,
+.creatorEditorialVisual.isRevealed{
+  transform:
+    perspective(1300px)
+    translate3d(0,var(--lift),0)
+    rotateX(var(--tilt-x))
+    rotateY(var(--tilt-y));
+  transition:
+    transform .22s cubic-bezier(.2,.8,.2,1),
+    box-shadow .3s ease,
+    border-color .25s ease,
+    background-color .25s ease;
+  will-change:transform;
+}
+.heroStageMain:hover,
+.heroMiniCard:hover,
+.premiumProductCard:hover,
+.collectionTile:hover,
+.insightCard:hover,
+.contactCards article:hover{
+  --lift:-7px;
+}
+
+/* Pointer-responsive soft studio light */
+.premiumProductCard:after,
+.collectionTile:after,
+.insightCard:after,
+.contactCards article:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  opacity:0;
+  z-index:4;
+  background:
+    radial-gradient(360px circle at var(--mx,50%) var(--my,50%),
+      rgba(255,255,255,.32),
+      rgba(49,87,255,.055) 34%,
+      transparent 70%);
+  transition:opacity .26s ease;
+  mix-blend-mode:soft-light;
+}
+.premiumProductCard:hover:after,
+.collectionTile:hover:after,
+.insightCard:hover:after,
+.contactCards article:hover:after{
+  opacity:1;
+}
+
+.heroStageMain{
+  box-shadow:
+    0 34px 90px rgba(24,32,60,.14),
+    0 1px 0 rgba(255,255,255,.7) inset;
+}
+.heroStageMain:before{
+  content:"";
+  position:absolute;
+  z-index:4;
+  inset:-35%;
+  pointer-events:none;
+  background:linear-gradient(110deg,transparent 38%,rgba(255,255,255,.2) 49%,transparent 60%);
+  transform:translateX(-70%) rotate(8deg);
+  animation:heroStudioSweep 7s cubic-bezier(.4,0,.2,1) infinite;
+}
+
+.heroStageMain .productVendorImage,
+.heroStageMain .productLocalImage{
+  animation:heroProductBreath 6.8s ease-in-out infinite;
+  will-change:transform;
+}
+.heroMiniCard:nth-child(1) .productRemoteImage{animation:miniProductFloat 7s ease-in-out infinite}
+.heroMiniCard:nth-child(2) .productRemoteImage{animation:miniProductFloat 7s ease-in-out -3.4s infinite}
+
+/* Animated brand rail feels like a living system without becoming a marquee */
+.brandRail span{
+  position:relative;
+  animation:brandPulse 5s ease-in-out infinite;
+}
+.brandRail span:nth-child(2){animation-delay:.35s}
+.brandRail span:nth-child(3){animation-delay:.7s}
+.brandRail span:nth-child(4){animation-delay:1.05s}
+.brandRail span:nth-child(5){animation-delay:1.4s}
+.brandRail span:nth-child(6){animation-delay:1.75s}
+.brandRail span:nth-child(7){animation-delay:2.1s}
+.brandRail span:after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-12px;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:#3157ff;
+  opacity:0;
+  transform:translateX(-50%) scale(.4);
+  transition:.25s ease;
+}
+.brandRail span:hover{color:#303747}
+.brandRail span:hover:after{opacity:1;transform:translateX(-50%) scale(1)}
+
+/* Section heads gain a precise kinetic underline */
+.premiumSectionHead h2,
+.whyLead h2,
+.editorialCopy h2{
+  position:relative;
+}
+.premiumSectionHead h2:after,
+.whyLead h2:after,
+.editorialCopy h2:after{
+  content:"";
+  display:block;
+  width:58px;
+  height:2px;
+  margin-top:18px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#3157ff,#7556ff);
+  transform-origin:left;
+  transform:scaleX(.25);
+  opacity:.32;
+  transition:transform .7s cubic-bezier(.16,1,.3,1),opacity .45s ease;
+}
+.premiumSectionHead.isRevealed h2:after,
+.whyLead.isRevealed h2:after,
+.editorialCopy .isRevealed h2:after{
+  transform:scaleX(1);
+  opacity:1;
+}
+
+/* Category tiles: sculptural icon motion */
+.categoryVisual{
+  animation:categoryVisualDrift 8s ease-in-out infinite;
+}
+.collectionTile:nth-child(2) .categoryVisual{animation-delay:-1.4s}
+.collectionTile:nth-child(3) .categoryVisual{animation-delay:-2.8s}
+.collectionTile:nth-child(4) .categoryVisual{animation-delay:-4.2s}
+.collectionTile:nth-child(5) .categoryVisual{animation-delay:-5.6s}
+.collectionTile:hover .categoryVisual{
+  opacity:.3;
+  animation-play-state:paused;
+}
+
+/* Premium product cards */
+.premiumProductCard{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+}
+.premiumProductCard:before{
+  content:"";
+  position:absolute;
+  z-index:0;
+  inset:0;
+  pointer-events:none;
+  border-radius:inherit;
+  background:linear-gradient(140deg,rgba(255,255,255,.85),transparent 35%,rgba(49,87,255,.025));
+  opacity:.55;
+}
+.premiumProductCard>*{position:relative;z-index:1}
+.premiumProductMedia{
+  overflow:hidden;
+}
+.premiumProductMedia .productRemoteImage{
+  transform:scale(1);
+  transition:transform .65s cubic-bezier(.16,1,.3,1),filter .45s ease!important;
+  will-change:transform;
+}
+.premiumProductCard:hover .premiumProductMedia .productRemoteImage{
+  transform:scale(1.055) translateY(-3px)!important;
+  filter:saturate(1.04) contrast(1.015);
+}
+.premiumProductCard:hover{
+  border-color:rgba(49,87,255,.2);
+  box-shadow:0 30px 70px rgba(24,32,60,.11);
+}
+.productBadge{
+  animation:badgeHover 4.5s ease-in-out infinite;
+}
+
+/* Dark accessory band becomes cinematic */
+.premiumDeal{
+  background:
+    radial-gradient(900px 420px at 82% 14%,rgba(117,86,255,.18),transparent 65%),
+    radial-gradient(700px 360px at 8% 100%,rgba(31,166,122,.11),transparent 66%),
+    #090b10;
+}
+.premiumDeal:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:.14;
+  background:
+    linear-gradient(90deg,transparent 49.8%,rgba(255,255,255,.08) 50%,transparent 50.2%),
+    linear-gradient(0deg,transparent 49.8%,rgba(255,255,255,.05) 50%,transparent 50.2%);
+  background-size:84px 84px;
+  animation:dealGridDrift 18s linear infinite;
+}
+.premiumDealInner{position:relative;z-index:2}
+.dealEditorialIcon{
+  transition:transform .35s cubic-bezier(.16,1,.3,1),background .3s ease;
+}
+.dealFeatureItem:hover .dealEditorialIcon{
+  transform:rotate(-7deg) scale(1.08);
+  background:rgba(255,255,255,.15);
+}
+
+/* Creator visual: layered orbit animation */
+.creatorEditorialVisual{
+  perspective:1000px;
+}
+.creatorVisualCore{
+  animation:creatorCoreFloat 6s ease-in-out infinite;
+}
+.creatorVisualCore:after{
+  content:"";
+  position:absolute;
+  inset:-24px;
+  border-radius:54px;
+  border:1px solid rgba(255,255,255,.12);
+  animation:creatorHalo 3.8s ease-in-out infinite;
+}
+.creatorVisualChip{
+  box-shadow:0 18px 45px rgba(0,0,0,.15);
+  animation:creatorChipFloat 6.6s ease-in-out infinite;
+}
+.creatorChipTwo{animation-delay:-2.1s}
+.creatorChipThree{animation-delay:-4.2s}
+
+/* Buttons: magnetic translation + press ripple */
+.heroPrimary,
+.premiumAddButton,
+.premiumDetailButton,
+.contactPrimary,
+.contactSecondary,
+.lightBtn,
+.primaryBtn,
+.buyNowAction{
+  --mag-x:0px;
+  --mag-y:0px;
+  transform:translate3d(var(--mag-x),var(--mag-y),0);
+  will-change:transform;
+}
+.heroPrimary:hover,
+.premiumAddButton:hover,
+.premiumDetailButton:hover,
+.contactPrimary:hover,
+.contactSecondary:hover,
+.lightBtn:hover,
+.primaryBtn:hover,
+.buyNowAction:hover{
+  transform:translate3d(var(--mag-x),calc(var(--mag-y) - 2px),0);
+}
+.motionPressed{
+  position:relative;
+}
+.motionPressed:after{
+  content:"";
+  position:absolute;
+  z-index:20;
+  left:var(--press-x,50%);
+  top:var(--press-y,50%);
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:rgba(255,255,255,.36);
+  transform:translate(-50%,-50%) scale(0);
+  pointer-events:none;
+  animation:pressRipple .42s ease-out forwards;
+}
+
+/* Nav enters glass mode with directional polish */
+.siteScrolled .premiumNav{
+  background:rgba(247,247,243,.82);
+  backdrop-filter:blur(18px) saturate(1.15);
+  -webkit-backdrop-filter:blur(18px) saturate(1.15);
+  box-shadow:0 12px 36px rgba(18,23,38,.06);
+}
+.scrollingDown.siteScrolled .premiumNav{
+  box-shadow:0 16px 42px rgba(18,23,38,.08);
+}
+
+/* Search and filter microinteraction */
+.premiumFilterRow button{
+  position:relative;
+  overflow:hidden;
+}
+.premiumFilterRow button:after{
+  content:"";
+  position:absolute;
+  inset:auto 20% 0;
+  height:2px;
+  border-radius:999px;
+  background:#3157ff;
+  transform:scaleX(0);
+  transition:transform .3s cubic-bezier(.16,1,.3,1);
+}
+.premiumFilterRow button:hover:after,
+.premiumFilterRow button.active:after{
+  transform:scaleX(1);
+}
+.featuredSearch svg{
+  transition:transform .35s cubic-bezier(.16,1,.3,1),color .25s ease;
+}
+.featuredSearch:focus-within svg{
+  transform:rotate(-8deg) scale(1.08);
+  color:#3157ff;
+}
+
+/* Footer and contact motion */
+.homeContactBand:before{
+  content:"";
+  position:absolute;
+  inset:-100% -30%;
+  background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.12) 50%,transparent 58%);
+  transform:translateX(-45%);
+  animation:contactLightSweep 9s ease-in-out infinite;
+  pointer-events:none;
+}
+.premiumNewsletter{
+  position:relative;
+}
+.premiumNewsletter:after{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  right:9%;
+  top:-90px;
+  border:1px solid rgba(49,87,255,.08);
+  border-radius:50%;
+  box-shadow:0 0 0 34px rgba(49,87,255,.025),0 0 0 68px rgba(49,87,255,.015);
+  animation:newsletterOrbit 12s linear infinite;
+  pointer-events:none;
+}
+
+/* Product page hero gets its own studio depth */
+.productGallery{
+  position:relative;
+  isolation:isolate;
+}
+.productGallery:before{
+  content:"";
+  position:absolute;
+  width:72%;
+  aspect-ratio:1;
+  left:14%;
+  top:10%;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(49,87,255,.09),transparent 68%);
+  animation:productPageAura 8s ease-in-out infinite;
+  pointer-events:none;
+}
+.productGallery .productRemoteImage{
+  transition:transform .7s cubic-bezier(.16,1,.3,1)!important;
+}
+.productGallery:hover .productRemoteImage{
+  transform:scale(1.035) translateY(-4px)!important;
+}
+
+/* Keyframes */
+@keyframes heroAtmosphereA{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(-26px,20px,0) scale(1.08)}
+}
+@keyframes heroAtmosphereB{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(22px,-20px,0) scale(.94)}
+}
+@keyframes heroStudioSweep{
+  0%,58%{transform:translateX(-75%) rotate(8deg);opacity:0}
+  68%{opacity:1}
+  84%,100%{transform:translateX(95%) rotate(8deg);opacity:0}
+}
+@keyframes heroProductBreath{
+  0%,100%{transform:scale(1) translate3d(0,0,0)}
+  50%{transform:scale(1.018) translate3d(0,-7px,0)}
+}
+@keyframes miniProductFloat{
+  0%,100%{transform:scale(1) translateY(0)}
+  50%{transform:scale(1.025) translateY(-5px)}
+}
+@keyframes brandPulse{
+  0%,100%{opacity:.64;transform:translateY(0)}
+  50%{opacity:1;transform:translateY(-2px)}
+}
+@keyframes categoryVisualDrift{
+  0%,100%{transform:rotate(-8deg) translate3d(0,0,0)}
+  50%{transform:rotate(-3deg) translate3d(-8px,-8px,0)}
+}
+@keyframes badgeHover{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-2px)}
+}
+@keyframes dealGridDrift{
+  from{background-position:0 0,0 0}
+  to{background-position:84px 0,0 84px}
+}
+@keyframes creatorCoreFloat{
+  0%,100%{transform:rotate(-6deg) translate3d(0,0,0)}
+  50%{transform:rotate(-2deg) translate3d(0,-14px,0)}
+}
+@keyframes creatorHalo{
+  0%,100%{transform:scale(.94);opacity:.25}
+  50%{transform:scale(1.1);opacity:.7}
+}
+@keyframes creatorChipFloat{
+  0%,100%{transform:translate3d(0,0,0)}
+  50%{transform:translate3d(0,-10px,0)}
+}
+@keyframes pressRipple{
+  from{transform:translate(-50%,-50%) scale(0);opacity:.7}
+  to{transform:translate(-50%,-50%) scale(18);opacity:0}
+}
+@keyframes contactLightSweep{
+  0%,55%{transform:translateX(-55%);opacity:0}
+  68%{opacity:1}
+  82%,100%{transform:translateX(65%);opacity:0}
+}
+@keyframes newsletterOrbit{
+  from{transform:rotate(0deg) translateX(8px) rotate(0deg)}
+  to{transform:rotate(360deg) translateX(8px) rotate(-360deg)}
+}
+@keyframes productPageAura{
+  0%,100%{transform:scale(.96);opacity:.55}
+  50%{transform:scale(1.06);opacity:1}
+}
+
+@media(max-width:900px){
+  body:before{display:none}
+  .motionReady .heroStage.isRevealed{
+    transform:none;
+  }
+  .heroStageMain.isRevealed,
+  .heroMiniCard.isRevealed,
+  .premiumProductCard.isRevealed,
+  .collectionTile.isRevealed,
+  .insightCard.isRevealed,
+  .contactCards article.isRevealed,
+  .creatorEditorialVisual.isRevealed{
+    transform:translate3d(0,var(--lift),0);
+  }
+}
+@media(max-width:760px){
+  .motionReady .revealItem{
+    transform:translate3d(0,20px,0);
+    filter:blur(4px);
+    transition-duration:.62s;
+  }
+  .heroStageMain:before{display:none}
+  .brandRail span{animation:none}
+  .creatorVisualCore{animation-duration:7.5s}
+  .creatorVisualChip{animation-duration:8s}
+}
+@media(prefers-reduced-motion:reduce){
+  body:before{display:none!important}
+  .heroStageMain:before,
+  .premiumDeal:after,
+  .homeContactBand:before,
+  .premiumNewsletter:after{display:none!important}
+  .heroStageMain .productRemoteImage,
+  .heroMiniCard .productRemoteImage,
+  .brandRail span,
+  .categoryVisual,
+  .productBadge,
+  .creatorVisualCore,
+  .creatorVisualChip,
+  .productGallery:before{
+    animation:none!important;
+  }
+  .heroStageMain,
+  .heroMiniCard,
+  .premiumProductCard,
+  .collectionTile,
+  .insightCard,
+  .contactCards article,
+  .creatorEditorialVisual,
+  .heroPrimary,
+  .premiumAddButton,
+  .premiumDetailButton,
+  .contactPrimary,
+  .contactSecondary,
+  .lightBtn,
+  .primaryBtn,
+  .buyNowAction{
+    transform:none!important;
+  }
+}
