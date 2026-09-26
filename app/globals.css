@@ -5771,3 +5771,390 @@ body:before{display:none!important}
   .editorialSection,.editorialMedia{min-height:460px}
   .editorialCopy{padding:30px 22px}
 }
+
+
+/* =========================================================
+   CINEMATIC MOTION SYSTEM — premium commerce interaction pass
+   ========================================================= */
+:root{
+  --pointer-x:.5;
+  --pointer-y:.5;
+  --pointer-px:50vw;
+  --pointer-py:50vh;
+  --hero-copy-parallax:0px;
+  --hero-scale:1;
+}
+
+.scrollProgress{
+  position:fixed;
+  z-index:9999;
+  top:0;
+  left:0;
+  width:100%;
+  height:3px;
+  transform:scaleX(0);
+  transform-origin:left center;
+  background:linear-gradient(90deg,#3157ff,#7556ff,#d7ff50);
+  box-shadow:0 0 16px rgba(49,87,255,.36);
+  pointer-events:none;
+}
+
+.motionReady .premiumHeroCopy{
+  transform:translate3d(0,calc(var(--hero-copy-parallax) * -1),0);
+  transition:transform .08s linear;
+  will-change:transform;
+}
+.motionReady .heroStage{
+  transform:translate3d(0,var(--hero-parallax),0) scale(var(--hero-scale));
+  transform-origin:center top;
+  transition:transform .08s linear;
+  will-change:transform;
+  perspective:1200px;
+}
+
+.premiumHero{
+  position:relative;
+  isolation:isolate;
+}
+.premiumHero:before,
+.premiumHero:after{
+  content:"";
+  display:block!important;
+  position:absolute;
+  z-index:-1;
+  pointer-events:none;
+  border-radius:999px;
+  filter:blur(2px);
+  opacity:.58;
+}
+.premiumHero:before{
+  width:460px;
+  height:460px;
+  right:-180px;
+  top:-120px;
+  background:radial-gradient(circle,rgba(49,87,255,.18),rgba(117,86,255,.04) 55%,transparent 72%);
+  animation:heroAuraA 11s ease-in-out infinite alternate!important;
+}
+.premiumHero:after{
+  width:340px;
+  height:340px;
+  left:34%;
+  bottom:-170px;
+  background:radial-gradient(circle,rgba(215,255,80,.13),transparent 68%);
+  animation:heroAuraB 14s ease-in-out infinite alternate!important;
+}
+
+.heroStageMain{
+  isolation:isolate;
+}
+.heroStageMain:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:6;
+  pointer-events:none;
+  opacity:.0;
+  background:radial-gradient(420px circle at var(--glow-x,50%) var(--glow-y,50%),rgba(255,255,255,.20),transparent 45%);
+  transition:opacity .28s ease;
+}
+.heroStageMain:hover:after{opacity:1}
+
+.motionTilt{
+  --tilt-x:0deg;
+  --tilt-y:0deg;
+  --glow-x:50%;
+  --glow-y:50%;
+  transform:
+    perspective(1100px)
+    rotateX(var(--tilt-x))
+    rotateY(var(--tilt-y))
+    translateY(var(--lift,0px));
+  transform-style:preserve-3d;
+  transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,border-color .3s ease!important;
+  will-change:transform;
+}
+.motionTilt:hover{
+  box-shadow:0 24px 60px rgba(10,18,38,.13);
+}
+.premiumProductCard.motionTilt:before,
+.collectionTile.motionTilt:after,
+.insightCard.motionTilt:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:8;
+  pointer-events:none;
+  border-radius:inherit;
+  opacity:0;
+  background:radial-gradient(240px circle at var(--glow-x,50%) var(--glow-y,50%),rgba(255,255,255,.48),transparent 52%);
+  transition:opacity .28s ease;
+  mix-blend-mode:soft-light;
+}
+.premiumProductCard.motionTilt:hover:before,
+.collectionTile.motionTilt:hover:after,
+.insightCard.motionTilt:hover:after{opacity:.82}
+
+.motionMagnetic{
+  transform:translate3d(var(--mag-x,0),var(--mag-y,0),0);
+  transition:transform .18s cubic-bezier(.2,.8,.2,1),box-shadow .22s ease,background-color .22s ease!important;
+  will-change:transform;
+}
+
+.motionPressed:after{
+  content:"";
+  position:absolute;
+  left:var(--press-x,50%);
+  top:var(--press-y,50%);
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  pointer-events:none;
+  background:rgba(255,255,255,.42);
+  transform:translate(-50%,-50%) scale(0);
+  animation:motionRipple .42s ease-out forwards;
+}
+
+.heroStageMain .productVendorImage,
+.heroStageMain .productRemoteImage{
+  animation:heroProductDrift 6.5s ease-in-out infinite!important;
+  transform-origin:center center;
+}
+.heroMiniCard:nth-child(1){animation:miniCardFloatA 5.8s ease-in-out infinite}
+.heroMiniCard:nth-child(2){animation:miniCardFloatB 6.4s ease-in-out infinite .5s}
+
+.brandRail{
+  overflow:hidden;
+  position:relative;
+}
+.brandRail:before,
+.brandRail:after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:72px;
+  z-index:3;
+  pointer-events:none;
+}
+.brandRail:before{left:0;background:linear-gradient(90deg,var(--page-bg,#f4f4f0),transparent)}
+.brandRail:after{right:0;background:linear-gradient(-90deg,var(--page-bg,#f4f4f0),transparent)}
+.brandRail span{
+  animation:brandBreath 4s ease-in-out infinite!important;
+}
+.brandRail span:nth-child(2n){animation-delay:.55s!important}
+.brandRail span:nth-child(3n){animation-delay:1.1s!important}
+
+.collectionTileCmsImage{
+  transition:transform .9s cubic-bezier(.15,.75,.18,1),filter .5s ease!important;
+}
+.collectionTile:hover .collectionTileCmsImage{
+  transform:scale(1.08) rotate(.35deg);
+  filter:saturate(1.06) contrast(1.02);
+}
+.collectionTile .collectionArrow{
+  transition:transform .28s cubic-bezier(.2,.8,.2,1),background .25s ease!important;
+}
+.collectionTile:hover .collectionArrow{transform:translate(3px,-3px) rotate(4deg)}
+
+.premiumProductMedia{
+  overflow:hidden;
+  isolation:isolate;
+}
+.premiumProductMedia:after{
+  content:"";
+  position:absolute;
+  z-index:5;
+  pointer-events:none;
+  top:-35%;
+  left:-90%;
+  width:42%;
+  height:170%;
+  opacity:0;
+  transform:rotate(18deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.42),transparent);
+}
+.premiumProductCard:hover .premiumProductMedia:after{
+  opacity:1;
+  animation:productSheen .82s cubic-bezier(.2,.7,.2,1) forwards;
+}
+.premiumProductCard .productRemoteImage{
+  transition:transform .65s cubic-bezier(.15,.75,.18,1),filter .35s ease!important;
+}
+.premiumProductCard:hover .productRemoteImage{
+  transform:scale(1.055) translateY(-4px)!important;
+  filter:saturate(1.04) contrast(1.015);
+}
+.productBadge{
+  transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease!important;
+}
+.premiumProductCard:hover .productBadge{
+  transform:translateY(-2px);
+  box-shadow:0 10px 26px rgba(9,11,16,.16);
+}
+
+.premiumFilterRow button{
+  position:relative;
+  overflow:hidden;
+}
+.premiumFilterRow button:after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:4px;
+  width:0;
+  height:2px;
+  border-radius:999px;
+  background:currentColor;
+  transform:translateX(-50%);
+  transition:width .28s cubic-bezier(.2,.8,.2,1);
+}
+.premiumFilterRow button:hover:after,
+.premiumFilterRow button.active:after{width:38%}
+
+.dealFeatureItem{
+  transition:transform .32s cubic-bezier(.2,.8,.2,1),border-color .25s ease,background .25s ease!important;
+}
+.dealFeatureItem:hover{
+  transform:translateY(-5px) scale(1.01);
+}
+.dealFeatureItem:hover .dealEditorialIcon{
+  transform:rotate(-6deg) scale(1.08);
+}
+.dealEditorialIcon{
+  transition:transform .35s cubic-bezier(.2,.8,.2,1);
+}
+
+.creatorVisualCore{
+  animation:creatorCoreFloat 5.6s ease-in-out infinite!important;
+}
+.creatorVisualChip{
+  animation:creatorChipFloat 4.8s ease-in-out infinite!important;
+}
+.creatorChipTwo{animation-delay:.7s!important}
+.creatorChipThree{animation-delay:1.25s!important}
+.creatorEditorialVisual:before{animation:creatorRingPulse 8s ease-in-out infinite}
+.creatorEditorialVisual:after{animation:creatorRingPulse 8s ease-in-out infinite 1.8s}
+
+.homeContactBand:before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  pointer-events:none;
+  background:radial-gradient(440px circle at calc(var(--pointer-x) * 100%) calc(var(--pointer-y) * 100%),rgba(255,255,255,.13),transparent 48%);
+  opacity:.85;
+}
+
+.siteScrolled .premiumNav{
+  backdrop-filter:blur(20px) saturate(1.35);
+  box-shadow:0 12px 40px rgba(10,18,38,.07);
+}
+.premiumNav{
+  transition:height .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,background-color .3s ease,backdrop-filter .3s ease!important;
+}
+.premiumDesktopNav a:after{
+  transform-origin:left center;
+  transition:transform .28s cubic-bezier(.2,.8,.2,1)!important;
+}
+
+.motionReady .revealItem{
+  opacity:0;
+  transform:translate3d(0,28px,0) scale(.985);
+  transition:
+    opacity .72s cubic-bezier(.2,.75,.2,1) var(--reveal-delay,0ms),
+    transform .82s cubic-bezier(.16,.84,.2,1) var(--reveal-delay,0ms)!important;
+}
+.motionReady .revealItem.isRevealed{
+  opacity:1;
+  transform:translate3d(0,0,0) scale(1);
+}
+.motionReady .premiumHeroCopy>*.revealItem{
+  transform:translate3d(-22px,18px,0);
+}
+.motionReady .premiumHeroCopy>*.revealItem.isRevealed{
+  transform:translate3d(0,0,0);
+}
+.motionReady .heroStage.revealItem{
+  transform:translate3d(24px,26px,0) scale(.965);
+}
+.motionReady .heroStage.revealItem.isRevealed{
+  transform:translate3d(0,var(--hero-parallax),0) scale(var(--hero-scale));
+}
+
+@keyframes heroAuraA{
+  0%{transform:translate3d(0,0,0) scale(.92)}
+  100%{transform:translate3d(-70px,58px,0) scale(1.16)}
+}
+@keyframes heroAuraB{
+  0%{transform:translate3d(0,0,0) scale(.9)}
+  100%{transform:translate3d(80px,-54px,0) scale(1.18)}
+}
+@keyframes heroProductDrift{
+  0%,100%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(0,-9px,0) scale(1.018)}
+}
+@keyframes miniCardFloatA{
+  0%,100%{translate:0 0}
+  50%{translate:0 -7px}
+}
+@keyframes miniCardFloatB{
+  0%,100%{translate:0 0}
+  50%{translate:0 6px}
+}
+@keyframes brandBreath{
+  0%,100%{opacity:.55;transform:translateY(0)}
+  50%{opacity:1;transform:translateY(-2px)}
+}
+@keyframes productSheen{
+  from{left:-90%}
+  to{left:145%}
+}
+@keyframes creatorCoreFloat{
+  0%,100%{transform:translate3d(0,0,0) rotate(-6deg)}
+  50%{transform:translate3d(0,-14px,0) rotate(-2deg)}
+}
+@keyframes creatorChipFloat{
+  0%,100%{translate:0 0}
+  50%{translate:0 -8px}
+}
+@keyframes creatorRingPulse{
+  0%,100%{transform:scale(.86);opacity:.35}
+  50%{transform:scale(1.06);opacity:.75}
+}
+@keyframes motionRipple{
+  0%{transform:translate(-50%,-50%) scale(0);opacity:.72}
+  100%{transform:translate(-50%,-50%) scale(18);opacity:0}
+}
+
+@media(max-width:760px){
+  .motionReady .premiumHeroCopy{transform:none}
+  .motionReady .heroStage{transform:none}
+  .motionTilt,
+  .motionTilt:hover{
+    transform:translateY(var(--lift,0px))!important;
+  }
+  .heroStageMain .productVendorImage,
+  .heroStageMain .productRemoteImage{
+    animation-duration:7.5s!important;
+  }
+  .heroMiniCard{animation:none!important}
+  .creatorVisualChip{animation-duration:6s!important}
+  .premiumProductCard:hover .productRemoteImage{transform:scale(1.025)!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .premiumHero:before,
+  .premiumHero:after,
+  .heroStageMain .productRemoteImage,
+  .heroMiniCard,
+  .brandRail span,
+  .creatorVisualCore,
+  .creatorVisualChip,
+  .creatorEditorialVisual:before,
+  .creatorEditorialVisual:after{
+    animation:none!important;
+  }
+  .motionTilt,
+  .motionMagnetic{
+    transform:none!important;
+  }
+}
