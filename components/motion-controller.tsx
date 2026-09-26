@@ -49,33 +49,11 @@ const revealSelectors = [
   ".premiumCopyright > *",
 ];
 
-const tiltSelector = [
-  ".heroStageMain",
-  ".heroMiniCard",
-  ".premiumProductCard",
-  ".collectionTile",
-  ".insightCard",
-  ".contactCards article",
-  ".creatorEditorialVisual",
-].join(",");
-
-const magneticSelector = [
-  ".heroPrimary",
-  ".premiumAddButton",
-  ".premiumDetailButton",
-  ".contactPrimary",
-  ".contactSecondary",
-  ".lightBtn",
-  ".primaryBtn",
-  ".buyNowAction",
-].join(",");
-
 export default function MotionController() {
   useEffect(() => {
     const root = document.documentElement;
     const body = document.body;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const finePointer = window.matchMedia("(pointer: fine)").matches;
 
     root.classList.add("motionReady");
 
@@ -165,65 +143,6 @@ export default function MotionController() {
 
     const cleanups: Array<() => void> = [];
 
-    if (!reduced && finePointer) {
-      const onGlobalPointer = (event: PointerEvent) => {
-        const nx = (event.clientX / Math.max(1, window.innerWidth) - 0.5) * 2;
-        const ny = (event.clientY / Math.max(1, window.innerHeight) - 0.5) * 2;
-        root.style.setProperty("--pointer-x", `${event.clientX}px`);
-        root.style.setProperty("--pointer-y", `${event.clientY}px`);
-        root.style.setProperty("--cursor-nx", nx.toFixed(4));
-        root.style.setProperty("--cursor-ny", ny.toFixed(4));
-      };
-      window.addEventListener("pointermove", onGlobalPointer, { passive: true });
-      cleanups.push(() => window.removeEventListener("pointermove", onGlobalPointer));
-
-      document.querySelectorAll<HTMLElement>(tiltSelector).forEach((target) => {
-        const move = (event: PointerEvent) => {
-          const rect = target.getBoundingClientRect();
-          const px = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
-          const py = Math.min(1, Math.max(0, (event.clientY - rect.top) / rect.height));
-          target.style.setProperty("--mx", `${event.clientX - rect.left}px`);
-          target.style.setProperty("--my", `${event.clientY - rect.top}px`);
-          target.style.setProperty("--tilt-x", `${((0.5 - py) * 1.6).toFixed(2)}deg`);
-          target.style.setProperty("--tilt-y", `${((px - 0.5) * 2).toFixed(2)}deg`);
-          target.style.setProperty("--pointer-px", px.toFixed(3));
-          target.style.setProperty("--pointer-py", py.toFixed(3));
-        };
-        const leave = () => {
-          target.style.setProperty("--tilt-x", "0deg");
-          target.style.setProperty("--tilt-y", "0deg");
-          target.style.setProperty("--pointer-px", ".5");
-          target.style.setProperty("--pointer-py", ".5");
-        };
-        target.addEventListener("pointermove", move);
-        target.addEventListener("pointerleave", leave);
-        cleanups.push(() => {
-          target.removeEventListener("pointermove", move);
-          target.removeEventListener("pointerleave", leave);
-        });
-      });
-
-      document.querySelectorAll<HTMLElement>(magneticSelector).forEach((target) => {
-        const move = (event: PointerEvent) => {
-          const rect = target.getBoundingClientRect();
-          const x = (event.clientX - rect.left - rect.width / 2) * 0.035;
-          const y = (event.clientY - rect.top - rect.height / 2) * 0.04;
-          target.style.setProperty("--mag-x", `${x.toFixed(2)}px`);
-          target.style.setProperty("--mag-y", `${y.toFixed(2)}px`);
-        };
-        const leave = () => {
-          target.style.setProperty("--mag-x", "0px");
-          target.style.setProperty("--mag-y", "0px");
-        };
-        target.addEventListener("pointermove", move);
-        target.addEventListener("pointerleave", leave);
-        cleanups.push(() => {
-          target.removeEventListener("pointermove", move);
-          target.removeEventListener("pointerleave", leave);
-        });
-      });
-    }
-
     const onPointerDown = (event: PointerEvent) => {
       const target = (event.target as HTMLElement | null)?.closest<HTMLElement>("a,button");
       if (!target) return;
@@ -249,8 +168,6 @@ export default function MotionController() {
       root.style.removeProperty("--scroll-progress");
       root.style.removeProperty("--scroll-velocity");
       root.style.removeProperty("--hero-parallax");
-      root.style.removeProperty("--cursor-nx");
-      root.style.removeProperty("--cursor-ny");
     };
   }, []);
 
