@@ -248,13 +248,14 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
         <div className="collectionBento">
           {categoryMeta.map((item, index) => {
             const Icon = item.icon;
+            const tileImage = siteMedia?.[item.mediaKey];
             return (
               <Link
                 key={item.name}
                 href={`/shop?category=${encodeURIComponent(item.name)}`}
                 className={`collectionTile collectionTile${index + 1} ${index % 2 === 0 ? "categoryAlignStart" : "categoryAlignEnd"}`}
               >
-                {siteMedia?.[item.mediaKey] && <img className="collectionTileCmsImage" src={siteMedia[item.mediaKey]} alt="" loading="lazy" decoding="async"/>}
+                {tileImage && <img className="collectionTileCmsImage" src={tileImage} alt="" loading="lazy" decoding="async"/>}
                 <div className="collectionTileTop"><Icon size={18}/><span>{index === 0 ? "Featured" : index === 1 ? "Portable" : item.name === "Creator Tools" ? "Studio" : "Explore"}</span></div>
                 <div className="collectionTileCopy">
                   <h3>{item.name}</h3>
