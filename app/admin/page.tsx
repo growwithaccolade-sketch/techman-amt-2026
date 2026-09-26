@@ -13,15 +13,15 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
   if (!authenticated) {
     return (
       <main className="adminLogin">
-        <div className="adminLoginCard">
+        <div className="adminLoginCard" role="dialog" aria-modal="true" aria-labelledby="admin-login-title">
           <BrandLogo/>
           <span className="kicker">PRIVATE ADMIN</span>
-          <h1>Store control starts here.</h1>
-          <p>Sign in to manage products, pages, orders, staff and store settings.</p>
+          <h1 id="admin-login-title">Enter your admin password.</h1>
+          <p>Username is already set to <b>admin</b>. Enter the private server-side password to manage products, images, prices, pages, orders, staff and store settings.</p>
           {error === "invalid" && <div className="adminError">Incorrect username or password.</div>}
           {error === "owner" && <div className="adminError">Owner access is required for that action.</div>}
-          <form action={loginAdmin}><label>Username<input name="username" required autoComplete="username" defaultValue="admin"/></label><label>Password<input name="password" type="password" required autoComplete="current-password"/></label><button className="primaryAction" type="submit"><ShieldCheck size={18}/> Sign in</button></form>
-          <small>Owner and staff sessions are server-signed. Add staff from the Staff section after signing in.</small>
+          <form action={loginAdmin}><label>Username<input name="username" required autoComplete="username" defaultValue="admin" readOnly/></label><label>Password<input name="password" type="password" required autoComplete="current-password" autoFocus placeholder="Enter admin password"/></label><button className="primaryAction" type="submit"><ShieldCheck size={18}/> Open admin dashboard</button></form>
+          <small>The password is checked on the server and is never shown in the browser. After signing in, you can add staff from the Staff section.</small>
         </div>
       </main>
     );
