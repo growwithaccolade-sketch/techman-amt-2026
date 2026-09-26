@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const selectors = [
+const revealSelectors = [
   ".premiumHeroCopy > *",
   ".heroStage",
   ".brandRail > span",
@@ -37,82 +37,196 @@ const selectors = [
   ".accountOrder",
   ".infoHero > *",
   ".infoContent > section",
-  ".infoAside"
+  ".infoAside",
 ];
+
+const tiltSelector = [
+  ".heroStageMain",
+  ".heroMiniCard",
+  ".premiumProductCard",
+  ".collectionTile",
+  ".insightCard",
+  ".contactCards article",
+  ".creatorEditorialVisual",
+].join(",");
+
+const magneticSelector = [
+  ".heroPrimary",
+  ".premiumAddButton",
+  ".premiumDetailButton",
+  ".contactPrimary",
+  ".contactSecondary",
+  ".lightBtn",
+  ".primaryBtn",
+  ".buyNowAction",
+].join(",");
 
 export default function MotionController() {
   useEffect(() => {
     const root = document.documentElement;
+    const body = document.body;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const finePointer = window.matchMedia("(pointer: fine)").matches;
+
+    root.classList.add("motionReady");
 
     const progress = document.createElement("div");
     progress.className = "scrollProgress";
-    document.body.appendChild(progress);
+    body.appendChild(progress);
 
-    const updateScroll = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      const ratio = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    let lastScrollY = window.scrollY;
+    let velocity = 0;
+    let raf = 0;
+
+    const renderScroll = () => {
+      raf = 0;
+      const y = window.scrollY;
+      const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      const ratio = Math.min(1, Math.max(0, y / max));
+      const delta = y - lastScrollY;
+      velocity = velocity * 0.72 + delta * 0.28;
+      lastScrollY = y;
+
       progress.style.transform = `scaleX(${ratio})`;
-      document.body.classList.toggle("siteScrolled", window.scrollY > 18);
+      root.style.setProperty("--scroll-y", `${y}px`);
+      root.style.setProperty("--scroll-progress", ratio.toFixed(4));
+      root.style.setProperty("--scroll-velocity", Math.max(-36, Math.min(36, velocity)).toFixed(2));
+      root.style.setProperty("--hero-parallax", `${Math.min(34, y * 0.045)}px`);
+      body.classList.toggle("siteScrolled", y > 18);
+      body.classList.toggle("scrollingDown", delta > 1);
+      body.classList.toggle("scrollingUp", delta < -1);
     };
 
-    updateScroll();
-    window.addEventListener("scroll", updateScroll, { passive: true });
+    const onScroll = () => {
+      if (!raf) raf = window.requestAnimationFrame(renderScroll);
+    };
 
-    const elements = Array.from(document.querySelectorAll<HTMLElement>(selectors.join(",")));
-    elements.forEach((element, index) => {
+    renderScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    const registered = new Set<HTMLElement>();
+    let observer: IntersectionObserver | null = null;
+
+    const registerReveal = (element: HTMLElement, index: number) => {
+      if (registered.has(element)) return;
+      registered.add(element);
       element.classList.add("revealItem");
-      element.style.setProperty("--reveal-delay", `${Math.min(index % 6, 5) * 55}ms`);
-      if (element.getBoundingClientRect().top < window.innerHeight * 0.92) {
-        element.classList.add("isRevealed");
-      }
-    });
+      element.style.setProperty("--reveal-delay", `${Math.min(index % 6, 5) * 65}ms`);
+      element.style.setProperty("--reveal-order", String(index % 6));
 
-    if (reduced) {
-      elements.forEach((element) => element.classList.add("isRevealed"));
-    } else {
-      const observer = new IntersectionObserver(
+      if (reduced || element.getBoundingClientRect().top < window.innerHeight * 0.92) {
+        element.classList.add("isRevealed");
+      } else {
+        observer?.observe(element);
+      }
+    };
+
+    if (!reduced) {
+      observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              (entry.target as HTMLElement).classList.add("isRevealed");
-              observer.unobserve(entry.target);
-            }
+            if (!entry.isIntersecting) return;
+            const element = entry.target as HTMLElement;
+            element.classList.add("isRevealed");
+            observer?.unobserve(element);
           });
         },
-        { threshold: 0.08, rootMargin: "0px 0px -8% 0px" }
+        { threshold: 0.1, rootMargin: "0px 0px -7% 0px" }
       );
-      elements.forEach((element) => observer.observe(element));
-
-      const hoverTargets = Array.from(
-        document.querySelectorAll<HTMLElement>(".premiumProductCard,.collectionTile,.insightCard,.contactCards article")
-      );
-
-      hoverTargets.forEach((target) => {
-        const move = (event: MouseEvent) => {
-          const rect = target.getBoundingClientRect();
-          target.style.setProperty("--mx", `${event.clientX - rect.left}px`);
-          target.style.setProperty("--my", `${event.clientY - rect.top}px`);
-        };
-        target.addEventListener("mousemove", move);
-        (target as HTMLElement & { __move?: (e: MouseEvent) => void }).__move = move;
-      });
-
-      return () => {
-        observer.disconnect();
-        window.removeEventListener("scroll", updateScroll);
-        progress.remove();
-        hoverTargets.forEach((target) => {
-          const move = (target as HTMLElement & { __move?: (e: MouseEvent) => void }).__move;
-          if (move) target.removeEventListener("mousemove", move);
-        });
-      };
     }
 
+    const scanReveals = () => {
+      document
+        .querySelectorAll<HTMLElement>(revealSelectors.join(","))
+        .forEach((element, index) => registerReveal(element, index));
+    };
+    scanReveals();
+
+    const mutationObserver = new MutationObserver(() => scanReveals());
+    mutationObserver.observe(body, { childList: true, subtree: true });
+
+    const cleanups: Array<() => void> = [];
+
+    if (!reduced && finePointer) {
+      const onGlobalPointer = (event: PointerEvent) => {
+        root.style.setProperty("--pointer-x", `${event.clientX}px`);
+        root.style.setProperty("--pointer-y", `${event.clientY}px`);
+      };
+      window.addEventListener("pointermove", onGlobalPointer, { passive: true });
+      cleanups.push(() => window.removeEventListener("pointermove", onGlobalPointer));
+
+      document.querySelectorAll<HTMLElement>(tiltSelector).forEach((target) => {
+        const move = (event: PointerEvent) => {
+          const rect = target.getBoundingClientRect();
+          const px = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
+          const py = Math.min(1, Math.max(0, (event.clientY - rect.top) / rect.height));
+          target.style.setProperty("--mx", `${event.clientX - rect.left}px`);
+          target.style.setProperty("--my", `${event.clientY - rect.top}px`);
+          target.style.setProperty("--tilt-x", `${((0.5 - py) * 5).toFixed(2)}deg`);
+          target.style.setProperty("--tilt-y", `${((px - 0.5) * 6).toFixed(2)}deg`);
+          target.style.setProperty("--pointer-px", px.toFixed(3));
+          target.style.setProperty("--pointer-py", py.toFixed(3));
+        };
+        const leave = () => {
+          target.style.setProperty("--tilt-x", "0deg");
+          target.style.setProperty("--tilt-y", "0deg");
+          target.style.setProperty("--pointer-px", ".5");
+          target.style.setProperty("--pointer-py", ".5");
+        };
+        target.addEventListener("pointermove", move);
+        target.addEventListener("pointerleave", leave);
+        cleanups.push(() => {
+          target.removeEventListener("pointermove", move);
+          target.removeEventListener("pointerleave", leave);
+        });
+      });
+
+      document.querySelectorAll<HTMLElement>(magneticSelector).forEach((target) => {
+        const move = (event: PointerEvent) => {
+          const rect = target.getBoundingClientRect();
+          const x = (event.clientX - rect.left - rect.width / 2) * 0.1;
+          const y = (event.clientY - rect.top - rect.height / 2) * 0.12;
+          target.style.setProperty("--mag-x", `${x.toFixed(2)}px`);
+          target.style.setProperty("--mag-y", `${y.toFixed(2)}px`);
+        };
+        const leave = () => {
+          target.style.setProperty("--mag-x", "0px");
+          target.style.setProperty("--mag-y", "0px");
+        };
+        target.addEventListener("pointermove", move);
+        target.addEventListener("pointerleave", leave);
+        cleanups.push(() => {
+          target.removeEventListener("pointermove", move);
+          target.removeEventListener("pointerleave", leave);
+        });
+      });
+    }
+
+    const onPointerDown = (event: PointerEvent) => {
+      const target = (event.target as HTMLElement | null)?.closest<HTMLElement>("a,button");
+      if (!target) return;
+      const rect = target.getBoundingClientRect();
+      target.style.setProperty("--press-x", `${event.clientX - rect.left}px`);
+      target.style.setProperty("--press-y", `${event.clientY - rect.top}px`);
+      target.classList.remove("motionPressed");
+      requestAnimationFrame(() => target.classList.add("motionPressed"));
+      window.setTimeout(() => target.classList.remove("motionPressed"), 420);
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+
     return () => {
-      window.removeEventListener("scroll", updateScroll);
+      if (raf) cancelAnimationFrame(raf);
+      observer?.disconnect();
+      mutationObserver.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("pointerdown", onPointerDown);
+      cleanups.forEach((cleanup) => cleanup());
       progress.remove();
       root.classList.remove("motionReady");
+      root.style.removeProperty("--scroll-y");
+      root.style.removeProperty("--scroll-progress");
+      root.style.removeProperty("--scroll-velocity");
+      root.style.removeProperty("--hero-parallax");
     };
   }, []);
 
