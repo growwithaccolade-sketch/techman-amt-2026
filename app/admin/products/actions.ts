@@ -37,7 +37,7 @@ export async function createProduct(formData: FormData) {
     catch (error) { redirect(`/admin/products?error=${encodeURIComponent(error instanceof Error ? error.message : "Image upload failed")}`); }
   }
 
-  if (!name || !slug || !Number.isFinite(price) || price < 0 || !Number.isInteger(stock) || stock < 0) {
+  if (!name || !slug || !Number.isFinite(price) || price <= 0 || !Number.isInteger(stock) || stock < 0) {
     redirect("/admin/products?error=invalid");
   }
 
@@ -83,6 +83,10 @@ export async function updateProduct(formData: FormData) {
   if (imageFile instanceof File && imageFile.size > 0) {
     try { imageUrl = await uploadProductImage(imageFile); }
     catch (error) { redirect(`/admin/products?error=${encodeURIComponent(error instanceof Error ? error.message : "Image upload failed")}`); }
+  }
+
+  if (!id || !Number.isFinite(price) || price <= 0 || !Number.isInteger(stock) || stock < 0) {
+    redirect("/admin/products?error=price-required");
   }
 
   const { error } = await supabase.from("products").update({
