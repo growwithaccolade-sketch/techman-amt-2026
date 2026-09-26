@@ -8,12 +8,12 @@ export const metadata: Metadata = { title: "Contact", description: "Talk to Tech
 
 const fallback = {
   slug: "contact",
-  eyebrow: "REAL HELP, BEFORE YOU BUY",
-  title: "Ask the question before you spend the money.",
-  intro: "Need help comparing two devices, checking compatibility, confirming delivery or sorting out an order? Reach TechMan AMT directly.",
+  eyebrow: "BUY WITH A SECOND OPINION",
+  title: "One quick question can save you from the wrong purchase.",
+  intro: "Comparing two devices? Unsure about compatibility, delivery or an order? Call, WhatsApp or email TechMan AMT before you commit.",
   sections: [
-    { title: "Call or WhatsApp", body: "For fast product and order help, reach us on 08103483669." },
-    { title: "Email us", body: "Send product, order or business enquiries to techmanamt@gmail.com." },
+    { title: "Call or WhatsApp 08103483669", body: "Get fast help choosing a product, checking compatibility, confirming delivery or asking about an order." },
+    { title: "Email techmanamt@gmail.com", body: "Send product, order, bulk purchase or business enquiries and keep the details in one thread." },
     { title: "Already ordered?", body: "Use your order reference and checkout email to check the latest recorded status." }
   ]
 };
