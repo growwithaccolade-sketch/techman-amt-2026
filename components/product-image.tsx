@@ -87,7 +87,7 @@ export default function ProductImage({
 
   const isRealLocalPhoto = displaySrc.startsWith("/products/");
   const isBackupArtwork = displaySrc.startsWith("/product-art/");
-  const isOptimizable = isRealLocalPhoto || /^https:\/\//.test(displaySrc);
+  const isOptimizable = !isRealLocalPhoto && /^https:\/\//.test(displaySrc);
 
   const imageClass = `productRemoteImage ${isRealLocalPhoto ? "productLocalImage" : isBackupArtwork ? "productBackupImage" : "productVendorImage"} ${className || ""}`;
 
@@ -111,8 +111,9 @@ export default function ProductImage({
         <img
           src={displaySrc}
           alt={alt}
-          loading="lazy"
+          loading={priority ? "eager" : "lazy"}
           decoding="async"
+          fetchPriority={priority ? "high" : "auto"}
           className={imageClass}
           onError={() => {
             if (!isBackupArtwork) setFailed(true);
