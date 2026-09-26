@@ -291,7 +291,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
                 className={`collectionTile collectionTile${index + 1} ${index % 2 === 0 ? "categoryAlignStart" : "categoryAlignEnd"}`}
               >
                 {tileImage && <img className="collectionTileCmsImage" src={tileImage} alt="" loading="lazy" decoding="async"/>}
-                <div className="collectionTileTop"><Icon size={18}/><span>{item.name}</span></div>
+                <div className="collectionTileTop"><Icon size={18}/></div>
                 <div className="collectionTileCopy">
                   <h3>{item.name}</h3>
                   <p>{item.copy}</p>
@@ -400,7 +400,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
 
         {displayProducts.length === 0 && (
           <div className="emptyState premiumEmptyState">
-            <Search size={34}/><h3>No match yet.</h3><p>Try another product, brand or category.</p>
+            <Search size={34}/><h3>No products found.</h3><p>Change the search or category filter.</p>
             <button onClick={() => { setQuery(""); setCategory("All"); }}>Clear filters</button>
           </div>
         )}
@@ -450,9 +450,9 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
 
         <div className="insightGrid">
           {[
-            ["01", "Buying Guide", "How to choose a phone for content creation", "Camera, storage, battery and creator workflow.", "/blog/how-to-choose-a-phone-for-content-creation"],
-            ["02", "Buying Guide", "Laptop buying guide for work and school", "Choose specs around the work you actually do.", "/blog/laptop-buying-guide-for-work-school-and-creative-use"],
-            ["03", "Creator Tips", "A creator’s starter guide to better audio", "Improve clarity before buying more camera gear.", "/blog/creator-audio-starter-guide"],
+            ["01", "Buying Guide", "Phone specifications for content creation", "What to check for camera, storage and battery.", "/blog/how-to-choose-a-phone-for-content-creation"],
+            ["02", "Buying Guide", "Laptop specifications for work and school", "Processor, memory, storage and battery considerations.", "/blog/laptop-buying-guide-for-work-school-and-creative-use"],
+            ["03", "Buying Guide", "Microphone and audio guide for creators", "Microphone types, recording setups and common accessories.", "/blog/creator-audio-starter-guide"],
           ].map(([index, type, title, copy, href]) => (
             <Link href={href} className="insightCard" key={title}>
               <div><span>{index}</span><small>{type}</small></div>
