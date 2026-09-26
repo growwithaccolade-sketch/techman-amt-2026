@@ -17,6 +17,7 @@ import {
   Search,
   ShieldCheck,
   ShoppingBag,
+  Star,
   Smartphone,
   Truck,
   UserRound,
@@ -31,13 +32,14 @@ import ProductImage from "@/components/product-image";
 import BrandLogo from "@/components/brand-logo";
 import type { EditablePage } from "@/lib/site-pages";
 import type { SiteMedia } from "@/lib/site-media";
+import { productBadgeLabel, productSavings } from "@/lib/product-display";
 
 const categoryMeta = [
-  { name: "Phones", copy: "Flagships and everyday phones worth carrying.", icon: Smartphone, mediaKey: "categoryPhones" as const },
-  { name: "Laptops", copy: "Reliable machines for work, school and serious projects.", icon: Laptop, mediaKey: "categoryLaptops" as const },
-  { name: "Creator Tools", copy: "Audio, lighting and gear that make your content better.", icon: Mic2, mediaKey: "categoryCreatorTools" as const },
-  { name: "Audio", copy: "Hear more clearly at home, at work and on the move.", icon: Headphones, mediaKey: "categoryAudio" as const },
-  { name: "Accessories", copy: "The chargers, storage and extras that complete the setup.", icon: Zap, mediaKey: "categoryAccessories" as const },
+  { name: "Phones", copy: "Smartphones from Apple, Samsung and other major brands.", icon: Smartphone, mediaKey: "categoryPhones" as const, fallbackImage: "/products/iphone-16-pro-max-256gb.webp" },
+  { name: "Laptops", copy: "Laptops for work, school, gaming and creative software.", icon: Laptop, mediaKey: "categoryLaptops" as const, fallbackImage: "/products/macbook-air-m4-13-inch.webp" },
+  { name: "Creator Tools", copy: "Microphones, cameras, lighting and production accessories.", icon: Mic2, mediaKey: "categoryCreatorTools" as const, fallbackImage: "/products/dji-mic-3.webp" },
+  { name: "Audio", copy: "Headphones, earbuds and speakers for work and everyday use.", icon: Headphones, mediaKey: "categoryAudio" as const, fallbackImage: "/products/sony-wh-1000xm6.webp" },
+  { name: "Accessories", copy: "Chargers, storage, power banks and device accessories.", icon: Zap, mediaKey: "categoryAccessories" as const, fallbackImage: "/products/anker-737-power-bank.webp" },
 ];
 
 const filters = ["All", "Phones", "Laptops", "Tablets", "Watches", "Audio", "Creator Tools", "Accessories", "Gaming"];
@@ -70,7 +72,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
 
   const supportLink = makeWhatsappUrl(
     settings.whatsappNumber,
-    "Hello TechMan AMT, I’m ready to buy but want help choosing the right option."
+    "Hello TechMan AMT, I need help with a product."
   );
 
   const visibleProducts = useMemo(() => {
@@ -117,7 +119,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
   const displayProducts = defaultMode
     ? defaultFeatured
     : visibleProducts.filter((product) => !heroIds.has(product.id)).slice(0, 9);
-  const heroTitle = (homeContent?.title || "The right tech.|The right price. No chasing.").split("|");
+  const heroTitle = (homeContent?.title || "Phones, laptops and creator gear.|Prices shown before you buy.").split("|");
   const homeSections = homeContent?.sections || [];
   const editableSections = homeSections.length >= 8 ? homeSections : [];
   const categorySection = editableSections[0];
@@ -132,7 +134,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
   return (
     <main className="siteFrame">
       <div className="announcement premiumAnnouncement">
-        <span>{settings.announcementText || "Real prices. Clear product details. Direct support when you need it."}</span>
+        <span>{settings.announcementText || "Prices, stock and product details are shown on the site."}</span>
         <span className="announcementDesktop">Delivery across Nigeria · Help when you need it</span>
       </div>
 
@@ -192,15 +194,15 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
 
       <section className="premiumHero shell">
         <div className="premiumHeroCopy">
-          <div className="heroOverline">{homeContent?.eyebrow || "BUY WITH CLARITY"}</div><h1>{heroTitle[0]}{heroTitle[1] && <><br/><span>{heroTitle[1]}</span></>}</h1><p>{homeContent?.intro || "Stop wasting time asking for prices or guessing which model fits. Compare trusted phones, laptops, audio and creator gear with visible pricing, key details and direct buying support."}</p>
+          <div className="heroOverline">{homeContent?.eyebrow || "TECHMAN AMT"}</div><h1>{heroTitle[0]}{heroTitle[1] && <><br/><span>{heroTitle[1]}</span></>}</h1><p>{homeContent?.intro || "Compare prices, stock, condition and key specifications for phones, laptops, audio and creator equipment. Order online or contact us if you need help choosing."}</p>
           <div className="premiumHeroCtas">
-            <Link className="primaryBtn heroPrimary" href="/shop">Shop products with prices <ArrowRight size={17}/></Link>
-            <Link className="textCta" href="/device-request">Get a buying recommendation <ArrowUpRight size={16}/></Link>
+            <Link className="primaryBtn heroPrimary" href="/shop">Shop products <ArrowRight size={17}/></Link>
+            <Link className="textCta" href="/device-request">Ask about a product <ArrowUpRight size={16}/></Link>
           </div>
           <div className="heroProof">
-            <span><BadgeCheck size={16}/> A visible price on every product</span>
+            <span><BadgeCheck size={16}/> Prices shown</span>
             <span><Truck size={16}/> Delivery across Nigeria</span>
-            <span><ShieldCheck size={16}/> Call or email before you pay</span>
+            <span><ShieldCheck size={16}/> Phone and email support</span>
           </div>
         </div>
 
@@ -210,7 +212,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
               href={`/product/${primaryHero.slug}`}
               className="heroStageMain"
             >
-              <div className="heroStageBadge">NEW 2026</div>
+              <div className="heroStageBadge">New</div>
               <ProductImage src={primaryHero.image} alt={primaryHero.name} brand={primaryHero.brand} sizes="(max-width: 900px) 92vw, 46vw" priority/>
               <div className="heroStageOverlay">
                 <span>{primaryHero.brand}</span>
@@ -247,6 +249,31 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
         <span>APPLE</span><span>SAMSUNG</span><span>GOOGLE</span><span>SONY</span><span>DJI</span><span>NINTENDO</span><span>ANKER</span>
       </section>
 
+      <div className="homeQuickFilterWrap">
+        <div className="shell homeQuickFilter">
+          <span>Shop by category</span>
+          <div className="filterRow premiumFilterRow" role="tablist" aria-label="Filter products by category">
+            {filters.map((item) => (
+              <button
+                key={item}
+                type="button"
+                role="tab"
+                aria-selected={category === item}
+                aria-controls="trending-products"
+                onClick={() => {
+                  setCategory(item);
+                  window.requestAnimationFrame(() => document.getElementById("featured")?.scrollIntoView({ behavior: "smooth", block: "start" }));
+                }}
+                className={category === item ? "active" : ""}
+              >
+                <span>{item}</span>
+                <em>{item === "All" ? catalog.length : catalog.filter((product) => product.category === item).length}</em>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <section id="collections" className="collectionSection shell">
         <div className="premiumSectionHead">
           <div><span className="kicker">SHOP BY NEED</span><h2>{categorySection?.title || "Find the right product faster."}</h2>{categorySection?.body && <p className="sectionLead">{categorySection.body}</p>}</div>
@@ -256,7 +283,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
         <div className="collectionBento">
           {categoryMeta.map((item, index) => {
             const Icon = item.icon;
-            const tileImage = siteMedia?.[item.mediaKey];
+            const tileImage = siteMedia?.[item.mediaKey] || item.fallbackImage;
             return (
               <Link
                 key={item.name}
@@ -264,7 +291,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
                 className={`collectionTile collectionTile${index + 1} ${index % 2 === 0 ? "categoryAlignStart" : "categoryAlignEnd"}`}
               >
                 {tileImage && <img className="collectionTileCmsImage" src={tileImage} alt="" loading="lazy" decoding="async"/>}
-                <div className="collectionTileTop"><Icon size={18}/><span>{index === 0 ? "Featured" : index === 1 ? "Portable" : item.name === "Creator Tools" ? "Studio" : "Explore"}</span></div>
+                <div className="collectionTileTop"><Icon size={18}/><span>{item.name}</span></div>
                 <div className="collectionTileCopy">
                   <h3>{item.name}</h3>
                   <p>{item.copy}</p>
@@ -280,23 +307,23 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
       <section className="premiumDeal">
         <div className="shell premiumDealInner">
           <div className="premiumDealCopy">
-            <span className="dealLabel">MAKE THE PURCHASE COUNT</span>
-            <h2>{setupSection?.title || "Do not stop at the main device."}</h2>
-            <p>{setupSection?.body || "Add the charger, audio, storage and creator gear that makes your new device more useful from day one."}</p>
-            <Link href="/shop" className="lightBtn">Build the complete setup <ArrowRight size={17}/></Link>
+            <span className="dealLabel">ACCESSORIES AND ADD-ONS</span>
+            <h2>{setupSection?.title || "Add the accessories you need."}</h2>
+            <p>{setupSection?.body || "Choose chargers, storage, audio and other accessories that match your main device."}</p>
+            <Link href="/shop" className="lightBtn">Shop accessories <ArrowRight size={17}/></Link>
           </div>
           <div className="dealFeatureStack">
             {[
-              ["01", "Power", "Fast charging and dependable battery backup", Zap],
-              ["02", "Audio", "Clear sound for calls, travel and content", Headphones],
-              ["03", "Work", "Input and storage that match the main device", Laptop],
+              ["01", "Power", "Chargers and power banks", Zap],
+              ["02", "Audio", "Headphones, earbuds and speakers", Headphones],
+              ["03", "Work", "Storage and computer accessories", Laptop],
             ].map(([index, label, title, FeatureIcon]) => {
               const Icon = FeatureIcon as typeof Zap;
               return (
                 <Link href="/shop?category=Accessories" className="dealFeatureItem dealEditorialItem" key={String(index)}>
                   <span>{String(index)}</span>
                   <div className="dealEditorialIcon"><Icon size={22}/></div>
-                  <div><small>{String(label)}</small><strong>{String(title)}</strong><b>Browse matched gear</b></div>
+                  <div><small>{String(label)}</small><strong>{String(title)}</strong><b>View products</b></div>
                   <ArrowUpRight size={18}/>
                 </Link>
               );
@@ -307,40 +334,26 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
 
       <section id="featured" className="featuredSection shell">
         <div className="premiumSectionHead featuredHead">
-          <div><span className="kicker">READY TO BUY</span><h2>{trendingSection?.title || "Compare what is worth your money."}</h2>{trendingSection?.body && <p className="sectionLead">{trendingSection.body}</p>}</div>
+          <div><span className="kicker">PRODUCTS</span><h2>{trendingSection?.title || "Popular products and current prices."}</h2>{trendingSection?.body && <p className="sectionLead">{trendingSection.body}</p>}</div>
           <div className="featuredSearch">
             <Search size={17}/>
             <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search iPhone, Samsung, MacBook, audio..."/>
           </div>
         </div>
 
-        <div className="filterToolbar">
-          <div className="filterRow premiumFilterRow" role="tablist" aria-label="Filter trending products by category">
-          {filters.map((item) => (
-            <button
-              key={item}
-              type="button"
-              role="tab"
-              aria-selected={category === item}
-              aria-controls="trending-products"
-              onClick={() => setCategory(item)}
-              className={category === item ? "active" : ""}
-            >
-              <span>{item}</span>
-              <em>{item === "All" ? catalog.length : catalog.filter((product) => product.category === item).length}</em>
-            </button>
-          ))}
-          </div>
+        <div className="filterToolbar featuredResultBar">
           <p className="filterResult" aria-live="polite">{displayProducts.length} {displayProducts.length === 1 ? "product" : "products"} shown{category !== "All" ? ` in ${category}` : ""}</p>
         </div>
 
         <div id="trending-products" className="premiumProductGrid">
           {displayProducts.map((product) => {
             const inCart = lines.some((line) => line.id === product.id);
+            const badge = productBadgeLabel(product);
+            const savings = productSavings(product);
             return (
               <article className="premiumProductCard" key={product.id}>
                 <div className="premiumProductMedia">
-                  {product.badge && <span className="productBadge">{product.badge}</span>}
+                  {badge && <span className={`productBadge productBadge--${badge.toLowerCase()}`}>{badge}</span>}
                   <button
                     className={`wishBtn ${wishlist.includes(product.id) ? "on" : ""}`}
                     onClick={() => toggleWishlist(product.id)}
@@ -360,9 +373,13 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
                   <div className="premiumPriceLine">
                     <strong>{priceLabel(product)}</strong>
                     {product.oldPrice && product.oldPrice > product.price && <del>{money(product.oldPrice)}</del>}
+                    {savings && <span className="priceSaving">Save {savings.percent}%</span>}
                   </div>
-                  <div className={product.stock > 0 ? "premiumStock" : "premiumStock out"}>
-                    {product.stock > 0 ? `${product.stock} available` : "Out of stock"}
+                  <div className="productTrustRow">
+                    {product.rating > 0 && product.reviews > 0
+                      ? <span><Star size={13} fill="currentColor"/> {product.rating.toFixed(1)} <small>({product.reviews})</small></span>
+                      : <span><ShieldCheck size={13}/> {product.condition}</span>}
+                    <span className={product.stock > 0 ? "" : "isOut"}>{product.stock > 0 ? "In stock" : "Stock check required"}</span>
                   </div>
                   <div className="premiumCardActions">
                     <button
@@ -391,14 +408,14 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
 
       <section className="whySection shell">
         <div className="whyLead">
-          <span className="kicker">WHY BUY HERE</span>
-          <h2>{trustSection?.title || "Less back-and-forth. More certainty."}</h2>
-          <p>{trustSection?.body || "You should not have to message three times just to know the price, condition or next step. The important buying details stay visible."}</p>
+          <span className="kicker">STORE INFORMATION</span>
+          <h2>{trustSection?.title || "What you can check before ordering."}</h2>
+          <p>{trustSection?.body || "Product pages show price, stock, condition and key specifications before checkout."}</p>
         </div>
         <div className="whyGrid">
-          <article><span>01</span><ShieldCheck/><h3>Prices you can see</h3><p>Every product displays a price, making it easier to compare options and decide what fits your budget.</p></article>
+          <article><span>01</span><ShieldCheck/><h3>Price</h3><p>Every product has a visible price.</p></article>
           <article><span>02</span><Truck/><h3>Details before payment</h3><p>Check condition, warranty, important specs and stock information before you commit your money.</p></article>
-          <article><span>03</span><BadgeCheck/><h3>Talk to a real person</h3><p>Call {settings.whatsappNumber} or email {settings.supportEmail} when you need buying, delivery or order support.</p></article>
+          <article><span>03</span><BadgeCheck/><h3>Contact</h3><p>Call {settings.whatsappNumber} or email {settings.supportEmail} for product and order questions.</p></article>
         </div>
       </section>
 
@@ -412,9 +429,9 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
           <span className="editorialTag">CREATOR TOOLS</span>
         </div>
         <div className="editorialCopy">
-          <span className="kicker">CREATOR TOOLS</span>
-          <h2>{creatorSection?.title || "Make your content sound and look more expensive."}</h2>
-          <p>{creatorSection?.body || "Upgrade the problems viewers notice immediately: weak audio, poor lighting, shaky shots, low storage and unreliable power."}</p>
+          <span className="kicker">CREATOR EQUIPMENT</span>
+          <h2>{creatorSection?.title || "Microphones, lighting, storage and camera accessories."}</h2>
+          <p>{creatorSection?.body || "Browse equipment for recording, streaming, video calls and mobile content production."}</p>
           <div className="editorialChecklist">
             <span><Check/> Wireless microphones</span>
             <span><Check/> Tripods & phone rigs</span>
@@ -427,8 +444,8 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
 
       <section className="insights premiumInsights shell">
         <div className="premiumSectionHead">
-          <div><span className="kicker">BEFORE YOU BUY</span><h2>{guidesSection?.title || "Spend with a reason, not just hype."}</h2>{guidesSection?.body && <p className="sectionLead">{guidesSection.body}</p>}</div>
-          <Link href="/blog" className="sectionLink">Use the buying guides <ArrowUpRight size={16}/></Link>
+          <div><span className="kicker">BUYING GUIDES</span><h2>{guidesSection?.title || "Product guides for common buying questions."}</h2>{guidesSection?.body && <p className="sectionLead">{guidesSection.body}</p>}</div>
+          <Link href="/blog" className="sectionLink">View guides <ArrowUpRight size={16}/></Link>
         </div>
 
         <div className="insightGrid">
@@ -449,11 +466,11 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
 
       <section className="homeContactBand shell">
         <div className="homeContactCopy">
-          <span className="kicker">NEED A SECOND OPINION?</span>
-          <h2>{contactSection?.title || "Before you pay, make sure it is the right device."}</h2><p>{contactSection?.body || `Call ${settings.whatsappNumber} or email ${settings.supportEmail} for a quick product recommendation, compatibility check, delivery question or order update.`}</p>
+          <span className="kicker">CONTACT</span>
+          <h2>{contactSection?.title || "Need help choosing a product?"}</h2><p>{contactSection?.body || `Call ${settings.whatsappNumber} or email ${settings.supportEmail} for a quick product recommendation, compatibility check, delivery question or order update.`}</p>
         </div>
         <div className="homeContactActions">
-          <Link className="contactPrimary" href="/contact">Talk to TechMan AMT <ArrowRight size={17}/></Link>
+          <Link className="contactPrimary" href="/contact">Contact TechMan AMT <ArrowRight size={17}/></Link>
           {supportLink && <a className="contactSecondary" href={supportLink} target="_blank" rel="noreferrer"><MessageCircle size={17}/> WhatsApp</a>}
           <Link className="contactSecondary" href="/track-order">Track order</Link>
         </div>
@@ -462,8 +479,8 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
       <section className="newsletter premiumNewsletter">
         <div className="shell premiumNewsletterInner">
           <div>
-            <span className="kicker">STOCK + PRICE UPDATES</span>
-            <h2>{newsletterSection?.title || "Know what just landed before everyone else does."}</h2><p>{newsletterSection?.body || "Get new arrivals, useful price updates, selected offers and buying guides without daily spam."}</p>
+            <span className="kicker">UPDATES</span>
+            <h2>{newsletterSection?.title || "Get stock and price updates."}</h2><p>{newsletterSection?.body || "Receive new product, stock and price updates by email."}</p>
           </div>
           <NewsletterForm/>
         </div>
