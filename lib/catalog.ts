@@ -1,7 +1,22 @@
 import { commerceBackendConfigured, getSupabaseAdmin } from "@/lib/supabase/admin";
 import { type Product, products as demoProducts } from "@/lib/products";
 
-const fallbackImage = (slug: string) => demoProducts.find((product) => product.slug === slug)?.image || `/product-art/${slug}.svg`;
+const localCatalogImage = (slug: string) =>
+  demoProducts.find((product) => product.slug === slug)?.image || `/product-art/${slug}.svg`;
+
+function resolveImage(row: Record<string, unknown>) {
+  const slug = String(row.slug);
+  const stored = row.image_url ? String(row.image_url) : "";
+  const local = localCatalogImage(slug);
+
+  // Admin-uploaded Supabase Storage images remain authoritative.
+  const isManagedUpload =
+    stored.includes("/storage/v1/object/public/product-images/") ||
+    stored.includes(".supabase.co/storage/");
+
+  if (isManagedUpload) return stored;
+  return local || stored || `/product-art/${slug}.svg`;
+}
 
 function mapRow(row: Record<string, unknown>): Product {
   const condition = row.condition === "UK Used" ? "UK Used" : "New";
@@ -16,7 +31,7 @@ function mapRow(row: Record<string, unknown>): Product {
     badge: row.badge ? String(row.badge) : undefined,
     rating: 0,
     reviews: 0,
-    image: row.image_url ? String(row.image_url) : fallbackImage(String(row.slug)),
+    image: resolveImage(row),
     blurb: row.blurb ? String(row.blurb) : "Selected technology from TechMan AMT.",
     stock: Number(row.stock || 0),
     warranty: row.warranty ? String(row.warranty) : "Warranty details available before payment",
