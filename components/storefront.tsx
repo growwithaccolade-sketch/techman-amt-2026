@@ -59,7 +59,9 @@ const featuredSlugs = [
   "jbl-charge-5",
 ];
 
-const priceLabel = (price: number) => price > 0 ? money(price) : "Get quote";
+const isLaunchProduct = (product: Product) => product.price <= 0 && /new\s*2026/i.test(product.badge || "");
+const availabilityCta = (product: Product) => isLaunchProduct(product) ? "Join waitlist" : "Get quote";
+const priceLabel = (product: Product) => product.price > 0 ? money(product.price) : availabilityCta(product);
 
 export default function Storefront({ homeContent }: { homeContent?: EditablePage }) {
   const [query, setQuery] = useState("");
@@ -213,7 +215,7 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
               <div className="heroStageOverlay">
                 <span>{primaryHero.brand}</span>
                 <strong>{primaryHero.name}</strong>
-                <b>{priceLabel(primaryHero.price)}</b>
+                <b className={primaryHero.price <= 0 ? "heroQuoteCta" : undefined}>{priceLabel(primaryHero)}{primaryHero.price <= 0 && <ArrowRight size={14}/>}</b>
               </div>
             </Link>
           )}
@@ -272,7 +274,7 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
                 href={`/shop?category=${encodeURIComponent(item.name)}`}
                 className={`collectionTile collectionTile${index + 1} ${index % 2 === 0 ? "categoryAlignStart" : "categoryAlignEnd"}`}
               >
-                <div className="collectionTileTop"><Icon size={18}/><span>{item.name === "Creator Tools" ? "Studio" : "Explore"}</span></div>
+                <div className="collectionTileTop"><Icon size={18}/><span>{index === 0 ? "Featured" : index === 1 ? "Portable" : item.name === "Creator Tools" ? "Studio" : "Explore"}</span></div>
                 <div className="collectionTileCopy">
                   <h3>{item.name}</h3>
                   <p>{item.copy}</p>
@@ -322,12 +324,15 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
           </div>
         </div>
 
-        <div className="filterRow premiumFilterRow">
+        <div className="filterToolbar">
+          <div className="filterRow premiumFilterRow" role="tablist" aria-label="Filter trending products by category">
           {filters.map((item) => (
             <button
               key={item}
               type="button"
-              aria-pressed={category === item}
+              role="tab"
+              aria-selected={category === item}
+              aria-controls="trending-products"
               onClick={() => setCategory(item)}
               className={category === item ? "active" : ""}
             >
@@ -335,9 +340,11 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
               <em>{item === "All" ? catalog.length : catalog.filter((product) => product.category === item).length}</em>
             </button>
           ))}
+          </div>
+          <p className="filterResult" aria-live="polite">{displayProducts.length} {displayProducts.length === 1 ? "product" : "products"} shown{category !== "All" ? ` in ${category}` : ""}</p>
         </div>
 
-        <div className="premiumProductGrid">
+        <div id="trending-products" className="premiumProductGrid">
           {displayProducts.map((product) => {
             const inCart = lines.some((line) => line.id === product.id);
             return (
@@ -363,7 +370,7 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
                   <div className="premiumPriceLine">
                     {product.price > 0 ? (
                       <>
-                        <strong>{priceLabel(product.price)}</strong>
+                        <strong>{priceLabel(product)}</strong>
                         {product.oldPrice && <del>{money(product.oldPrice)}</del>}
                       </>
                     ) : (
@@ -372,7 +379,7 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
                         className="inlineQuoteButton"
                         onClick={() => setQuoteProduct(product)}
                       >
-                        Get quote
+                        {availabilityCta(product)}
                       </button>
                     )}
                   </div>
@@ -386,7 +393,7 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
                         className="premiumAddButton requestButton"
                         onClick={() => setQuoteProduct(product)}
                       >
-                        Get quote
+                        {availabilityCta(product)}
                       </button>
                     ) : (
                       <button
@@ -504,15 +511,15 @@ export default function Storefront({ homeContent }: { homeContent?: EditablePage
             onMouseDown={(event) => event.stopPropagation()}
           >
             <button className="quoteModalClose" type="button" onClick={() => setQuoteProduct(null)} aria-label="Close quote dialog"><X size={18}/></button>
-            <span className="kicker">QUICK QUOTE</span>
+            <span className="kicker">{isLaunchProduct(quoteProduct) ? "EARLY ACCESS" : "QUICK QUOTE"}</span>
             <h3 id="quote-modal-title">{quoteProduct.name}</h3>
-            <p>Get current price, stock status and delivery details without leaving the page.</p>
+            <p>{isLaunchProduct(quoteProduct) ? "Join the waitlist for the current price, stock confirmation and availability update." : "Get current price, stock status and delivery details without leaving the page."}</p>
             <div className="quoteModalProduct">
               <div><ProductImage src={quoteProduct.image} alt={quoteProduct.name} brand={quoteProduct.brand} sizes="110px"/></div>
               <span><b>{quoteProduct.brand}</b><small>{quoteProduct.category}</small></span>
             </div>
             <div className="quoteModalActions">
-              <Link className="primaryBtn" href={`/device-request?product=${encodeURIComponent(quoteProduct.name)}`}>Get quote <ArrowRight size={16}/></Link>
+              <Link className="primaryBtn" href={`/device-request?product=${encodeURIComponent(quoteProduct.name)}&intent=${isLaunchProduct(quoteProduct) ? "waitlist" : "quote"}`}>{availabilityCta(quoteProduct)} <ArrowRight size={16}/></Link>
               <button type="button" className="secondaryAction" onClick={() => { setQuoteProduct(null); setCategory(quoteProduct.category); document.getElementById("featured")?.scrollIntoView({ behavior: "smooth" }); }}>See similar products</button>
             </div>
           </div>
