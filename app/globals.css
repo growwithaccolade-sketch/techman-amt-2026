@@ -6158,3 +6158,332 @@ body:before{display:none!important}
     transform:none!important;
   }
 }
+
+
+/* Buyer clarity pass */
+.premiumHero{
+  grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);
+  align-items:center;
+}
+.premiumHeroCopy{
+  padding-right:18px;
+}
+.heroOverline{
+  display:inline-flex;
+  align-items:center;
+  min-height:27px;
+  padding:0 9px;
+  border:1px solid #d9dad5;
+  border-radius:999px;
+  background:#fff;
+  color:#5f636a;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.1em;
+}
+.premiumHero h1{
+  margin-top:16px;
+  max-width:660px;
+}
+.premiumHero h1 span{
+  color:#4d5560;
+}
+.premiumHeroCopy>p{
+  color:#565c64;
+}
+.heroIntentRow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:16px;
+}
+.heroIntentRow a{
+  min-height:34px;
+  display:inline-flex;
+  align-items:center;
+  padding:0 11px;
+  border:1px solid #d8dad4;
+  border-radius:999px;
+  background:#fff;
+  color:#24272c;
+  font-size:10px;
+  font-weight:850;
+  transition:border-color .2s ease,background .2s ease,transform .2s ease;
+}
+.heroIntentRow a:hover{
+  border-color:#aeb3bb;
+  background:#f7f7f4;
+  transform:translateY(-1px);
+}
+.heroStage{
+  border-radius:30px;
+}
+.heroStageMain,
+.heroMiniCard{
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);
+}
+.heroProof{
+  gap:13px;
+}
+.heroProof span{
+  color:#52575e;
+}
+
+/* Give each homepage block a clearer beginning and end. */
+.collectionSection,
+.featuredSection,
+.whySection,
+.premiumInsights{
+  border-top:1px solid #e1e2dd;
+}
+.collectionSection .premiumSectionHead,
+.featuredSection .premiumSectionHead,
+.premiumInsights .premiumSectionHead{
+  align-items:flex-end;
+}
+.collectionSection .premiumSectionHead>div,
+.featuredSection .premiumSectionHead>div,
+.premiumInsights .premiumSectionHead>div{
+  max-width:780px;
+}
+.kicker{
+  letter-spacing:.105em;
+}
+
+/* Buying guides */
+.premiumInsights{
+  padding-bottom:104px;
+}
+.guideSectionHead{
+  margin-bottom:30px;
+}
+.guideSectionHead .sectionLead{
+  max-width:690px;
+  font-size:13px;
+  line-height:1.62;
+}
+.guideGrid{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+}
+.guideCard{
+  min-height:0;
+  padding:0;
+  overflow:hidden;
+  border-radius:24px;
+  background:#fff;
+}
+.guideCard:hover{
+  transform:translateY(-3px);
+  border-color:#bcc0b9;
+  box-shadow:0 18px 42px rgba(15,20,32,.07);
+}
+.guideCardMedia{
+  position:relative;
+  height:190px;
+  display:block!important;
+  overflow:hidden;
+  background:#ecece8;
+}
+.guideCardMedia:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,rgba(5,7,10,.03),rgba(5,7,10,.3));
+}
+.guideCardMedia img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .35s ease;
+}
+.guideCard:hover .guideCardMedia img{
+  transform:scale(1.025);
+}
+.guideCardMedia>span{
+  position:absolute;
+  z-index:2;
+  top:13px;
+  left:13px;
+  min-width:31px;
+  height:31px;
+  display:grid;
+  place-items:center;
+  border-radius:999px;
+  background:#fff;
+  color:#111;
+  font-size:9px;
+  font-weight:950;
+  box-shadow:0 7px 18px rgba(0,0,0,.08);
+}
+.guideCardBody{
+  display:flex!important;
+  flex-direction:column;
+  align-items:flex-start;
+  padding:20px;
+}
+.guideCardBody small{
+  color:#656b73;
+  font-size:8px;
+  font-weight:950;
+  letter-spacing:.12em;
+}
+.guideCardBody h3{
+  margin:10px 0 10px!important;
+  font-size:24px;
+  line-height:1.08;
+  letter-spacing:-.035em;
+}
+.guideCardBody p{
+  margin:0;
+  min-height:5.2em;
+  color:#666c74;
+  font-size:11px;
+  line-height:1.58;
+}
+.guideCardBody em{
+  display:inline-flex;
+  margin-top:16px;
+  padding:7px 9px;
+  border-radius:999px;
+  background:#f1f2ee;
+  color:#474c53;
+  font-size:9px;
+  font-style:normal;
+  font-weight:850;
+}
+.guideCardBody b{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-top:18px;
+  padding-top:15px;
+  border-top:1px solid #e9eae5;
+  color:#111;
+  font-size:10px;
+}
+
+/* Make the standalone Guides page scan like a set of decisions. */
+.blogPage .catalogHero{
+  max-width:800px;
+  padding-bottom:32px;
+}
+.blogPage .catalogHero h1{
+  max-width:700px;
+}
+.blogPage .blogGrid{
+  gap:14px;
+}
+.blogPage .blogCard{
+  min-height:300px;
+  display:flex;
+  flex-direction:column;
+  padding:25px;
+}
+.blogPage .blogCard>span{
+  color:#4f5660;
+}
+.blogPage .blogCard h2{
+  margin:22px 0 12px;
+  font-size:30px;
+  line-height:1.06;
+}
+.blogPage .blogCard p{
+  font-size:12px;
+  line-height:1.65;
+}
+.blogPage .blogCard>b{
+  margin-top:auto;
+  padding-top:22px;
+  color:#111;
+  font-size:10px;
+}
+
+/* Reduce visual fatigue lower down the homepage. */
+.whySection{
+  gap:42px;
+}
+.whyGrid article{
+  border-radius:18px;
+}
+.editorialSection{
+  border-radius:26px;
+}
+.homeContactBand{
+  border-radius:24px;
+}
+.premiumNewsletter{
+  padding:68px 0;
+}
+
+@media(max-width:980px){
+  .premiumHero{
+    grid-template-columns:1fr;
+  }
+  .premiumHeroCopy{
+    padding-right:0;
+  }
+  .guideGrid{
+    grid-template-columns:1fr 1fr;
+  }
+  .guideCard:last-child{
+    grid-column:1/3;
+  }
+  .guideCard:last-child{
+    display:grid;
+    grid-template-columns:.8fr 1.2fr;
+  }
+  .guideCard:last-child .guideCardMedia{
+    height:100%;
+    min-height:230px;
+  }
+}
+
+@media(max-width:760px){
+  .premiumHero h1{
+    font-size:clamp(40px,11.5vw,54px);
+  }
+  .premiumHeroCopy>p{
+    font-size:14px;
+  }
+  .heroIntentRow{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+  .heroIntentRow a{
+    justify-content:center;
+  }
+  .heroIntentRow a:last-child{
+    grid-column:1/3;
+  }
+  .guideGrid{
+    display:flex!important;
+    overflow-x:auto;
+    gap:10px;
+    scroll-snap-type:x mandatory;
+    padding-bottom:6px;
+  }
+  .guideCard,
+  .guideCard:last-child{
+    flex:0 0 84vw;
+    display:block;
+    grid-column:auto;
+    scroll-snap-align:start;
+  }
+  .guideCardMedia,
+  .guideCard:last-child .guideCardMedia{
+    height:180px;
+    min-height:0;
+  }
+  .guideCardBody h3{
+    font-size:23px;
+  }
+  .guideCardBody p{
+    min-height:0;
+  }
+  .premiumInsights{
+    padding-bottom:72px;
+  }
+}
