@@ -47,10 +47,25 @@ function mapRow(row: Record<string, unknown>): Product {
   const condition = row.condition === "UK Used" ? "UK Used" : "New";
   const id = Number(row.external_id);
   const category = String(row.category);
+  const slug = String(row.slug);
   const rawPrice = Number(row.price_ngn);
+  const rawStock = Number(row.stock || 0);
+  const localProduct = demoProducts.find((product) => product.slug === slug);
+  const rawSpecs = row.specs && typeof row.specs === "object" && !Array.isArray(row.specs)
+    ? row.specs as Record<string, unknown>
+    : {};
+  const legacyAvailability = String(rawSpecs.Availability || "");
+  const seededZeroStock = rawStock <= 0 && legacyAvailability === "Price and stock to confirm";
+  const resolvedStock = rawStock > 0 ? rawStock : seededZeroStock ? (localProduct?.stock ?? 0) : 0;
+  const resolvedSpecs = Object.fromEntries(
+    Object.entries(rawSpecs).map(([key, value]) => [key, String(value)])
+  );
+  if (seededZeroStock) {
+    resolvedSpecs.Availability = resolvedStock > 0 ? "In stock" : "Currently unavailable";
+  }
   return {
     id,
-    slug: String(row.slug),
+    slug,
     name: String(row.name),
     brand: String(row.brand),
     category,
@@ -61,13 +76,11 @@ function mapRow(row: Record<string, unknown>): Product {
     reviews: 0,
     image: resolveImage(row),
     blurb: row.blurb ? String(row.blurb) : "Selected technology from TechMan AMT.",
-    stock: Number(row.stock || 0),
+    stock: resolvedStock,
     warranty: row.warranty ? String(row.warranty) : "Warranty details available before payment",
     condition,
     highlights: Array.isArray(row.highlights) ? row.highlights.map(String) : [],
-    specs: row.specs && typeof row.specs === "object" && !Array.isArray(row.specs)
-      ? Object.fromEntries(Object.entries(row.specs as Record<string, unknown>).map(([key, value]) => [key, String(value)]))
-      : {},
+    specs: resolvedSpecs,
   };
 }
 
