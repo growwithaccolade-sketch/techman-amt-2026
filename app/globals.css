@@ -7892,3 +7892,63 @@ body:before{display:none!important}
     column-gap:112px!important;
   }
 }
+
+
+/* DESKTOP HERO EDGE INSET + POLISH */
+@media(min-width:1101px){
+  .premiumHero{
+    width:min(1260px,calc(100% - 112px))!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    padding-top:72px!important;
+    padding-bottom:86px!important;
+  }
+  .premiumHeroCopy{
+    padding-left:10px!important;
+  }
+  .premiumHero h1{
+    margin-top:18px!important;
+  }
+  .premiumHeroCopy>p{
+    margin-top:22px!important;
+    line-height:1.66!important;
+  }
+  .premiumHeroCtas{
+    margin-top:28px!important;
+    gap:14px!important;
+  }
+  .heroProof{
+    margin-top:26px!important;
+  }
+  .heroIntentRow{
+    margin-top:12px!important;
+  }
+  .heroStage{
+    border-radius:30px!important;
+    box-shadow:0 28px 72px rgba(18,24,40,.09)!important;
+  }
+  .heroStageMain{
+    border-radius:22px!important;
+  }
+  .heroMiniCard{
+    border-radius:18px!important;
+  }
+}
+
+@media(min-width:1440px){
+  .premiumHero{
+    width:min(1320px,calc(100% - 144px))!important;
+  }
+}
+
+@media(min-width:1101px) and (max-width:1240px){
+  .premiumHero{
+    width:calc(100% - 80px)!important;
+    grid-template-columns:minmax(0,460px) minmax(0,1fr)!important;
+    column-gap:72px!important;
+  }
+  .premiumHeroCopy,
+  .premiumHero h1{
+    max-width:460px!important;
+  }
+}
