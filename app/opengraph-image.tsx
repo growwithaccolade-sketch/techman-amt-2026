@@ -11,14 +11,26 @@ export default function Image() {
       <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", width: "100%" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 26, fontWeight: 800 }}>
           <div style={{ width: 52, height: 52, borderRadius: 26, background: "white", color: "#0a0d12", display: "flex", alignItems: "center", justifyContent: "center" }}>T</div>
-          TECHMAN <span style={{ color: "#4c7cff" }}>AMT</span>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <span>TECHMAN</span>
+            <span style={{ color: "#4c7cff" }}>AMT</span>
+          </div>
         </div>
+
         <div style={{ display: "flex", flexDirection: "column", maxWidth: 900 }}>
-          <div style={{ fontSize: 82, lineHeight: .95, letterSpacing: -4, fontWeight: 800 }}>Phones. Laptops.<br/><span style={{ color: "#4c7cff" }}>Creator tools.</span></div>
-          <div style={{ fontSize: 25, color: "#aeb5c1", marginTop: 28 }}>Phones · Laptops · Gadgets · Creator Tools</div>
+          <div style={{ display: "flex", flexDirection: "column", fontSize: 82, lineHeight: .95, letterSpacing: -4, fontWeight: 800 }}>
+            <span>Phones. Laptops.</span>
+            <span style={{ color: "#4c7cff" }}>Creator gear.</span>
+          </div>
+          <div style={{ fontSize: 25, color: "#aeb5c1", marginTop: 28 }}>Choose by what you need it to do.</div>
         </div>
+
         <div style={{ display: "flex", gap: 24, fontSize: 18, color: "#c9ced6" }}>
-          <span>Clear product details</span><span>•</span><span>Delivery across Nigeria</span><span>•</span><span>Secure payment</span>
+          <span>Prices shown</span>
+          <span>•</span>
+          <span>Delivery across Nigeria</span>
+          <span>•</span>
+          <span>Product support</span>
         </div>
       </div>
       <div style={{ position: "absolute", width: 360, height: 360, borderRadius: 180, background: "#1256f3", opacity: .18, right: -70, top: 60 }}/>
