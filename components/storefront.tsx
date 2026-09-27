@@ -119,7 +119,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
   const displayProducts = defaultMode
     ? defaultFeatured
     : visibleProducts.filter((product) => !heroIds.has(product.id)).slice(0, 9);
-  const heroTitle = (homeContent?.title || "Phones, laptops and creator gear.|Prices shown before you buy.").split("|");
+  const heroTitle = (homeContent?.title || "Need a new phone, laptop or creator gear?|Compare the options before you pay.").split("|");
   const homeSections = homeContent?.sections || [];
   const editableSections = homeSections.length >= 8 ? homeSections : [];
   const categorySection = editableSections[0];
@@ -194,15 +194,20 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
 
       <section className="premiumHero shell">
         <div className="premiumHeroCopy">
-          <div className="heroOverline">{homeContent?.eyebrow || "TECHMAN AMT"}</div><h1>{heroTitle[0]}{heroTitle[1] && <><br/><span>{heroTitle[1]}</span></>}</h1><p>{homeContent?.intro || "Compare prices, stock, condition and key specifications for phones, laptops, audio and creator equipment. Order online or contact us if you need help choosing."}</p>
+          <div className="heroOverline">{homeContent?.eyebrow || "TECHMAN AMT"}</div><h1>{heroTitle[0]}{heroTitle[1] && <><br/><span>{heroTitle[1]}</span></>}</h1><p>{homeContent?.intro || "See the price, stock, condition and key details in one place. If you are not sure what fits your budget or what you want to do with it, tell us and we will point you to the right options."}</p>
           <div className="premiumHeroCtas">
-            <Link className="primaryBtn heroPrimary" href="/shop">Shop products <ArrowRight size={17}/></Link>
-            <Link className="textCta" href="/device-request">Ask about a product <ArrowUpRight size={16}/></Link>
+            <Link className="primaryBtn heroPrimary" href="/shop">Shop all products <ArrowRight size={17}/></Link>
+            <Link className="textCta" href="/device-request">Tell us what you need <ArrowUpRight size={16}/></Link>
           </div>
           <div className="heroProof">
             <span><BadgeCheck size={16}/> Prices shown</span>
             <span><Truck size={16}/> Delivery across Nigeria</span>
-            <span><ShieldCheck size={16}/> Phone and email support</span>
+            <span><ShieldCheck size={16}/> Ask before you buy</span>
+          </div>
+          <div className="heroIntentRow" aria-label="Common shopping needs">
+            <Link href="/shop?category=Phones">I need a phone</Link>
+            <Link href="/shop?category=Laptops">I need a laptop</Link>
+            <Link href="/shop?category=Creator%20Tools">I make content</Link>
           </div>
         </div>
 
@@ -430,35 +435,70 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
         </div>
         <div className="editorialCopy">
           <span className="kicker">CREATOR EQUIPMENT</span>
-          <h2>{creatorSection?.title || "Microphones, lighting, storage and camera accessories."}</h2>
-          <p>{creatorSection?.body || "Browse equipment for recording, streaming, video calls and mobile content production."}</p>
+          <h2>{creatorSection?.title || "Building a content setup? Start with the parts people notice."}</h2>
+          <p>{creatorSection?.body || "For a talking-head video, a clear microphone and decent light can matter more than another camera upgrade. Add storage and power based on how long and how often you record."}</p>
           <div className="editorialChecklist">
             <span><Check/> Wireless microphones</span>
             <span><Check/> Tripods & phone rigs</span>
             <span><Check/> Lighting & streaming gear</span>
             <span><Check/> Storage & power</span>
           </div>
-          <Link href="/shop?category=Creator%20Tools" className="primaryBtn">Shop creator upgrades <ArrowRight size={17}/></Link>
+          <Link href="/shop?category=Creator%20Tools" className="primaryBtn">Shop creator equipment <ArrowRight size={17}/></Link>
         </div>
       </section>
 
       <section className="insights premiumInsights shell">
-        <div className="premiumSectionHead">
-          <div><span className="kicker">BUYING GUIDES</span><h2>{guidesSection?.title || "Product guides for common buying questions."}</h2>{guidesSection?.body && <p className="sectionLead">{guidesSection.body}</p>}</div>
-          <Link href="/blog" className="sectionLink">View guides <ArrowUpRight size={16}/></Link>
+        <div className="premiumSectionHead guideSectionHead">
+          <div>
+            <span className="kicker">NOT SURE WHAT TO BUY?</span>
+            <h2>{guidesSection?.title || "Start with what you need the device to do."}</h2>
+            <p className="sectionLead">{guidesSection?.body || "These short guides answer the questions people usually ask before spending money on a phone, laptop or microphone."}</p>
+          </div>
+          <Link href="/blog" className="sectionLink">See all buying guides <ArrowUpRight size={16}/></Link>
         </div>
 
-        <div className="insightGrid">
+        <div className="insightGrid guideGrid">
           {[
-            ["01", "Buying Guide", "Phone specifications for content creation", "What to check for camera, storage and battery.", "/blog/how-to-choose-a-phone-for-content-creation"],
-            ["02", "Buying Guide", "Laptop specifications for work and school", "Processor, memory, storage and battery considerations.", "/blog/laptop-buying-guide-for-work-school-and-creative-use"],
-            ["03", "Buying Guide", "Microphone and audio guide for creators", "Microphone types, recording setups and common accessories.", "/blog/creator-audio-starter-guide"],
-          ].map(([index, type, title, copy, href]) => (
-            <Link href={href} className="insightCard" key={title}>
-              <div><span>{index}</span><small>{type}</small></div>
-              <h3>{title}</h3>
-              <p>{copy}</p>
-              <b>Read guide <ArrowUpRight size={15}/></b>
+            {
+              number: "01",
+              image: "/products/iphone-16-pro-max-256gb.webp",
+              label: "PHONE GUIDE",
+              title: "Which phone should you buy for TikTok, Reels or YouTube?",
+              copy: "If you record often, camera stabilization, storage and battery life can matter more than a long spec list. See what to check before paying.",
+              examples: "TikTok · Reels · YouTube",
+              href: "/blog/how-to-choose-a-phone-for-content-creation",
+            },
+            {
+              number: "02",
+              image: "/products/macbook-air-m4-13-inch.webp",
+              label: "LAPTOP GUIDE",
+              title: "What laptop specs do you need for school, work, editing or coding?",
+              copy: "Google Docs and Zoom do not need the same hardware as Premiere Pro, AutoCAD, large code projects or gaming. Match the laptop to the apps you actually use.",
+              examples: "School · Office · Editing · Coding",
+              href: "/blog/laptop-buying-guide-for-work-school-and-creative-use",
+            },
+            {
+              number: "03",
+              image: "/products/dji-mic-3.webp",
+              label: "AUDIO GUIDE",
+              title: "What microphone should you use for videos, interviews or podcasts?",
+              copy: "A wireless clip-on mic works well for walking videos and interviews. A desk podcast or streaming setup may need something different.",
+              examples: "Vlogs · Interviews · Podcasts",
+              href: "/blog/creator-audio-starter-guide",
+            },
+          ].map((guide) => (
+            <Link href={guide.href} className="insightCard guideCard" key={guide.title}>
+              <div className="guideCardMedia">
+                <img src={guide.image} alt="" loading="lazy" decoding="async"/>
+                <span>{guide.number}</span>
+              </div>
+              <div className="guideCardBody">
+                <small>{guide.label}</small>
+                <h3>{guide.title}</h3>
+                <p>{guide.copy}</p>
+                <em>{guide.examples}</em>
+                <b>Read this guide <ArrowUpRight size={15}/></b>
+              </div>
             </Link>
           ))}
         </div>
