@@ -10,41 +10,77 @@ export type Article = {
 export const articles: Article[] = [
   {
     slug: "how-to-choose-a-phone-for-content-creation",
-    title: "How to choose a phone for content creation",
-    excerpt: "A practical way to compare camera, storage, battery, audio and workflow before paying for a creator phone.",
-    category: "Buying Guide",
+    title: "Which phone should you buy for TikTok, Reels or YouTube?",
+    excerpt: "If you record often, camera stabilization, storage and battery life can matter more than a long spec list. Here is what to check before paying.",
+    category: "Phone Guide",
     readTime: "6 min read",
     sections: [
-      { heading: "Start with the content you actually make", body: "Short-form social video, long-form YouTube, product photography and livestreaming place different demands on a phone. Decide whether camera flexibility, battery, storage or app performance matters most before comparing models." },
-      { heading: "Storage becomes a workflow problem quickly", body: "High-resolution video consumes space fast. Think about how often you can offload files, whether cloud storage fits your data plan and whether external storage is practical for your setup." },
-      { heading: "Audio quality deserves its own budget", body: "A good phone does not solve every recording problem. For interviews, talking-head videos and noisy environments, a compatible wireless microphone can improve perceived quality more than a small camera upgrade." },
-      { heading: "Buy for the whole setup", body: "Budget for charging, power, storage, a stable mount and any microphone or lighting you genuinely need. The cheapest phone is not always the cheapest complete workflow." }
+      {
+        heading: "Start with the videos you actually make",
+        body: "If most of your content is TikTok or Instagram Reels, you may care more about reliable video, a good front camera and battery life than extreme zoom. If you shoot long YouTube videos, product videos or events, storage, heat management and external microphone support become more important."
+      },
+      {
+        heading: "Think about storage before camera features",
+        body: "Video fills a phone quickly. If you record several clips every day, edit on the phone and keep finished videos locally, a small storage option can become frustrating. Think about how much you shoot in a normal week and how often you are willing to move files to a laptop, drive or cloud service."
+      },
+      {
+        heading: "A better microphone can improve a video more than a small camera upgrade",
+        body: "For talking videos, interviews and outdoor clips, clear speech matters. A compatible wireless clip-on microphone can be more useful than paying extra for a phone with a slightly better camera while still recording poor audio."
+      },
+      {
+        heading: "Do not forget battery, charging and a stable mount",
+        body: "If you record outside, at events or away from a charger, battery life and a power bank matter. A simple tripod or phone rig also makes a big difference for interviews, product videos and talking-head content. Price the phone together with the accessories you will actually use."
+      }
     ]
   },
   {
     slug: "laptop-buying-guide-for-work-school-and-creative-use",
-    title: "Laptop buying guide for work, school and creative use",
-    excerpt: "Choose processor, memory, storage and display based on what you run every week, not what looks impressive on a spec sheet.",
-    category: "Buying Guide",
+    title: "What laptop specs do you need for school, work, editing or coding?",
+    excerpt: "Google Docs and Zoom do not need the same hardware as Premiere Pro, AutoCAD, large code projects or gaming. Match the laptop to the apps you use every week.",
+    category: "Laptop Guide",
     readTime: "7 min read",
     sections: [
-      { heading: "List your heaviest regular tasks", body: "Browser tabs and documents need far less sustained performance than video editing, 3D work, large code builds or modern games. Base the purchase on the most demanding tasks you actually perform often." },
-      { heading: "Memory affects how comfortably you multitask", body: "More memory helps when several demanding applications stay open together. It does not automatically make every workload faster, so balance RAM against processor, storage and budget." },
-      { heading: "Storage speed and capacity are different decisions", body: "Fast solid-state storage improves responsiveness, while capacity determines how much you can keep locally. Creators may need external storage even with a large internal drive." },
-      { heading: "Ports and battery can matter more than benchmarks", body: "Check charging, external display support, USB ports, card readers and battery expectations against your real routine. Adapters and docks add cost and friction." }
+      {
+        heading: "Write down the apps you use every week",
+        body: "A student using Chrome, Microsoft Word, Google Docs and Zoom has very different needs from someone editing 4K video, running AutoCAD, building software or playing modern games. Start with your real apps instead of buying the highest specification you can find."
+      },
+      {
+        heading: "More memory helps when you keep many things open",
+        body: "If your normal day includes a browser with many tabs, Zoom, spreadsheets, Slack and other apps running together, memory matters. If you edit video or work with large creative files, you will usually need more headroom than someone using documents and web apps."
+      },
+      {
+        heading: "Storage is about both space and convenience",
+        body: "School files and office documents use little space compared with video projects, photos, game libraries and large development files. If you regularly work with large files, decide whether you want more internal storage or are comfortable carrying an external SSD."
+      },
+      {
+        heading: "Check the ports before you buy",
+        body: "Think about what you connect every week: an external monitor, projector, USB drive, memory card, mouse, microphone or Ethernet cable. A laptop can be fast and still be annoying to use if you need three adapters every day."
+      }
     ]
   },
   {
     slug: "creator-audio-starter-guide",
-    title: "A creator's starter guide to better audio",
-    excerpt: "Clear speech usually improves content faster than buying more camera gear. Here is how to think about microphones, placement and monitoring.",
-    category: "Creator Tips",
+    title: "What microphone should you use for videos, interviews or podcasts?",
+    excerpt: "A wireless clip-on mic, USB desk mic and podcast setup solve different problems. Choose based on where you record and how you move.",
+    category: "Audio Guide",
     readTime: "5 min read",
     sections: [
-      { heading: "Distance matters", body: "Moving a microphone closer to the speaker often improves clarity more than buying a much more expensive microphone used from far away." },
-      { heading: "Choose the format for the job", body: "Wireless clip-on microphones are convenient for mobile creators and interviews, while desk and studio microphones can make sense for podcasts, streaming and voice work." },
-      { heading: "Reduce problems before recording", body: "Quiet the room, control wind and clothing noise, check battery and storage, then record a short test. Prevention is easier than trying to repair unusable audio later." },
-      { heading: "Keep the signal chain simple", body: "Use the fewest adapters and conversion steps you need. Confirm device compatibility before buying a microphone, receiver, cable or interface." }
+      {
+        heading: "For walking videos and interviews, wireless is usually easier",
+        body: "If you move around while recording, film outside or interview people away from a desk, a wireless clip-on microphone keeps the mic close to the speaker without a long cable. Check that the receiver works with your phone or camera before buying."
+      },
+      {
+        heading: "For desk videos, streaming and podcasts, you can use a fixed microphone",
+        body: "If you sit in one place, a USB or studio-style microphone can make more sense. You do not need wireless freedom if the microphone stays on a desk. What matters is keeping it close enough to your mouth and using it in a reasonably quiet room."
+      },
+      {
+        heading: "The room matters as much as the microphone",
+        body: "A very expensive microphone can still sound poor in a noisy or echo-heavy room. Turn off loud fans where possible, avoid recording beside traffic, reduce empty-room echo and do a short test before the full recording."
+      },
+      {
+        heading: "Check the full connection before paying",
+        body: "Confirm the microphone, receiver, cable or interface works with the exact phone, camera or laptop you plan to use. This prevents buying a good microphone that still needs an adapter or accessory you did not budget for."
+      }
     ]
   }
 ];
