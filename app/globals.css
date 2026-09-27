@@ -7952,3 +7952,55 @@ body:before{display:none!important}
     max-width:460px!important;
   }
 }
+
+
+/* DESKTOP HERO COMPOSITION FINAL */
+@media(min-width:1241px){
+  .premiumHero{
+    grid-template-columns:minmax(0,480px) minmax(0,1fr)!important;
+    column-gap:clamp(122px,9vw,148px)!important;
+  }
+  .premiumHeroCopy{
+    max-width:480px!important;
+    padding-left:18px!important;
+  }
+  .premiumHero h1{
+    max-width:470px!important;
+    font-size:clamp(42px,4.15vw,58px)!important;
+    line-height:.98!important;
+  }
+  .premiumHeroCopy>p{
+    max-width:445px!important;
+  }
+  .heroStage{
+    max-width:690px;
+    justify-self:end;
+  }
+}
+
+@media(min-width:1440px){
+  .premiumHero{
+    grid-template-columns:minmax(0,490px) minmax(0,1fr)!important;
+    column-gap:150px!important;
+  }
+  .premiumHeroCopy{
+    padding-left:24px!important;
+  }
+}
+
+@media(min-width:1101px) and (max-width:1240px){
+  .premiumHero{
+    grid-template-columns:minmax(0,450px) minmax(0,1fr)!important;
+    column-gap:88px!important;
+  }
+  .premiumHeroCopy,
+  .premiumHero h1{
+    max-width:450px!important;
+  }
+  .premiumHeroCopy{
+    padding-left:8px!important;
+  }
+  .heroStage{
+    justify-self:end;
+  }
+}
