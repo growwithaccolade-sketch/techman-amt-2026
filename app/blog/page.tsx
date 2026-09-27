@@ -4,13 +4,13 @@ import CommerceHeader from "@/components/commerce-header";
 import { articles } from "@/lib/articles";
 import { getEditablePage } from "@/lib/site-pages";
 
-export const metadata: Metadata = { title: "Tech Insights", description: "Practical technology buying guides and creator tips from TechMan AMT." };
+export const metadata: Metadata = { title: "Buying Guides", description: "Clear guides for choosing phones, laptops, microphones and other tech based on what you actually use them for." };
 
 const fallback = {
   slug: "blog",
-  eyebrow: "TECHMAN INSIGHTS",
-  title: "Buy with more context.",
-  intro: "Guides focused on the decisions behind the purchase: use case, compatibility, workflow and total setup cost.",
+  eyebrow: "BUYING GUIDES",
+  title: "Not sure which one to buy?",
+  intro: "Start with what you want to do. These guides explain what matters for common needs like school, office work, editing, coding, TikTok, YouTube, interviews and podcasts.",
   sections: [],
 };
 
