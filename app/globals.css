@@ -6685,6 +6685,7 @@ body:before{display:none!important}
   display:inline;
 }
 .premiumWhatsapp:hover{
+  will-change:transform;/* whatsapp deployment refresh */
   transform:translateY(-3px) scale(1.02);
   background:#18a958!important;
   box-shadow:
