@@ -1,15 +1,16 @@
 import { redirect } from "next/navigation";
 import AdminNav from "@/components/admin-nav";
-import { hasAdminSession } from "@/app/admin/actions";
+import { changeOwnerPassword, getAdminSession, hasAdminSession } from "@/app/admin/actions";
 import { getStoreSettings } from "@/lib/store-settings";
 import { commerceBackendConfigured } from "@/lib/supabase/admin";
 import { updateStoreSettings } from "./actions";
 
-export default async function AdminSettingsPage({ searchParams }: { searchParams: Promise<{ error?: string; success?: string }> }) {
+export default async function AdminSettingsPage({ searchParams }: { searchParams: Promise<{ error?: string; success?: string; password?: string }> }) {
   if (!(await hasAdminSession())) redirect("/admin");
-  const { error, success } = await searchParams;
+  const { error, success, password } = await searchParams;
   const backend = commerceBackendConfigured();
   const settings = await getStoreSettings();
+  const session = await getAdminSession();
 
   return (
     <main className="adminShell">
@@ -31,6 +32,28 @@ export default async function AdminSettingsPage({ searchParams }: { searchParams
             <button className="primaryAction" type="submit" disabled={!backend}>Save public settings</button>
           </form>
         </section>
+
+        {session?.role === "owner" && (
+          <section className="adminCard settingsCard adminSecurityCard">
+            <span className="kicker">ADMIN SECURITY</span>
+            <h2>Change owner password</h2>
+            <p className="adminMuted">Only the signed-in owner can change the admin password. Once changed, the previous password stops working for future logins.</p>
+            {password === "changed" && <div className="adminNotice success">Admin password changed successfully.</div>}
+            {password === "current" && <div className="adminNotice error">Current password is incorrect.</div>}
+            {password === "length" && <div className="adminNotice error">New password must be between 10 and 128 characters.</div>}
+            {password === "match" && <div className="adminNotice error">New password and confirmation do not match.</div>}
+            {password === "save" && <div className="adminNotice error">Could not save the new password.</div>}
+            {password === "backend" && <div className="adminNotice warning">The database must be connected before the password can be changed.</div>}
+            <form className="adminForm" action={changeOwnerPassword}>
+              <label>Current password<input name="currentPassword" type="password" required autoComplete="current-password"/></label>
+              <div className="fieldGrid">
+                <label>New password<input name="newPassword" type="password" required minLength={10} maxLength={128} autoComplete="new-password"/></label>
+                <label>Confirm new password<input name="confirmPassword" type="password" required minLength={10} maxLength={128} autoComplete="new-password"/></label>
+              </div>
+              <button className="primaryAction" type="submit" disabled={!backend}>Change admin password</button>
+            </form>
+          </section>
+        )}
       </section>
     </main>
   );

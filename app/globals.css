@@ -7778,3 +7778,86 @@ body:before{display:none!important}
     max-width:none!important;
   }
 }
+
+
+/* SITEWIDE FLOATING ACTIONS */
+.globalFloatingActions{
+  position:fixed;
+  z-index:70;
+  left:18px;
+  right:18px;
+  bottom:20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  pointer-events:none;
+}
+.globalScrollTop,
+.globalWhatsApp{
+  pointer-events:auto;
+  min-height:50px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.01em;
+  text-decoration:none;
+  transition:transform .2s ease,box-shadow .2s ease,background .2s ease;
+}
+.globalScrollTop{
+  min-width:82px;
+  padding:0 16px;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(10,13,18,.94);
+  color:#fff;
+  box-shadow:0 14px 30px rgba(0,0,0,.2);
+  backdrop-filter:blur(14px);
+  cursor:pointer;
+}
+.globalWhatsApp{
+  min-width:132px;
+  padding:0 16px;
+  border:1px solid rgba(255,255,255,.28);
+  background:#1fbd67;
+  color:#fff;
+  box-shadow:0 14px 32px rgba(17,130,68,.28);
+}
+.globalScrollTop:hover,
+.globalWhatsApp:hover{
+  transform:translateY(-3px);
+}
+.globalScrollTop:hover{background:#151a23}
+.globalWhatsApp:hover{background:#18a958}
+.globalScrollTop:focus-visible,
+.globalWhatsApp:focus-visible{
+  outline:3px solid rgba(49,87,255,.25);
+  outline-offset:3px;
+}
+
+@media(max-width:760px){
+  .globalFloatingActions{
+    left:14px;
+    right:14px;
+    bottom:calc(88px + env(safe-area-inset-bottom));
+  }
+  .globalScrollTop,
+  .globalWhatsApp{
+    width:50px;
+    min-width:50px;
+    height:50px;
+    min-height:50px;
+    padding:0;
+    border-radius:50%;
+  }
+  .globalScrollTop span,
+  .globalWhatsApp span{
+    display:none;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .globalScrollTop,.globalWhatsApp{transition:none}
+}

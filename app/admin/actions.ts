@@ -4,11 +4,12 @@ import { createHash, createHmac, timingSafeEqual } from "crypto";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { commerceBackendConfigured, getSupabaseAdmin } from "@/lib/supabase/admin";
-import { verifyAdminPassword } from "@/lib/admin-auth";
+import { hashAdminPassword, verifyAdminPassword } from "@/lib/admin-auth";
 
 const COOKIE_NAME = "techman_admin_session";
-const OWNER_USERNAME = process.env.ADMIN_USERNAME || "admin";
-const FALLBACK_OWNER_HASH = "bc979b33513a9ba7527c9d4faf1a7346:27069305c08e429b4c526395ef1c8b406641c8884198fa600233dfc14a0265e73d903f846e56399a4ee427a008db95709ed51a91cad590f5bb2f6b19cf71d9c5";
+const OWNER_USERNAME = "admin";
+const OWNER_OVERRIDE_USERNAME = "__techman_owner__";
+const INITIAL_OWNER_HASH = "0121995fff462b8185448fcd8c68ad0a:ecfef40f9497cfa66508b0e5496b7a3aac93808b88b377db21343566288c6180e2e6e3941efdea5aab4736510f8c27cfa38bff566e3755f938ea4da9673b462a";
 
 export type AdminSession = {
   id: string;
@@ -24,19 +25,30 @@ function safeEqual(aValue: string, bValue: string) {
   return a.length === b.length && timingSafeEqual(a, b);
 }
 
-function ownerPasswordValid(password: string) {
-  const configured = process.env.ADMIN_PASSWORD;
-  if (configured) {
-    return safeEqual(
-      createHash("sha256").update(password).digest("hex"),
-      createHash("sha256").update(configured).digest("hex")
-    );
+async function ownerPasswordValid(password: string) {
+  if (commerceBackendConfigured()) {
+    try {
+      const supabase = getSupabaseAdmin();
+      const { data } = await supabase
+        .from("admin_staff")
+        .select("password_hash,active")
+        .eq("username", OWNER_OVERRIDE_USERNAME)
+        .eq("active", true)
+        .maybeSingle();
+
+      if (data?.password_hash) {
+        return verifyAdminPassword(password, String(data.password_hash));
+      }
+    } catch {
+      // Fall through to the initial owner credential if the backend is unavailable.
+    }
   }
-  return verifyAdminPassword(password, FALLBACK_OWNER_HASH);
+
+  return verifyAdminPassword(password, INITIAL_OWNER_HASH);
 }
 
 function sessionSecret() {
-  return process.env.ADMIN_SESSION_SECRET || process.env.ADMIN_ACCESS_KEY || FALLBACK_OWNER_HASH;
+  return process.env.ADMIN_SESSION_SECRET || process.env.ADMIN_ACCESS_KEY || INITIAL_OWNER_HASH;
 }
 
 function signPayload(payload: string) {
@@ -82,7 +94,7 @@ export async function loginAdmin(formData: FormData) {
 
   let session: AdminSession | null = null;
 
-  if (username === OWNER_USERNAME.toLowerCase() && ownerPasswordValid(password)) {
+  if (username === OWNER_USERNAME && await ownerPasswordValid(password)) {
     session = {
       id: "owner",
       username: OWNER_USERNAME,
@@ -127,4 +139,38 @@ export async function logoutAdmin() {
   const cookieStore = await cookies();
   cookieStore.delete(COOKIE_NAME);
   redirect("/admin");
+}
+
+
+export async function changeOwnerPassword(formData: FormData) {
+  await requireOwner();
+  if (!commerceBackendConfigured()) redirect("/admin/settings?password=backend");
+
+  const currentPassword = String(formData.get("currentPassword") || "");
+  const newPassword = String(formData.get("newPassword") || "");
+  const confirmPassword = String(formData.get("confirmPassword") || "");
+
+  if (!(await ownerPasswordValid(currentPassword))) {
+    redirect("/admin/settings?password=current");
+  }
+  if (newPassword.length < 10 || newPassword.length > 128) {
+    redirect("/admin/settings?password=length");
+  }
+  if (newPassword !== confirmPassword) {
+    redirect("/admin/settings?password=match");
+  }
+
+  const supabase = getSupabaseAdmin();
+  const { error } = await supabase.from("admin_staff").upsert({
+    username: OWNER_OVERRIDE_USERNAME,
+    display_name: "Owner credential",
+    role: "manager",
+    password_hash: hashAdminPassword(newPassword),
+    active: true,
+    updated_at: new Date().toISOString(),
+  }, { onConflict: "username" });
+
+  if (error) redirect("/admin/settings?password=save");
+
+  redirect("/admin/settings?password=changed");
 }

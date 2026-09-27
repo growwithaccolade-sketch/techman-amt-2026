@@ -547,21 +547,6 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
         <Link href="/cart" className="dockBadge"><span className="dockIcon"><ShoppingBag size={18}/></span><small>Cart</small>{totalItems > 0 && <em>{totalItems}</em>}</Link>
       </nav>
 
-      {supportLink && (
-        <a className="floatingWhatsApp premiumWhatsapp" href={supportLink} target="_blank" rel="noreferrer" aria-label="Chat with TechMan AMT on WhatsApp">
-          <MessageCircle size={22} strokeWidth={2.5}/>
-          <span>WhatsApp</span>
-        </a>
-      )}
-      <button
-        type="button"
-        className="scrollTopButton"
-        aria-label="Scroll to top"
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      >
-        <ArrowUpRight size={18}/>
-        <span>Top</span>
-      </button>
     </main>
   );
 }
