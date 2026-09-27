@@ -16,5 +16,5 @@ const fallback = {
 
 export default async function BlogPage() {
   const page = await getEditablePage("blog", fallback);
-  return <><CommerceHeader/><main className="blogPage shell"><section className="catalogHero"><span className="kicker">{page.eyebrow}</span><h1>{page.title}</h1><p>{page.intro}</p></section><div className="blogGrid">{articles.map((article, index) => <Link className="blogCard" href={`/blog/${article.slug}`} key={article.slug}><span>0{index + 1} · {article.category}</span><h2>{article.title}</h2><p>{article.excerpt}</p><b>{article.readTime}</b></Link>)}</div></main></>;
+  return <><CommerceHeader/><main className="blogPage shell"><section className="catalogHero"><span className="kicker">{page.eyebrow}</span><h1>{page.title}</h1><p>{page.intro}</p></section><div className="blogGrid">{articles.map((article, index) => <Link className="blogCard" href={`/blog/${article.slug}`} key={article.slug}><span>0{index + 1} · {article.category}</span><h2>{article.title}</h2><p>{article.excerpt}</p><b>{article.readTime} · Read guide</b></Link>)}</div></main></>;
 }
