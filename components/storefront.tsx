@@ -119,7 +119,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
   const displayProducts = defaultMode
     ? defaultFeatured
     : visibleProducts.filter((product) => !heroIds.has(product.id)).slice(0, 9);
-  const heroTitle = (homeContent?.title || "Need a new phone, laptop or creator gear?|Compare the options before you pay.").split("|");
+  const heroTitle = (homeContent?.title || "Need a new phone, laptop or creator gear?|Find the option that fits what you actually need.").split("|");
   const homeSections = homeContent?.sections || [];
   const editableSections = homeSections.length >= 8 ? homeSections : [];
   const categorySection = editableSections[0];
@@ -194,7 +194,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
 
       <section className="premiumHero shell">
         <div className="premiumHeroCopy">
-          <div className="heroOverline">{homeContent?.eyebrow || "TECHMAN AMT"}</div><h1>{heroTitle[0]}{heroTitle[1] && <><br/><span>{heroTitle[1]}</span></>}</h1><p>{homeContent?.intro || "See the price, stock, condition and key details in one place. If you are not sure what fits your budget or what you want to do with it, tell us and we will point you to the right options."}</p>
+          <div className="heroOverline">{homeContent?.eyebrow || "TECHMAN AMT"}</div><h1>{heroTitle[0]}{heroTitle[1] && <><br/><span>{heroTitle[1]}</span></>}</h1><p>{homeContent?.intro || "Compare current options by price, stock, condition and the features that matter for your everyday use. Whether it is school, work, content, gaming or a simple upgrade, start with what you need it to do."}</p>
           <div className="premiumHeroCtas">
             <Link className="primaryBtn heroPrimary" href="/shop">Shop all products <ArrowRight size={17}/></Link>
             <Link className="textCta" href="/device-request">Tell us what you need <ArrowUpRight size={16}/></Link>
@@ -202,7 +202,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
           <div className="heroProof">
             <span><BadgeCheck size={16}/> Prices shown</span>
             <span><Truck size={16}/> Delivery across Nigeria</span>
-            <span><ShieldCheck size={16}/> Ask before you buy</span>
+            <span><ShieldCheck size={16}/> Help choosing the right option</span>
           </div>
           <div className="heroIntentRow" aria-label="Common shopping needs">
             <Link href="/shop?category=Phones">I need a phone</Link>
@@ -534,6 +534,15 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
       </nav>
 
       {supportLink && <a className="floatingWhatsApp premiumWhatsapp" href={supportLink} target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp">WA</a>}
+      <button
+        type="button"
+        className="scrollTopButton"
+        aria-label="Scroll to top"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      >
+        <ArrowUpRight size={18}/>
+        <span>Top</span>
+      </button>
     </main>
   );
 }
