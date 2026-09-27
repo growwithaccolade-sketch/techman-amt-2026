@@ -428,14 +428,14 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
         <div className="editorialMedia creatorEditorialVisual">
           {siteMedia?.creatorImage && <img className="creatorCmsImage" src={siteMedia.creatorImage} alt="Creator setup" loading="lazy" decoding="async"/>}
           <div className="creatorVisualCore"><Mic2 size={64}/></div>
-          <div className="creatorVisualChip creatorChipOne"><Headphones size={22}/> Clean audio</div>
-          <div className="creatorVisualChip creatorChipTwo"><Zap size={22}/> Reliable power</div>
-          <div className="creatorVisualChip creatorChipThree"><Laptop size={22}/> Edit anywhere</div>
+          <div className="creatorVisualChip creatorChipOne"><Headphones size={22}/> Wireless mic</div>
+          <div className="creatorVisualChip creatorChipTwo"><Zap size={22}/> Power bank</div>
+          <div className="creatorVisualChip creatorChipThree"><Laptop size={22}/> Laptop editing</div>
           <span className="editorialTag">CREATOR TOOLS</span>
         </div>
         <div className="editorialCopy">
           <span className="kicker">CREATOR EQUIPMENT</span>
-          <h2>{creatorSection?.title || "Building a content setup? Start with the parts people notice."}</h2>
+          <h2>{creatorSection?.title || "For video content, start with audio, lighting and power."}</h2>
           <p>{creatorSection?.body || "For a talking-head video, a clear microphone and decent light can matter more than another camera upgrade. Add storage and power based on how long and how often you record."}</p>
           <div className="editorialChecklist">
             <span><Check/> Wireless microphones</span>
