@@ -77,7 +77,7 @@ function mapRow(row: Record<string, unknown>): Product {
     image: resolveImage(row),
     blurb: row.blurb ? String(row.blurb) : "Selected technology from TechMan AMT.",
     stock: resolvedStock,
-    warranty: row.warranty ? String(row.warranty) : "Warranty details available before payment",
+    warranty: row.warranty ? String(row.warranty) : "Warranty details available before ordering",
     condition,
     highlights: Array.isArray(row.highlights) ? row.highlights.map(String) : [],
     specs: resolvedSpecs,

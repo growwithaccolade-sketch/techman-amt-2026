@@ -51,7 +51,7 @@ const categoryMeta = [
 const filters = ["All", "Phones", "Laptops", "Tablets", "Watches", "Audio", "Creator Tools", "Accessories", "Gaming"];
 
 const heroSlugs = [
-  "iphone-18-pro-max-256gb",
+  "iphone-18-pro-256gb",
   "galaxy-s26-ultra-512gb",
   "airpods-5",
 ];
@@ -125,7 +125,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
   const displayProducts = defaultMode
     ? defaultFeatured
     : visibleProducts.filter((product) => !heroIds.has(product.id)).slice(0, 9);
-  const heroTitle = (homeContent?.title || "Need a new phone, laptop or creator gear?|Find the option that fits what you actually need.").split("|");
+  const heroTitle = (homeContent?.title || "Phones, laptops and creator gear.|Choose by what you need it to do.").split("|");
   const homeSections = homeContent?.sections || [];
   const editableSections = homeSections.length >= 8 ? homeSections : [];
   const categorySection = editableSections[0];
@@ -200,20 +200,20 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
 
       <section className="premiumHero shell">
         <div className="premiumHeroCopy">
-          <div className="heroOverline">{homeContent?.eyebrow || "TECHMAN AMT"}</div><h1>{heroTitle[0]}{heroTitle[1] && <><br/><span>{heroTitle[1]}</span></>}</h1><p>{homeContent?.intro || "Compare current options by price, stock, condition and the features that matter for your everyday use. Whether it is school, work, content, gaming or a simple upgrade, start with what you need it to do."}</p>
+          <div className="heroOverline">{homeContent?.eyebrow || "TECHMAN AMT"}</div><h1>{heroTitle[0]}{heroTitle[1] && <><br/><span>{heroTitle[1]}</span></>}</h1><p>{homeContent?.intro || "Compare current stock, condition, price and key features for school, work, content, gaming or a simple upgrade."}</p>
           <div className="premiumHeroCtas">
-            <Link className="primaryBtn heroPrimary" href="/shop">Shop all products <ArrowRight size={17}/></Link>
-            <Link className="textCta" href="/device-request">Tell us what you need <ArrowUpRight size={16}/></Link>
+            <Link className="primaryBtn heroPrimary" href="/shop">Shop products <ArrowRight size={17}/></Link>
+            <Link className="textCta" href="/device-request">Help me choose <ArrowUpRight size={16}/></Link>
           </div>
           <div className="heroProof">
             <span><BadgeCheck size={16}/> Prices shown</span>
             <span><Truck size={16}/> Delivery across Nigeria</span>
-            <span><ShieldCheck size={16}/> Help choosing the right option</span>
+            <span><ShieldCheck size={16}/> Product help when you need it</span>
           </div>
           <div className="heroIntentRow" aria-label="Common shopping needs">
-            <Link href="/shop?category=Phones">I need a phone</Link>
-            <Link href="/shop?category=Laptops">I need a laptop</Link>
-            <Link href="/shop?category=Creator%20Tools">I make content</Link>
+            <Link href="/shop?category=Phones">Phones</Link>
+            <Link href="/shop?category=Laptops">Laptops</Link>
+            <Link href="/shop?category=Creator%20Tools">Creator gear</Link>
           </div>
         </div>
 
@@ -223,12 +223,20 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
               href={`/product/${primaryHero.slug}`}
               className="heroStageMain"
             >
-              <div className="heroStageBadge">New</div>
+              <div className="heroStageBadge">Featured</div>
               <ProductImage src={primaryHero.image} alt={primaryHero.name} brand={primaryHero.brand} sizes="(max-width: 900px) 92vw, 46vw" priority/>
               <div className="heroStageOverlay">
-                <span>{primaryHero.brand}</span>
+                <div className="heroStageMeta">
+                  <span>{primaryHero.brand}</span>
+                  <em className={primaryHero.stock > 0 ? "heroStockOn" : "heroStockOff"}>
+                    {primaryHero.stock > 0 ? "In stock" : "Check availability"}
+                  </em>
+                </div>
                 <strong>{primaryHero.name}</strong>
-                <b>{priceLabel(primaryHero)}</b>
+                <div className="heroStagePrice">
+                  <b>{priceLabel(primaryHero)}</b>
+                  <small>View product <ArrowUpRight size={14}/></small>
+                </div>
               </div>
             </Link>
           )}
@@ -240,7 +248,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
                 className="heroMiniCard"
               >
                 <ProductImage src={secondaryHero.image} alt={secondaryHero.name} brand={secondaryHero.brand} sizes="220px" priority/>
-                <div><span>{secondaryHero.category}</span><strong>{secondaryHero.name}</strong></div>
+                <div><span>{secondaryHero.category}</span><strong>{secondaryHero.name}</strong><em>{priceLabel(secondaryHero)}</em></div>
               </Link>
             )}
             {tertiaryHero && (
@@ -249,7 +257,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
                 className="heroMiniCard"
               >
                 <ProductImage src={tertiaryHero.image} alt={tertiaryHero.name} brand={tertiaryHero.brand} sizes="220px" priority/>
-                <div><span>{tertiaryHero.category}</span><strong>{tertiaryHero.name}</strong></div>
+                <div><span>{tertiaryHero.category}</span><strong>{tertiaryHero.name}</strong><em>{priceLabel(tertiaryHero)}</em></div>
               </Link>
             )}
           </div>
@@ -425,7 +433,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
         </div>
         <div className="whyGrid">
           <article><span>01</span><ShieldCheck/><h3>Price</h3><p>Every product has a visible price.</p></article>
-          <article><span>02</span><Truck/><h3>Details before payment</h3><p>Check condition, warranty, important specs and stock information before you commit your money.</p></article>
+          <article><span>02</span><Truck/><h3>Product details</h3><p>Check condition, warranty, important specs and stock information before ordering.</p></article>
           <article><span>03</span><BadgeCheck/><h3>Contact</h3><p>Call {settings.whatsappNumber} or email {settings.supportEmail} for product and order questions.</p></article>
         </div>
       </section>

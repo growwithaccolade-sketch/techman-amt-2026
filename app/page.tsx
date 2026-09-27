@@ -5,8 +5,8 @@ import { getSiteMedia } from "@/lib/site-media";
 const fallback = {
   slug: "home",
   eyebrow: "TECHMAN AMT",
-  title: "Need a new phone, laptop or creator gear?|Find the option that fits what you actually need.",
-  intro: "Compare current options by price, stock, condition and the features that matter for your everyday use. Whether it is school, work, content, gaming or a simple upgrade, start with what you need it to do.",
+  title: "Phones, laptops and creator gear.|Choose by what you need it to do.",
+  intro: "Compare current stock, condition, price and key features for school, work, content, gaming or a simple upgrade.",
   sections: [
     { title: "Find the right product faster.", body: "Choose a category to narrow the catalogue." },
     { title: "Add the accessories you need.", body: "Choose chargers, storage, audio and other accessories that match your main device." },
@@ -27,8 +27,10 @@ export default async function Home() {
     stored.title === "The right tech.|The right price. No chasing." ||
     stored.title === "Phones, laptops and creator gear.|Prices shown before you buy." ||
     stored.title === "Need a new phone, laptop or creator gear?|Compare the options before you pay." ||
+    stored.title === "Need a new phone, laptop or creator gear?|Find the option that fits what you actually need." ||
     stored.intro.startsWith("Current phones, laptops, audio and creator tools") ||
-    stored.intro.startsWith("Shop phones, laptops, audio and creator gear selected");
+    stored.intro.startsWith("Shop phones, laptops, audio and creator gear selected") ||
+    stored.intro.startsWith("Compare current options by price, stock, condition");
   const content = isLegacyCopy ? fallback : stored;
   return <Storefront homeContent={content} siteMedia={siteMedia}/>;
 }

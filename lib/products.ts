@@ -230,7 +230,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Chip: A20 Pro", "Storage: 256GB", "Camera: 48MP Fusion Main with variable aperture", "Availability: In stock"],
-    specs: {"Chip":"A20 Pro","Storage":"256GB","Camera":"48MP Fusion Main with variable aperture","Availability":"Confirm current stock before purchase"}
+    specs: {"Chip":"A20 Pro","Storage":"256GB","Camera":"48MP Fusion Main with variable aperture","Availability":"In stock"}
   },
   {
     id: 10,
@@ -248,7 +248,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Chip: A20 Pro", "Storage: 256GB", "Camera: 48MP Fusion Main with variable aperture", "Availability: Currently unavailable"],
-    specs: {"Chip":"A20 Pro","Storage":"256GB","Camera":"48MP Fusion Main with variable aperture","Availability":"Confirm current stock before purchase"}
+    specs: {"Chip":"A20 Pro","Storage":"256GB","Camera":"48MP Fusion Main with variable aperture","Availability":"Currently unavailable"}
   },
   {
     id: 11,
@@ -266,7 +266,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: Open-ear wireless earbuds", "Feature: Active Noise Cancellation", "Availability: In stock"],
-    specs: {"Type":"Open-ear wireless earbuds","Feature":"Active Noise Cancellation","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"Open-ear wireless earbuds","Feature":"Active Noise Cancellation","Availability":"In stock"}
   },
   {
     id: 12,
@@ -284,7 +284,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Chip: S11", "Feature: Health Sensing System", "Availability: In stock"],
-    specs: {"Chip":"S11","Feature":"Health Sensing System","Availability":"Confirm current stock before purchase"}
+    specs: {"Chip":"S11","Feature":"Health Sensing System","Availability":"In stock"}
   },
   {
     id: 13,
@@ -302,7 +302,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Chip: S11", "Battery: Up to 50 hours everyday use", "Availability: In stock"],
-    specs: {"Chip":"S11","Battery":"Up to 50 hours everyday use","Availability":"Confirm current stock before purchase"}
+    specs: {"Chip":"S11","Battery":"Up to 50 hours everyday use","Availability":"In stock"}
   },
   {
     id: 14,
@@ -338,7 +338,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Storage: 512GB", "Availability: In stock"],
-    specs: {"Storage":"512GB","Availability":"Confirm current stock before purchase"}
+    specs: {"Storage":"512GB","Availability":"In stock"}
   },
   {
     id: 16,
@@ -356,7 +356,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Storage: 256GB", "Availability: In stock"],
-    specs: {"Storage":"256GB","Availability":"Confirm current stock before purchase"}
+    specs: {"Storage":"256GB","Availability":"In stock"}
   },
   {
     id: 17,
@@ -374,7 +374,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: Foldable phone", "Availability: In stock"],
-    specs: {"Type":"Foldable phone","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"Foldable phone","Availability":"In stock"}
   },
   {
     id: 18,
@@ -392,7 +392,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: Foldable phone", "Availability: In stock"],
-    specs: {"Type":"Foldable phone","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"Foldable phone","Availability":"In stock"}
   },
   {
     id: 19,
@@ -410,7 +410,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: Flip foldable", "Availability: In stock"],
-    specs: {"Type":"Flip foldable","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"Flip foldable","Availability":"In stock"}
   },
   {
     id: 20,
@@ -428,7 +428,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: Smartwatch", "Availability: Currently unavailable"],
-    specs: {"Type":"Smartwatch","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"Smartwatch","Availability":"Currently unavailable"}
   },
   {
     id: 21,
@@ -446,7 +446,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: Smartwatch", "Availability: In stock"],
-    specs: {"Type":"Smartwatch","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"Smartwatch","Availability":"In stock"}
   },
   {
     id: 22,
@@ -464,7 +464,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Chip: Google Tensor G6", "InnerDisplay: 8-inch Super Actua Flex", "Camera: Up to 30x Super Zoom", "Availability: In stock"],
-    specs: {"Chip":"Google Tensor G6","InnerDisplay":"8-inch Super Actua Flex","Camera":"Up to 30x Super Zoom","Availability":"Confirm current stock before purchase"}
+    specs: {"Chip":"Google Tensor G6","InnerDisplay":"8-inch Super Actua Flex","Camera":"Up to 30x Super Zoom","Availability":"In stock"}
   },
   {
     id: 23,
@@ -482,7 +482,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: Android flagship", "Availability: In stock"],
-    specs: {"Type":"Android flagship","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"Android flagship","Availability":"In stock"}
   },
   {
     id: 24,
@@ -500,7 +500,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: Android flagship", "Availability: In stock"],
-    specs: {"Type":"Android flagship","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"Android flagship","Availability":"In stock"}
   },
   {
     id: 25,
@@ -518,7 +518,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: Android flagship", "Availability: In stock"],
-    specs: {"Type":"Android flagship","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"Android flagship","Availability":"In stock"}
   },
   {
     id: 26,
@@ -536,7 +536,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Storage: 256GB", "Availability: In stock"],
-    specs: {"Storage":"256GB","Availability":"Confirm current stock before purchase"}
+    specs: {"Storage":"256GB","Availability":"In stock"}
   },
   {
     id: 27,
@@ -554,7 +554,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Storage: 256GB", "Availability: In stock"],
-    specs: {"Storage":"256GB","Availability":"Confirm current stock before purchase"}
+    specs: {"Storage":"256GB","Availability":"In stock"}
   },
   {
     id: 28,
@@ -572,7 +572,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Storage: 256GB", "Availability: In stock"],
-    specs: {"Storage":"256GB","Availability":"Confirm current stock before purchase"}
+    specs: {"Storage":"256GB","Availability":"In stock"}
   },
   {
     id: 29,
@@ -590,7 +590,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Chip: Apple M3", "Display: 11-inch class", "Availability: In stock"],
-    specs: {"Chip":"Apple M3","Display":"11-inch class","Availability":"Confirm current stock before purchase"}
+    specs: {"Chip":"Apple M3","Display":"11-inch class","Availability":"In stock"}
   },
   {
     id: 30,
@@ -608,7 +608,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Chip: Apple M5", "Display: 13-inch class", "Availability: Currently unavailable"],
-    specs: {"Chip":"Apple M5","Display":"13-inch class","Availability":"Confirm current stock before purchase"}
+    specs: {"Chip":"Apple M5","Display":"13-inch class","Availability":"Currently unavailable"}
   },
   {
     id: 31,
@@ -626,7 +626,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: Android tablet", "Availability: In stock"],
-    specs: {"Type":"Android tablet","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"Android tablet","Availability":"In stock"}
   },
   {
     id: 32,
@@ -644,7 +644,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Chip: Apple M5", "Display: 14-inch class", "Availability: In stock"],
-    specs: {"Chip":"Apple M5","Display":"14-inch class","Availability":"Confirm current stock before purchase"}
+    specs: {"Chip":"Apple M5","Display":"14-inch class","Availability":"In stock"}
   },
   {
     id: 33,
@@ -662,7 +662,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Display: 14-inch 3K OLED 120Hz", "Graphics: RTX 50-series configurations", "Availability: In stock"],
-    specs: {"Display":"14-inch 3K OLED 120Hz","Graphics":"RTX 50-series configurations","Availability":"Confirm current stock before purchase"}
+    specs: {"Display":"14-inch 3K OLED 120Hz","Graphics":"RTX 50-series configurations","Availability":"In stock"}
   },
   {
     id: 34,
@@ -680,7 +680,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: Windows laptop", "Availability: In stock"],
-    specs: {"Type":"Windows laptop","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"Windows laptop","Availability":"In stock"}
   },
   {
     id: 35,
@@ -698,7 +698,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: Business laptop", "Availability: In stock"],
-    specs: {"Type":"Business laptop","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"Business laptop","Availability":"In stock"}
   },
   {
     id: 36,
@@ -716,7 +716,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: 2-in-1 laptop", "Availability: In stock"],
-    specs: {"Type":"2-in-1 laptop","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"2-in-1 laptop","Availability":"In stock"}
   },
   {
     id: 37,
@@ -734,7 +734,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: True wireless earbuds", "Availability: In stock"],
-    specs: {"Type":"True wireless earbuds","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"True wireless earbuds","Availability":"In stock"}
   },
   {
     id: 38,
@@ -752,7 +752,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: Over-ear headphones", "Availability: In stock"],
-    specs: {"Type":"Over-ear headphones","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"Over-ear headphones","Availability":"In stock"}
   },
   {
     id: 39,
@@ -770,7 +770,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: Over-ear headphones", "Availability: In stock"],
-    specs: {"Type":"Over-ear headphones","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"Over-ear headphones","Availability":"In stock"}
   },
   {
     id: 40,
@@ -788,7 +788,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: Over-ear headphones", "Availability: Currently unavailable"],
-    specs: {"Type":"Over-ear headphones","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"Over-ear headphones","Availability":"Currently unavailable"}
   },
   {
     id: 41,
@@ -806,7 +806,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: Bluetooth speaker", "Availability: In stock"],
-    specs: {"Type":"Bluetooth speaker","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"Bluetooth speaker","Availability":"In stock"}
   },
   {
     id: 42,
@@ -824,7 +824,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: Wireless microphone system", "Availability: In stock"],
-    specs: {"Type":"Wireless microphone system","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"Wireless microphone system","Availability":"In stock"}
   },
   {
     id: 43,
@@ -842,7 +842,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: Wireless microphone system", "Availability: In stock"],
-    specs: {"Type":"Wireless microphone system","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"Wireless microphone system","Availability":"In stock"}
   },
   {
     id: 44,
@@ -860,7 +860,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: 360 camera", "Availability: In stock"],
-    specs: {"Type":"360 camera","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"360 camera","Availability":"In stock"}
   },
   {
     id: 45,
@@ -878,7 +878,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: Gimbal camera", "Availability: In stock"],
-    specs: {"Type":"Gimbal camera","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"Gimbal camera","Availability":"In stock"}
   },
   {
     id: 46,
@@ -896,7 +896,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: Webcam", "Availability: In stock"],
-    specs: {"Type":"Webcam","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"Webcam","Availability":"In stock"}
   },
   {
     id: 47,
@@ -914,7 +914,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: LED key light", "Availability: In stock"],
-    specs: {"Type":"LED key light","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"LED key light","Availability":"In stock"}
   },
   {
     id: 48,
@@ -932,7 +932,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Capacity: 2TB", "Type: Portable SSD", "Availability: In stock"],
-    specs: {"Capacity":"2TB","Type":"Portable SSD","Availability":"Confirm current stock before purchase"}
+    specs: {"Capacity":"2TB","Type":"Portable SSD","Availability":"In stock"}
   },
   {
     id: 49,
@@ -950,7 +950,7 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Output: Up to 200W", "Type: USB-C charger", "Availability: In stock"],
-    specs: {"Output":"Up to 200W","Type":"USB-C charger","Availability":"Confirm current stock before purchase"}
+    specs: {"Output":"Up to 200W","Type":"USB-C charger","Availability":"In stock"}
   },
   {
     id: 50,
@@ -968,9 +968,9 @@ export const products: Product[] = [
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Type: Hybrid game console", "Availability: Currently unavailable"],
-    specs: {"Type":"Hybrid game console","Availability":"Confirm current stock before purchase"}
+    specs: {"Type":"Hybrid game console","Availability":"Currently unavailable"}
   }
 ];
 
-export const money = (value: number) => `₦${Math.max(value, 500000).toLocaleString("en-NG")}`;
+export const money = (value: number) => `₦${Math.max(value, 0).toLocaleString("en-NG")}`;
 export const getProduct = (slug: string) => products.find((product) => product.slug === slug);
