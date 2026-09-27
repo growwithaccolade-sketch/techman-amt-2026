@@ -30,7 +30,7 @@ export const products: Product[] = [
     badge: "Bestseller",
     rating: 0,
     reviews: 0,
-    stock: 8,
+    stock: 13,
     condition: "New",
     warranty: "1 year seller warranty",
     image: "/products/iphone-16-pro-max-256gb.webp",
@@ -56,7 +56,7 @@ export const products: Product[] = [
     badge: "Featured",
     rating: 0,
     reviews: 0,
-    stock: 11,
+    stock: 7,
     condition: "New",
     warranty: "1 year seller warranty",
     image: "/products/samsung-galaxy-s25-ultra-256gb.webp",
@@ -81,7 +81,7 @@ export const products: Product[] = [
     badge: "New",
     rating: 0,
     reviews: 0,
-    stock: 5,
+    stock: 14,
     condition: "New",
     warranty: "1 year seller warranty",
     image: "/products/macbook-air-m4-13-inch.webp",
@@ -105,7 +105,7 @@ export const products: Product[] = [
     oldPrice: 625000,
     rating: 0,
     reviews: 0,
-    stock: 14,
+    stock: 8,
     condition: "New",
     warranty: "6 months seller warranty",
     image: "/products/sony-wh-1000xm5.webp",
@@ -129,7 +129,7 @@ export const products: Product[] = [
     badge: "Staff pick",
     rating: 0,
     reviews: 0,
-    stock: 19,
+    stock: 15,
     condition: "New",
     warranty: "6 months seller warranty",
     image: "/products/anker-737-power-bank.webp",
@@ -200,7 +200,7 @@ export const products: Product[] = [
     badge: "Deal",
     rating: 0,
     reviews: 0,
-    stock: 13,
+    stock: 10,
     condition: "New",
     warranty: "6 months seller warranty",
     image: "/products/jbl-charge-5.webp",
@@ -226,10 +226,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/iphone-18-pro-256gb.webp",
     blurb: "A20 Pro iPhone with variable-aperture 48MP Fusion main camera.",
-    stock: 0,
+    stock: 17,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Chip: A20 Pro", "Storage: 256GB", "Camera: 48MP Fusion Main with variable aperture", "Availability: Confirm current stock before purchase"],
+    highlights: ["Chip: A20 Pro", "Storage: 256GB", "Camera: 48MP Fusion Main with variable aperture", "Availability: In stock"],
     specs: {"Chip":"A20 Pro","Storage":"256GB","Camera":"48MP Fusion Main with variable aperture","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -247,7 +247,7 @@ export const products: Product[] = [
     stock: 0,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Chip: A20 Pro", "Storage: 256GB", "Camera: 48MP Fusion Main with variable aperture", "Availability: Confirm current stock before purchase"],
+    highlights: ["Chip: A20 Pro", "Storage: 256GB", "Camera: 48MP Fusion Main with variable aperture", "Availability: Currently unavailable"],
     specs: {"Chip":"A20 Pro","Storage":"256GB","Camera":"48MP Fusion Main with variable aperture","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -262,10 +262,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/airpods-5.webp",
     blurb: "Open-ear AirPods with active noise cancellation and updated acoustics.",
-    stock: 0,
+    stock: 18,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: Open-ear wireless earbuds", "Feature: Active Noise Cancellation", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: Open-ear wireless earbuds", "Feature: Active Noise Cancellation", "Availability: In stock"],
     specs: {"Type":"Open-ear wireless earbuds","Feature":"Active Noise Cancellation","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -280,10 +280,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/apple-watch-series-12.webp",
     blurb: "S11-powered Apple Watch with the new Health Sensing System.",
-    stock: 0,
+    stock: 12,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Chip: S11", "Feature: Health Sensing System", "Availability: Confirm current stock before purchase"],
+    highlights: ["Chip: S11", "Feature: Health Sensing System", "Availability: In stock"],
     specs: {"Chip":"S11","Feature":"Health Sensing System","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -298,10 +298,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/apple-watch-ultra-4.webp",
     blurb: "Apple's latest rugged watch with S11 and extended battery life.",
-    stock: 0,
+    stock: 6,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Chip: S11", "Battery: Up to 50 hours everyday use", "Availability: Confirm current stock before purchase"],
+    highlights: ["Chip: S11", "Battery: Up to 50 hours everyday use", "Availability: In stock"],
     specs: {"Chip":"S11","Battery":"Up to 50 hours everyday use","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -316,7 +316,7 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/galaxy-s26-ultra-512gb.webp",
     blurb: "6.9-inch Ultra flagship with 200MP camera, S Pen and Privacy Display.",
-    stock: 0,
+    stock: 13,
     warranty: "Confirm before purchase",
     condition: "New",
     highlights: ["Display: 6.9-inch", "Camera: 200MP wide", "Feature: Built-in Privacy Display", "Storage: 512GB"],
@@ -334,10 +334,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/galaxy-s26-plus-512gb.webp",
     blurb: "Large-screen Galaxy S flagship with the 2026 Samsung platform.",
-    stock: 0,
+    stock: 7,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Storage: 512GB", "Availability: Confirm current stock before purchase"],
+    highlights: ["Storage: 512GB", "Availability: In stock"],
     specs: {"Storage":"512GB","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -352,10 +352,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/galaxy-s26-256gb.webp",
     blurb: "Compact 2026 Galaxy S flagship with Galaxy AI features.",
-    stock: 0,
+    stock: 14,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Storage: 256GB", "Availability: Confirm current stock before purchase"],
+    highlights: ["Storage: 256GB", "Availability: In stock"],
     specs: {"Storage":"256GB","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -370,10 +370,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/galaxy-z-fold8-ultra.webp",
     blurb: "Samsung's 2026 Ultra foldable built for large-screen productivity.",
-    stock: 0,
+    stock: 8,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: Foldable phone", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: Foldable phone", "Availability: In stock"],
     specs: {"Type":"Foldable phone","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -388,10 +388,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/galaxy-z-fold8.webp",
     blurb: "2026 Galaxy Fold with a book-style flexible display.",
-    stock: 0,
+    stock: 15,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: Foldable phone", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: Foldable phone", "Availability: In stock"],
     specs: {"Type":"Foldable phone","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -406,10 +406,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/galaxy-z-flip8.webp",
     blurb: "Compact 2026 clamshell foldable from Samsung.",
-    stock: 0,
+    stock: 9,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: Flip foldable", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: Flip foldable", "Availability: In stock"],
     specs: {"Type":"Flip foldable","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -427,7 +427,7 @@ export const products: Product[] = [
     stock: 0,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: Smartwatch", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: Smartwatch", "Availability: Currently unavailable"],
     specs: {"Type":"Smartwatch","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -442,10 +442,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/galaxy-watch9.webp",
     blurb: "2026 Galaxy smartwatch with Samsung health and wearable features.",
-    stock: 0,
+    stock: 10,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: Smartwatch", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: Smartwatch", "Availability: In stock"],
     specs: {"Type":"Smartwatch","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -460,10 +460,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/google-pixel-11-pro-fold.webp",
     blurb: "Tensor G6 foldable with 8-inch inner display and 30x Super Zoom.",
-    stock: 0,
+    stock: 17,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Chip: Google Tensor G6", "InnerDisplay: 8-inch Super Actua Flex", "Camera: Up to 30x Super Zoom", "Availability: Confirm current stock before purchase"],
+    highlights: ["Chip: Google Tensor G6", "InnerDisplay: 8-inch Super Actua Flex", "Camera: Up to 30x Super Zoom", "Availability: In stock"],
     specs: {"Chip":"Google Tensor G6","InnerDisplay":"8-inch Super Actua Flex","Camera":"Up to 30x Super Zoom","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -478,10 +478,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/google-pixel-10-pro-xl.webp",
     blurb: "Large-screen Pixel flagship with Google's AI-first software experience.",
-    stock: 0,
+    stock: 11,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: Android flagship", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: Android flagship", "Availability: In stock"],
     specs: {"Type":"Android flagship","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -496,10 +496,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/oneplus-15.webp",
     blurb: "Performance-focused Android flagship from OnePlus.",
-    stock: 0,
+    stock: 18,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: Android flagship", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: Android flagship", "Availability: In stock"],
     specs: {"Type":"Android flagship","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -514,10 +514,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/xiaomi-15-ultra.webp",
     blurb: "Camera-led Xiaomi flagship built around high-end mobile photography.",
-    stock: 0,
+    stock: 12,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: Android flagship", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: Android flagship", "Availability: In stock"],
     specs: {"Type":"Android flagship","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -532,10 +532,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/iphone-17-256gb.webp",
     blurb: "Previous-generation iPhone with strong everyday performance.",
-    stock: 0,
+    stock: 6,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Storage: 256GB", "Availability: Confirm current stock before purchase"],
+    highlights: ["Storage: 256GB", "Availability: In stock"],
     specs: {"Storage":"256GB","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -550,10 +550,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/iphone-17-pro-256gb.webp",
     blurb: "Pro iPhone for high-performance mobile photography and video.",
-    stock: 0,
+    stock: 13,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Storage: 256GB", "Availability: Confirm current stock before purchase"],
+    highlights: ["Storage: 256GB", "Availability: In stock"],
     specs: {"Storage":"256GB","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -568,10 +568,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/iphone-17-pro-max-256gb.webp",
     blurb: "Large-screen Pro iPhone with premium camera and battery focus.",
-    stock: 0,
+    stock: 7,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Storage: 256GB", "Availability: Confirm current stock before purchase"],
+    highlights: ["Storage: 256GB", "Availability: In stock"],
     specs: {"Storage":"256GB","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -586,10 +586,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/ipad-air-m3-11.webp",
     blurb: "M3-powered iPad Air for study, work and creative apps.",
-    stock: 0,
+    stock: 14,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Chip: Apple M3", "Display: 11-inch class", "Availability: Confirm current stock before purchase"],
+    highlights: ["Chip: Apple M3", "Display: 11-inch class", "Availability: In stock"],
     specs: {"Chip":"Apple M3","Display":"11-inch class","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -607,7 +607,7 @@ export const products: Product[] = [
     stock: 0,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Chip: Apple M5", "Display: 13-inch class", "Availability: Confirm current stock before purchase"],
+    highlights: ["Chip: Apple M5", "Display: 13-inch class", "Availability: Currently unavailable"],
     specs: {"Chip":"Apple M5","Display":"13-inch class","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -622,10 +622,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/galaxy-tab-s11-ultra.webp",
     blurb: "Large Samsung tablet for productivity, drawing and media.",
-    stock: 0,
+    stock: 15,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: Android tablet", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: Android tablet", "Availability: In stock"],
     specs: {"Type":"Android tablet","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -640,10 +640,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/macbook-pro-14-m5.webp",
     blurb: "14-inch MacBook Pro for development, design and creative production.",
-    stock: 0,
+    stock: 9,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Chip: Apple M5", "Display: 14-inch class", "Availability: Confirm current stock before purchase"],
+    highlights: ["Chip: Apple M5", "Display: 14-inch class", "Availability: In stock"],
     specs: {"Chip":"Apple M5","Display":"14-inch class","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -658,10 +658,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/rog-zephyrus-g14-2026.webp",
     blurb: "14-inch 3K OLED gaming laptop with 2026 Ryzen AI or Core Ultra configurations.",
-    stock: 0,
+    stock: 16,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Display: 14-inch 3K OLED 120Hz", "Graphics: RTX 50-series configurations", "Availability: Confirm current stock before purchase"],
+    highlights: ["Display: 14-inch 3K OLED 120Hz", "Graphics: RTX 50-series configurations", "Availability: In stock"],
     specs: {"Display":"14-inch 3K OLED 120Hz","Graphics":"RTX 50-series configurations","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -676,10 +676,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/dell-xps-14.webp",
     blurb: "Compact premium Windows laptop for professional work.",
-    stock: 0,
+    stock: 10,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: Windows laptop", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: Windows laptop", "Availability: In stock"],
     specs: {"Type":"Windows laptop","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -694,10 +694,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/thinkpad-x1-carbon.webp",
     blurb: "Lightweight business laptop with ThinkPad keyboard and security focus.",
-    stock: 0,
+    stock: 17,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: Business laptop", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: Business laptop", "Availability: In stock"],
     specs: {"Type":"Business laptop","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -712,10 +712,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/hp-spectre-x360-14.webp",
     blurb: "Premium convertible Windows laptop for mobile work.",
-    stock: 0,
+    stock: 11,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: 2-in-1 laptop", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: 2-in-1 laptop", "Availability: In stock"],
     specs: {"Type":"2-in-1 laptop","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -730,10 +730,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/airpods-pro-3.webp",
     blurb: "In-ear AirPods Pro with noise cancellation and Apple ecosystem features.",
-    stock: 0,
+    stock: 18,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: True wireless earbuds", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: True wireless earbuds", "Availability: In stock"],
     specs: {"Type":"True wireless earbuds","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -748,10 +748,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/airpods-max-2.webp",
     blurb: "Apple over-ear headphones with premium materials and noise control.",
-    stock: 0,
+    stock: 12,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: Over-ear headphones", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: Over-ear headphones", "Availability: In stock"],
     specs: {"Type":"Over-ear headphones","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -766,10 +766,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/sony-wh-1000xm6.webp",
     blurb: "Sony premium wireless headphones for travel and focused listening.",
-    stock: 0,
+    stock: 6,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: Over-ear headphones", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: Over-ear headphones", "Availability: In stock"],
     specs: {"Type":"Over-ear headphones","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -787,7 +787,7 @@ export const products: Product[] = [
     stock: 0,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: Over-ear headphones", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: Over-ear headphones", "Availability: Currently unavailable"],
     specs: {"Type":"Over-ear headphones","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -802,10 +802,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/marshall-emberton-iii.webp",
     blurb: "Compact portable speaker with Marshall styling and travel-friendly design.",
-    stock: 0,
+    stock: 7,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: Bluetooth speaker", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: Bluetooth speaker", "Availability: In stock"],
     specs: {"Type":"Bluetooth speaker","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -820,10 +820,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/dji-mic-3.webp",
     blurb: "Compact wireless microphone system for mobile and camera production.",
-    stock: 0,
+    stock: 14,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: Wireless microphone system", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: Wireless microphone system", "Availability: In stock"],
     specs: {"Type":"Wireless microphone system","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -838,10 +838,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/rode-wireless-pro.webp",
     blurb: "Professional dual-channel wireless audio kit for creators and interviews.",
-    stock: 0,
+    stock: 8,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: Wireless microphone system", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: Wireless microphone system", "Availability: In stock"],
     specs: {"Type":"Wireless microphone system","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -856,10 +856,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/insta360-x5.webp",
     blurb: "360 camera for action, travel and reframed social video.",
-    stock: 0,
+    stock: 15,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: 360 camera", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: 360 camera", "Availability: In stock"],
     specs: {"Type":"360 camera","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -874,10 +874,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/dji-osmo-pocket-3.webp",
     blurb: "Pocket gimbal camera for stabilized handheld video.",
-    stock: 0,
+    stock: 9,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: Gimbal camera", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: Gimbal camera", "Availability: In stock"],
     specs: {"Type":"Gimbal camera","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -892,10 +892,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/logitech-brio-4k.webp",
     blurb: "4K webcam for meetings, streaming and desktop content production.",
-    stock: 0,
+    stock: 16,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: Webcam", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: Webcam", "Availability: In stock"],
     specs: {"Type":"Webcam","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -910,10 +910,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/elgato-key-light.webp",
     blurb: "Desk-mounted LED key light for streaming and video calls.",
-    stock: 0,
+    stock: 10,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: LED key light", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: LED key light", "Availability: In stock"],
     specs: {"Type":"LED key light","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -928,10 +928,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/samsung-t9-ssd-2tb.webp",
     blurb: "Fast portable SSD for project files, backups and creator workflows.",
-    stock: 0,
+    stock: 17,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Capacity: 2TB", "Type: Portable SSD", "Availability: Confirm current stock before purchase"],
+    highlights: ["Capacity: 2TB", "Type: Portable SSD", "Availability: In stock"],
     specs: {"Capacity":"2TB","Type":"Portable SSD","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -946,10 +946,10 @@ export const products: Product[] = [
     reviews: 0,
     image: "/products/ugreen-nexode-200w.webp",
     blurb: "High-output multi-port desktop charger for laptops, phones and accessories.",
-    stock: 0,
+    stock: 11,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Output: Up to 200W", "Type: USB-C charger", "Availability: Confirm current stock before purchase"],
+    highlights: ["Output: Up to 200W", "Type: USB-C charger", "Availability: In stock"],
     specs: {"Output":"Up to 200W","Type":"USB-C charger","Availability":"Confirm current stock before purchase"}
   },
   {
@@ -967,7 +967,7 @@ export const products: Product[] = [
     stock: 0,
     warranty: "Confirm before purchase",
     condition: "New",
-    highlights: ["Type: Hybrid game console", "Availability: Confirm current stock before purchase"],
+    highlights: ["Type: Hybrid game console", "Availability: Currently unavailable"],
     specs: {"Type":"Hybrid game console","Availability":"Confirm current stock before purchase"}
   }
 ];
