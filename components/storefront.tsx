@@ -11,6 +11,7 @@ import {
   Heart,
   Home,
   Laptop,
+  Gamepad2,
   Menu,
   Mic2,
   MessageCircle,
@@ -19,8 +20,10 @@ import {
   ShoppingBag,
   Star,
   Smartphone,
+  Tablet,
   Truck,
   UserRound,
+  Watch,
   X,
   Zap,
 } from "lucide-react";
@@ -37,9 +40,12 @@ import { productBadgeLabel, productSavings } from "@/lib/product-display";
 const categoryMeta = [
   { name: "Phones", copy: "Smartphones from Apple, Samsung and other major brands.", icon: Smartphone, mediaKey: "categoryPhones" as const, fallbackImage: "/products/iphone-16-pro-max-256gb.webp" },
   { name: "Laptops", copy: "Laptops for work, school, gaming and creative software.", icon: Laptop, mediaKey: "categoryLaptops" as const, fallbackImage: "/products/macbook-air-m4-13-inch.webp" },
+  { name: "Tablets", copy: "Tablets for study, work, drawing, reading and entertainment.", icon: Tablet, mediaKey: null, fallbackImage: "/products/ipad-air-m3-11.webp" },
+  { name: "Watches", copy: "Smartwatches for fitness, notifications and everyday use.", icon: Watch, mediaKey: null, fallbackImage: "/products/apple-watch-ultra-4.webp" },
   { name: "Creator Tools", copy: "Microphones, cameras, lighting and production accessories.", icon: Mic2, mediaKey: "categoryCreatorTools" as const, fallbackImage: "/products/dji-mic-3.webp" },
   { name: "Audio", copy: "Headphones, earbuds and speakers for work and everyday use.", icon: Headphones, mediaKey: "categoryAudio" as const, fallbackImage: "/products/sony-wh-1000xm6.webp" },
   { name: "Accessories", copy: "Chargers, storage, power banks and device accessories.", icon: Zap, mediaKey: "categoryAccessories" as const, fallbackImage: "/products/anker-737-power-bank.webp" },
+  { name: "Gaming", copy: "Consoles and gaming devices for home and portable play.", icon: Gamepad2, mediaKey: null, fallbackImage: "/products/nintendo-switch-2.webp" },
 ];
 
 const filters = ["All", "Phones", "Laptops", "Tablets", "Watches", "Audio", "Creator Tools", "Accessories", "Gaming"];
@@ -288,7 +294,7 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
         <div className="collectionBento">
           {categoryMeta.map((item, index) => {
             const Icon = item.icon;
-            const tileImage = siteMedia?.[item.mediaKey] || item.fallbackImage;
+            const tileImage = item.mediaKey ? siteMedia?.[item.mediaKey] || item.fallbackImage : item.fallbackImage;
             return (
               <Link
                 key={item.name}
@@ -533,7 +539,12 @@ export default function Storefront({ homeContent, siteMedia }: { homeContent?: E
         <Link href="/cart" className="dockBadge"><span className="dockIcon"><ShoppingBag size={18}/></span><small>Cart</small>{totalItems > 0 && <em>{totalItems}</em>}</Link>
       </nav>
 
-      {supportLink && <a className="floatingWhatsApp premiumWhatsapp" href={supportLink} target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp">WA</a>}
+      {supportLink && (
+        <a className="floatingWhatsApp premiumWhatsapp" href={supportLink} target="_blank" rel="noreferrer" aria-label="Chat with TechMan AMT on WhatsApp">
+          <MessageCircle size={22} strokeWidth={2.5}/>
+          <span>WhatsApp</span>
+        </a>
+      )}
       <button
         type="button"
         className="scrollTopButton"
