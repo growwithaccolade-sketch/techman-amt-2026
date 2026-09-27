@@ -7861,3 +7861,34 @@ body:before{display:none!important}
 @media(prefers-reduced-motion:reduce){
   .globalScrollTop,.globalWhatsApp{transition:none}
 }
+
+
+/* DESKTOP HERO BREATHING ROOM */
+@media(min-width:1101px){
+  .premiumHero{
+    grid-template-columns:minmax(0,500px) minmax(0,1fr)!important;
+    column-gap:clamp(78px,6.5vw,104px)!important;
+    align-items:center!important;
+  }
+  .premiumHeroCopy{
+    width:100%!important;
+    max-width:500px!important;
+    padding-right:0!important;
+  }
+  .premiumHero h1{
+    max-width:500px!important;
+  }
+  .premiumHeroCopy>p{
+    max-width:470px!important;
+  }
+  .heroStage{
+    min-width:0!important;
+    width:100%!important;
+  }
+}
+
+@media(min-width:1440px){
+  .premiumHero{
+    column-gap:112px!important;
+  }
+}
